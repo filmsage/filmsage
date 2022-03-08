@@ -3,6 +3,7 @@ package com.filmsage.filmsage.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="media_items")
@@ -12,13 +13,17 @@ public class MediaItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(nullable = false, length = 255, name = "imdb")
     private String imdb;
 
-    public MediaItem() {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
+    private List<Review> reviews;
 
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
+    private List<Collection> collections;
+
+
+    public MediaItem() {}
 
     public MediaItem(Long id, String imdb) {
         this.id = id;

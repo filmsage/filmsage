@@ -16,8 +16,15 @@ public class Collection {
     @Column(nullable = false, name = "created_at")
     private Timestamp createdAt;
 
-    public Collection() {
-    }
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn (name = "media_id")
+    private MediaItem mediaItem;
+
+    public Collection() {}
 
     public Collection(long id, String title, Timestamp createdAt) {
         this.id = id;

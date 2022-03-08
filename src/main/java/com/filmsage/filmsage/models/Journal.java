@@ -28,8 +28,7 @@ public class Journal {
         this.user = user;
     }
 
-    public Journal() {
-    }
+    public Journal() {}
 
     public long getId() {
         return id;
