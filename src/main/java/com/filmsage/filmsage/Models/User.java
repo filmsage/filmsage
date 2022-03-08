@@ -42,6 +42,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Review> reviews;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Collection> collections;
+
     public User() {
     }
 

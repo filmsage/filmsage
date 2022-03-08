@@ -19,6 +19,9 @@ public class MediaItem {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
     private List<Review> reviews;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
+    private List<Collection> collections;
+
 
     public MediaItem() {
 
