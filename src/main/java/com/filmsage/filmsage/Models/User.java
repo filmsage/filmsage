@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +35,10 @@ public class Users {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(long id, String email, String username, String password, boolean admin, String first_name, String last_name, String country, Timestamp createdAt) {
+    public User(long id, String email, String username, String password, boolean admin, String first_name, String last_name, String country, Timestamp createdAt) {
         this.id = id;
         this.email = email;
         this.username = username;
