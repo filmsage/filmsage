@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<h1>Search Page</h1>
+
+<form th:action="@{/search}" th:method="POST" >
+    <div class="form-group">
+        <label for="search">search</label>
+        <input type="text" class="form-control" id="search" name="search" th:field="*{search}">
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>
