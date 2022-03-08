@@ -46,8 +46,7 @@ public class Review {
         this.mediaItem = mediaItem;
     }
 
-    public Review() {
-    }
+    public Review() {}
 
     public long getId() {
         return id;

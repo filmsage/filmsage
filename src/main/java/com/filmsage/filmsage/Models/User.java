@@ -53,8 +53,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "review_id"))
     private Set<Review> likedReviews;
 
-    public User() {
-    }
+    public User() {}
 
     public User(long id, String email, String username, String password, boolean admin, String firstName, String lastName, String country, Timestamp createdAt) {
         this.id = id;

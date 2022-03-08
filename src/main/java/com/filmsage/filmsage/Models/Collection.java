@@ -24,8 +24,7 @@ public class Collection {
     @JoinColumn (name = "media_id")
     private MediaItem mediaItem;
 
-    public Collection() {
-    }
+    public Collection() {}
 
     public Collection(long id, String title, Timestamp createdAt) {
         this.id = id;

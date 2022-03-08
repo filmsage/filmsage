@@ -23,9 +23,7 @@ public class MediaItem {
     private List<Collection> collections;
 
 
-    public MediaItem() {
-
-    }
+    public MediaItem() {}
 
     public MediaItem(Long id, String imdb) {
         this.id = id;
