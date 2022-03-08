@@ -2,6 +2,7 @@ package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -34,6 +35,12 @@ public class User {
 
     @Column(name = "created_at")
     private Timestamp createdAt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Journal> journals;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Review> reviews;
 
     public User() {
     }

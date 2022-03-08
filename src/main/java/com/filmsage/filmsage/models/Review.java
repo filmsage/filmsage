@@ -24,8 +24,12 @@ public class Review {
     @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;
 
+    @ManyToOne
+    @JoinColumn (name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn (name = "media_id")
     private MediaItem mediaItem;
 
     public Review(long id, String title, String body, int rating, Timestamp createdAt, User user, MediaItem mediaItem) {
