@@ -19,7 +19,7 @@ public class Journal {
 
     @ManyToOne
     @JoinColumn (name = "user_id")
-    private com.filmsage.filmsage.models.User user;
+    private User user;
 
     public Journal(long id, String title, String body, User user) {
         this.id = id;
