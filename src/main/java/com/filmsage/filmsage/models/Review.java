@@ -2,6 +2,7 @@ package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "reviews")
@@ -31,6 +32,9 @@ public class Review {
     @ManyToOne
     @JoinColumn (name = "media_id")
     private MediaItem mediaItem;
+
+    @ManyToMany(mappedBy = "likedReviews")
+    Set<User> userLikes;
 
     public Review(long id, String title, String body, int rating, Timestamp createdAt, User user, MediaItem mediaItem) {
         this.id = id;

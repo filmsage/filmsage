@@ -3,6 +3,7 @@ package com.filmsage.filmsage.models;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -44,6 +45,13 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Collection> collections;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_reviews_likes",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "review_id"))
+    private Set<Review> likedReviews;
 
     public User() {
     }
