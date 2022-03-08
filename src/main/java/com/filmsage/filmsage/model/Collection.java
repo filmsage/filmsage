@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "collections")
-public class Collections {
+public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -13,13 +13,13 @@ public class Collections {
     @Column(nullable = false, length = 255)
     private String title;
 
-    @Column(name = "created_at")
+    @Column(nullable = false, name = "created_at")
     private Timestamp createdAt;
 
-    public Collections() {
+    public Collection() {
     }
 
-    public Collections(long id, String title, Timestamp createdAt) {
+    public Collection(long id, String title, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
