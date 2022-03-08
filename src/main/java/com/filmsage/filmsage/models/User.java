@@ -107,22 +107,6 @@ public class User {
         this.admin = admin;
     }
 
-    public String getFirst_name() {
-        return firstName;
-    }
-
-    public void setFirst_name(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLast_name() {
-        return lastName;
-    }
-
-    public void setLast_name(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -137,6 +121,54 @@ public class User {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public List<Journal> getJournals() {
+        return journals;
+    }
+
+    public void setJournals(List<Journal> journals) {
+        this.journals = journals;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Collection> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(List<Collection> collections) {
+        this.collections = collections;
+    }
+
+    public Set<Review> getLikedReviews() {
+        return likedReviews;
+    }
+
+    public void setLikedReviews(Set<Review> likedReviews) {
+        this.likedReviews = likedReviews;
     }
 
     public User(User copy) {
