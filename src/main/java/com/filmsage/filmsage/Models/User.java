@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +24,10 @@ public class Users {
     private boolean admin;
 
     @Column(nullable = true, length = 255)
-    private String first_name;
+    private String firstName;
 
     @Column(nullable = true, length = 255)
-    private String last_name;
+    private String lastName;
 
     @Column(nullable = true, length = 255)
     private String country;
@@ -35,17 +35,17 @@ public class Users {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(long id, String email, String username, String password, boolean admin, String first_name, String last_name, String country, Timestamp createdAt) {
+    public User(long id, String email, String username, String password, boolean admin, String firstName, String lastName, String country, Timestamp createdAt) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
         this.admin = admin;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.country = country;
         this.createdAt = createdAt;
     }
@@ -91,19 +91,19 @@ public class Users {
     }
 
     public String getFirst_name() {
-        return first_name;
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirst_name(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLast_name() {
-        return last_name;
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLast_name(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getCountry() {

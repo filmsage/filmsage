@@ -1,4 +1,4 @@
-package com.filmsage.filmsage.Models;
+package com.filmsage.filmsage.models;
 
 
 

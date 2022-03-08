@@ -1,4 +1,4 @@
-package com.filmsage.filmsage.model;
+package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
