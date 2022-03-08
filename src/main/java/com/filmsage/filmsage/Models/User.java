@@ -13,7 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, unique = true)
     private String email;
 
     @Column(nullable = false, length = 64, unique = true)
@@ -137,5 +137,17 @@ public class User {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public User(User copy) {
+        id = copy.id;
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+        admin = copy.admin;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        country = copy.country;
+        createdAt = copy.createdAt;
     }
 }
