@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 @Controller
 public class UserController {
     private UserRepository userDao;
@@ -29,6 +32,12 @@ public class UserController {
     public String saveUser(@ModelAttribute User user) {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        long now = System.currentTimeMillis();
+        try {
+            user.setCreatedAt(new Timestamp(now));
+        } catch (ClassCastException cce) {
+            cce.printStackTrace();
+        }
         userDao.save(user);
         return "redirect:/login";
     }
