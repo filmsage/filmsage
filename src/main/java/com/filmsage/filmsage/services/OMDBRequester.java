@@ -1,6 +1,7 @@
 package com.filmsage.filmsage.services;
 
 import com.filmsage.filmsage.models.MediaItemMapped;
+import com.filmsage.filmsage.models.MediaSearchMapped;
 import com.filmsage.filmsage.omdb.OMDBProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,9 @@ public class OMDBRequester {
 
     public MediaItemMapped getMovie(String imdbId) {
         return restTemplate.getForObject("https://www.omdbapi.com/?apikey={apikey}&i={imdbId}", MediaItemMapped.class, this.omdbProperties.getKey(), imdbId);
+    }
+
+    public MediaSearchMapped searchMovie(String query) {
+        return restTemplate.getForObject("https://www.omdbapi.com/?apikey={apikey}&s={imdbId}", MediaSearchMapped.class, this.omdbProperties.getKey(), query);
     }
 }
