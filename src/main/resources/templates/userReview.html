@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container">
+  <h1>Movie Review</h1>
+</section>
+<div class="container">
+  <form th:action="@{/userReview}" th:method="POST" >
+    <div class="form-group">
+      <label for="reviewTitle">Review Title</label>
+      <br>
+      <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" th:field="*{reviewTitle}">
+      <br>
+      <label for="reviewBody">Review Body</label>
+      <br>
+      <textarea name="body" id="reviewBody" cols="30" rows="10" th:field="*{reviewBody}"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+</div>
+
+
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>

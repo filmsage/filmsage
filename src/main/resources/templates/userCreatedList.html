@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container">
+    <h1>User Created List</h1>
+</section>
+<div class="container">
+    <form th:action="@{/createList}" th:method="POST" >
+        <div class="form-group">
+            <label for="search">search</label>
+            <input type="text" class="form-control" id="search" name="search" >  <-- th:field="*{createList}" -->
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="card-body" >
+        <h5 class="card-title"> <--Title of List--></h5>
+        <h5 class="card-text"> <--list object? --></h5>
+    </div>
+</div>
+
+
+
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>
