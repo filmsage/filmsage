@@ -1,9 +1,8 @@
 package com.filmsage.filmsage.controllers;
 
-import com.filmsage.filmsage.models.MediaItemMapped;
-import com.filmsage.filmsage.models.MediaSearchMapped;
+import com.filmsage.filmsage.models.json.MediaItemMapped;
+import com.filmsage.filmsage.models.json.MediaSearchMapped;
 import com.filmsage.filmsage.services.OMDBRequester;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +28,7 @@ public class MediaController {
     @ResponseBody
     public String getMoviesById(@PathVariable String id) {
         MediaItemMapped movie = omdbRequester.getMovie(id);
+        // vvv super temporary vvv
         return movie.getTitle();
     }
 
@@ -36,6 +36,8 @@ public class MediaController {
     @ResponseBody
     public String searchMovies(@RequestParam("q") String query) {
         List<MediaSearchMapped> movies = omdbRequester.searchMovie(query);
+
+        // vvv temp stuff to be replaced vvv
         StringBuffer sb = new StringBuffer("<p>");
         for (MediaSearchMapped movie : movies) {
             sb.append(movie.getTitle())
@@ -44,25 +46,6 @@ public class MediaController {
                     .append("<br/>");
         }
         sb.append("</p>");
-        return sb.toString();
-    }
-
-    // these are just for testing if anyone needs them. should be removed ASAP
-    @GetMapping("/movies_test")
-    @ResponseBody
-    public String getMoviesTest() {
-        MediaItemMapped movie = omdbRequester.getMovie("tt5727208");
-        return movie.getTitle();
-    }
-
-    @GetMapping("/search_test")
-    @ResponseBody
-    public String searchMoviesTest() {
-        List<MediaSearchMapped> movies = omdbRequester.searchMovie("titan");
-        StringBuffer sb = new StringBuffer();
-        for (MediaSearchMapped movie : movies) {
-            sb.append(movie.getTitle() + "\n" + movie.getYear() + "\n" + movie.getImdbID() + "\n");
-        }
         return sb.toString();
     }
 }

@@ -1,4 +1,4 @@
-package com.filmsage.filmsage.models;
+package com.filmsage.filmsage.models.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,18 +1,13 @@
 package com.filmsage.filmsage.services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.filmsage.filmsage.models.MediaItemMapped;
-import com.filmsage.filmsage.models.MediaSearchMapped;
-import com.filmsage.filmsage.models.SearchMapped;
+import com.filmsage.filmsage.models.json.MediaItemMapped;
+import com.filmsage.filmsage.models.json.MediaSearchMapped;
+import com.filmsage.filmsage.models.json.SearchMapped;
 import com.filmsage.filmsage.omdb.OMDBProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.LinkedList;
