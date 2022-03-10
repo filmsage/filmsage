@@ -1,7 +1,9 @@
 package com.filmsage.filmsage.controllers;
 
+import com.filmsage.filmsage.models.Review;
 import com.filmsage.filmsage.models.json.MediaItemMapped;
 import com.filmsage.filmsage.models.json.MediaSearchMapped;
+import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.services.OMDBRequester;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +15,11 @@ import java.util.List;
 public class MediaController {
 
     OMDBRequester omdbRequester;
+    ReviewRepository reviewDao;
 
-    public MediaController(OMDBRequester omdbRequester) {
+    public MediaController(OMDBRequester omdbRequester, ReviewRepository reviewDao) {
         this.omdbRequester = omdbRequester;
+        this.reviewDao = reviewDao;
     }
 
     @GetMapping("/search")
@@ -23,12 +27,12 @@ public class MediaController {
         return "search/search";
     }
 
-    // all these methods with the @ResponseBody annotation need to be connected to templates
-    // and get their values consumed. the users are hungry, please feed the users our content
-    @GetMapping("/movies/{id}")
-    public String getMoviesById(@PathVariable String id, Model model) {
-        MediaItemMapped movie = omdbRequester.getMovie(id);
+    @GetMapping("/movies/{imdb}")
+    public String getMoviesById(@PathVariable String imdb, Model model) {
+        MediaItemMapped movie = omdbRequester.getMovie(imdb);
+        List<Review> reviews = reviewDao.findAllByMediaItemImdb(imdb);
         model.addAttribute("movie", movie);
+        model.addAttribute("reviews", reviews);
         return "movies/show";
     }
 
