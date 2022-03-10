@@ -26,31 +26,30 @@ public class CollectionController {
     }
 
 //    to View an individual collection
-    @GetMapping("/collections/{id}")
+    @GetMapping("/collections/show/{id}")
     public String getCollection(@PathVariable long id, Model model) {
-        model.addAttribute("singleCollection", usersDao.getById(id));
+        model.addAttribute("singleCollection", collectionsDao.getById(id));
         return "collect/show";
     }
-//
+
 ////  view the form to create a new movie collection
-//    @GetMapping("/collections/create")
-//    public String createMovieCollection(Model model) {
-//        model.addAttribute("newCollection", new Collection());
-//        return "collections/create";
-//    }
-//
-//
-//    @PostMapping("/collections/{id}/edit")
-//    public String submitMovieCollection(@ModelAttribute Collection submitCollection, @PathVariable long id) {
-////       Collection submitCollection = usersDao.getById(id);
-////       submitCollection.setTitle(title);
-////       submitCollection.setBody(body);
-//       return "redirect:/collections";
-//    }
-//
-//    @GetMapping("collections/{id}/delete")
-//    public String deleteCollection(@PathVariable long id) {
-//        usersDao.deleteById(id);
-//        return "redirect/collections";
-//    }
+    @GetMapping("/collections/create")
+    public String createMovieCollection(Model model) {
+        model.addAttribute("newCollection", new Collection());
+        return "collect/create";
+    }
+
+    @PostMapping("/collections/{id}/edit")
+    public String submitMovieCollection(@ModelAttribute Collection submitCollection, @PathVariable long id) {
+//       Collection submitCollection = usersDao.getById(id);
+//       submitCollection.setTitle(title);
+//       submitCollection.setBody(body);
+       return "redirect:/collect" + id;
+    }
+
+    @GetMapping("collections/{id}/delete")
+    public String deleteCollection(@PathVariable long id) {
+        collectionsDao.delete(collectionsDao.getById(id));
+        return "redirect/collect";
+    }
 }
