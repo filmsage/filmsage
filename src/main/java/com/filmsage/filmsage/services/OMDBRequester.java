@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,10 @@ public class OMDBRequester {
 //                        query
 //                );
         SearchMapped search = restTemplate.getForObject("https://www.omdbapi.com/?apikey={apikey}&s={query}", SearchMapped.class, this.omdbProperties.getKey(), query);
-        List<MediaSearchMapped> results = Arrays.stream(search.getSearchResults()).collect(Collectors.toList());
-         return results;
+        List<MediaSearchMapped> results = new LinkedList<>();
+        if (search.getSearchResults().length > 0) {
+            results = Arrays.stream(search.getSearchResults()).collect(Collectors.toList());
+        }
+        return results;
     }
 }
