@@ -8,18 +8,27 @@
   <h1>Movie Review</h1>
 </section>
 <div class="container">
-  <form th:action="@{/userReview}" th:method="POST" >
+  <form th:action="@{/review}" th:method="post" th:object="${review}">
+<!--  <form action="/userReview" method="post">-->
     <div class="form-group">
-      <label for="reviewTitle">Review Title</label>
+      <label>Review Title</label>
       <br>
-      <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" th:field="*{reviewTitle}">
+<!--      <input type="text" name="title">-->
+      <input th:field="*{title}" class="field">
       <br>
-      <label for="reviewBody">Review Body</label>
+      <label >Review Body</label>
       <br>
-      <textarea name="body" id="reviewBody" cols="30" rows="10" th:field="*{reviewBody}"></textarea>
+      <textarea th:field="*{body}" cols="30" rows="10" ></textarea>
+<!--      <textarea name="body" id="body" cols="30" rows="10"></textarea>-->
     </div>
     <button type="submit">Submit</button>
   </form>
+
+  <div>
+    <p th:text="*{review.title}"></p>
+    <p th:text="*{review.body}"></p>
+  </div>
+
 
 </div>
 
