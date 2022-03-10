@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container">
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <img class="img-fluid" th:src="${movie.poster}" alt="Movie poster"/>
+        </div>
+        <div class="col-12 col-md-9">
+            <h2 class="" th:text="${movie.title}"></h2>
+            <h3 class="" th:text="${movie.year}"></h3>
+            <p class="" th:text="${movie.plot}"></p>
+            <ul class="list-group">
+                <li class="list-group-item" th:text="${movie.released}"></li>
+                <li class="list-group-item" th:text="${movie.runtime}"></li>
+                <li class="list-group-item" th:text="${movie.genre}"></li>
+                <li class="list-group-item" th:text="${movie.directors}"></li>
+                <li class="list-group-item" th:text="${movie.writers}"></li>
+                <li class="list-group-item" th:text="${movie.actors}"></li>
+                <li class="list-group-item" th:text="${movie.languages}"></li>
+                <li class="list-group-item" th:text="${movie.country}"></li>
+                <li class="list-group-item" th:text="${movie.awards}"></li>
+                <li class="list-group-item" th:text="${movie.metascore}"></li>
+                <li class="list-group-item" th:text="${movie.boxOffice}"></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>

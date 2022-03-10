@@ -4,6 +4,7 @@ import com.filmsage.filmsage.models.json.MediaItemMapped;
 import com.filmsage.filmsage.models.json.MediaSearchMapped;
 import com.filmsage.filmsage.services.OMDBRequester;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,11 +26,10 @@ public class MediaController {
     // all these methods with the @ResponseBody annotation need to be connected to templates
     // and get their values consumed. the users are hungry, please feed the users our content
     @GetMapping("/movies/{id}")
-    @ResponseBody
-    public String getMoviesById(@PathVariable String id) {
+    public String getMoviesById(@PathVariable String id, Model model) {
         MediaItemMapped movie = omdbRequester.getMovie(id);
-        // vvv super temporary vvv
-        return movie.getTitle();
+        model.addAttribute("movie", movie);
+        return "movies/show";
     }
 
     @RequestMapping(value = "/search", params = "q")
