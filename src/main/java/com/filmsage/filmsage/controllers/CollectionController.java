@@ -20,17 +20,17 @@ public class CollectionController {
     }
 
     @GetMapping("/collections")
-    public String collections( Model model) {
-        model.addAttribute("");
-        return "/collections";//"collections/index";
+    public String viewCollections(Model model) {
+        model.addAttribute("newCollection", new Collection());
+        return "collect/index";
     }
 
 //    to View an individual collection
-//    @GetMapping("/collections/{id}")
-//    public String getCollection(@PathVariable long id, Model model) {
-//        model.addAttribute("singleCollection", usersDao.getById(id));
-//        return "collections/show";
-//    }
+    @GetMapping("/collections/{id}")
+    public String getCollection(@PathVariable long id, Model model) {
+        model.addAttribute("singleCollection", usersDao.getById(id));
+        return "collect/show";
+    }
 //
 ////  view the form to create a new movie collection
 //    @GetMapping("/collections/create")
