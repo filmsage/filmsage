@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='EditMovieCollection')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container">
+    <h1>Edit Movie Collections</h1>
+    <form th:action="@{'/collections/' + ${collection.id} + '/edit'}" th:method="POST" th:object="${collection}">
+        <div class = "form-group">
+            <label for="title">Movie Title</label>
+            <input type="text" name="form-control" id=title placeholder="input movie title" th:field="*{title}">
+        </div>
+        <input type="hidden" th:field="*{id}">
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>
