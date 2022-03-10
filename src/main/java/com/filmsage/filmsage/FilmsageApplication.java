@@ -12,10 +12,4 @@ public class FilmsageApplication {
     public static void main(String[] args) {
         SpringApplication.run(FilmsageApplication.class, args);
     }
-
-    @Bean
-    RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
 }
