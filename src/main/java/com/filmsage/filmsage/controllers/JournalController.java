@@ -36,7 +36,7 @@ public class JournalController {
     }
 
     @GetMapping("/journals/create")
-    public String showCJournalCreateForm(Model model) {
+    public String showJournalCreateForm(Model model) {
         model.addAttribute("journal", new Journal());
             return "journals/create";
         }
