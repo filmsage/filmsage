@@ -33,31 +33,6 @@ public class OMDBRequester {
     }
 
     public List<MediaSearchMapped> searchMovie(String query) {
-//        Object json = restTemplate.getForEntity("https://www.omdbapi.com/?apikey={apikey}&s={imdbId}", Object[].class, this.omdbProperties.getKey(), query)
-//        return objectMapper.readValue(json, new TypeReference<List<MediaSearchMapped>>(){})
-//        ResponseEntity<MediaSearchMapped[]> responseEntity =  restTemplate.getForEntity("https://www.omdbapi.com/?apikey={apikey}&s={imdbId}", MediaSearchMapped[].class, this.omdbProperties.getKey(), query);
-        //String urlTemplate = UriComponentsBuilder.fromHttpUrl("https://www.omdbapi.com/?apikey={apikey}&s={imdbId}")
-//        ResponseEntity<List<MediaSearchMapped>> responseEntity =
-//                restTemplate.exchange(
-//                        "https://www.omdbapi.com/?apikey={apikey}&s={imdbId}",
-//                        HttpMethod.GET,
-//                        null,
-//                        new ParameterizedTypeReference<List<MediaSearchMapped>>() {},
-//                        this.omdbProperties.getKey(),
-//                        query
-//                );
-        //MediaSearchMapped[] arr = responseEntity.getBody();
-        //return responseEntity.getBody();
-
-//        ResponseEntity<List<SearchMapped>> responseEntity =
-//                restTemplate.exchange(
-//                        "https://www.omdbapi.com/?apikey={apikey}&s={imdbId}",
-//                        HttpMethod.GET,
-//                        null,
-//                        new ParameterizedTypeReference<List<SearchMapped>>() {},
-//                        this.omdbProperties.getKey(),
-//                        query
-//                );
         SearchMapped search = restTemplate.getForObject("https://www.omdbapi.com/?apikey={apikey}&s={query}", SearchMapped.class, this.omdbProperties.getKey(), query);
         List<MediaSearchMapped> results = new LinkedList<>();
         if (search.getSearchResults().length > 0) {

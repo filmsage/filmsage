@@ -20,7 +20,7 @@ public class MediaController {
 
     @GetMapping("/search")
     public String showSearchPage() {
-        return "search";
+        return "search/search";
     }
 
     // all these methods with the @ResponseBody annotation need to be connected to templates
@@ -33,19 +33,9 @@ public class MediaController {
     }
 
     @RequestMapping(value = "/search", params = "q")
-    @ResponseBody
-    public String searchMovies(@RequestParam("q") String query) {
+    public String searchMovies(@RequestParam("q") String query, Model model) {
         List<MediaSearchMapped> movies = omdbRequester.searchMovie(query);
-
-        // vvv temp stuff to be replaced vvv
-        StringBuffer sb = new StringBuffer("<p>");
-        for (MediaSearchMapped movie : movies) {
-            sb.append(movie.getTitle())
-                    .append(movie.getYear())
-                    .append(movie.getImdbID())
-                    .append("<br/>");
-        }
-        sb.append("</p>");
-        return sb.toString();
+        model.addAttribute("movies", movies);
+        return "search/results";
     }
 }
