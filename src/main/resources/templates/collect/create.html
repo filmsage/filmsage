@@ -5,10 +5,10 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-    <form th:action='@{/collection/create}' th:method="POST" th:object="${newCollection}">
+    <form th:action='@{/collection/create}' th:method="POST" th:object="${collection}">
         <div class = "form-group">
             <label for="title">Movie Title</label>
-            <input type="text" class="form-control" id=title placeholder="input movie title" name="title" th:field="${title}">
+            <input type="text" class="form-control" id=title placeholder="input movie title" name="title" th:field="*{title}">
         </div>
         <button type="submit">Search</button>
     </form>

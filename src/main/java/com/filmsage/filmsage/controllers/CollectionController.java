@@ -21,35 +21,46 @@ public class CollectionController {
 
     @GetMapping("/collections")
     public String viewCollections(Model model) {
-        model.addAttribute("newCollection", new Collection());
+        model.addAttribute("collections", collectionsDao.findAll());
         return "collect/index";
     }
 
+
 //    to View an individual collection
-    @GetMapping("/collections/show/{id}")
-    public String getCollection(@PathVariable long id, Model model) {
-        model.addAttribute("singleCollection", collectionsDao.getById(id));
+    @GetMapping("/collections/{id}/show")
+    public String getMovieCollection(@PathVariable long id, Model model) {
+        model.addAttribute("collection", collectionsDao.getById(id));
         return "collect/show";
     }
 
 ////  view the form to create a new movie collection
     @GetMapping("/collections/create")
     public String createMovieCollection(Model model) {
-        model.addAttribute("newCollection", new Collection());
+        model.addAttribute("collection", new Collection());
         return "collect/create";
     }
 
+    @PostMapping("/collections/create")
+    public String createMovieCollection(@ModelAttribute Collection collection) {
+        collectionsDao.save(collection);
+        return "collect/create";
+    }
+
+
+    @GetMapping("/collections/{id}/edit")
+    public String editMovieCollection(@PathVariable long id, Model model) {
+        model.addAttribute("collection", collectionsDao.getById(id));
+        return "collect/edit";
+    }
+
     @PostMapping("/collections/{id}/edit")
-    public String submitMovieCollection(@ModelAttribute Collection submitCollection, @PathVariable long id) {
-//       Collection submitCollection = usersDao.getById(id);
-//       submitCollection.setTitle(title);
-//       submitCollection.setBody(body);
+    public String submitEditMovieCollection(@ModelAttribute Collection submitCollection, @PathVariable long id) {
        return "redirect:/collect" + id;
     }
 
     @GetMapping("collections/{id}/delete")
-    public String deleteCollection(@PathVariable long id) {
+    public String deleteMovieCollection(@PathVariable long id) {
         collectionsDao.delete(collectionsDao.getById(id));
-        return "redirect/collect";
+        return "redirect:/collect";
     }
 }
