@@ -1,8 +1,8 @@
 package com.filmsage.filmsage.controllers;
 
-import com.filmsage.filmsage.models.Review;
+import com.filmsage.filmsage.models.Journal;
 import com.filmsage.filmsage.models.User;
-import com.filmsage.filmsage.repositories.ReviewRepository;
+import com.filmsage.filmsage.repositories.JournalRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,53 +14,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class JournalController {
+    private JournalRepository journalDao;
     private UserRepository userDao;
-    private ReviewRepository reviewDao;
 
-    public JournalController(UserRepository userDao, ReviewRepository reviewDao){
+    public JournalController(UserRepository userDao, JournalRepository journalDao){
         this.userDao = userDao;
-        this.reviewDao = reviewDao;
+        this.journalDao = journalDao;
     }
 
-    @GetMapping("/users")
-    public String showUsers(Model model) {
-        model.addAttribute("allusers", userDao.findAll());
-        return "users/index";
+    @GetMapping("/journals")
+    public String showJournals(Model model) {
+        model.addAttribute("alljournals", journalDao.findAll());
+        return "/journals";
     }
 
-    @GetMapping("/users/create")
+    @GetMapping("/journals/create")
     public String showCreate(Model model) {
-        model.addAttribute("review", new Review());
-        model.addAttribute("reviews", reviewDao.findAll());
-            return "users/create";
+        model.addAttribute("journal", new Journal());
+        model.addAttribute("journals", journalDao.findAll());
+            return "journal/create";
         }
 
-        @GetMapping("/users/{id}")
+        @GetMapping("/journals/{id}")
     public String showReview(@PathVariable long id, Model model){
-        model.addAttribute("singleReview",reviewDao.getById(id));
-        return "reviews/show";
+        model.addAttribute("singleJournal",journalDao.getById(id));
+        return "journals/show";
         }
 
-    @PostMapping("/reviews/{id}/edit")
-    public String submitReviewEdit(@ModelAttribute Review reviewToEdit, @PathVariable long id) {
-        reviewToEdit.setUser(userDao.getById(1L));
-        reviewDao.save(reviewToEdit);
-        return "redirect:/reviews/" + id;
+    @PostMapping("/journal/{id}/edit")
+    public String submitJournalEdit(@ModelAttribute Journal JournalToEdit, @PathVariable long id) {
+        return "redirect:/journals/" + id;
     }
 
-    @PostMapping("/reviews/create")
-    public String createReview(@ModelAttribute Review review) {
-        review.setUser(userDao.getById(1L));
-        reviewDao.save(review);
-        return "redirect:/reviews";
+    @GetMapping("/journals/{id}/delete")
+    public String deleteJournal(@PathVariable long id) {
+        journalDao.delete(journalDao.getById(id));
+        return "redirect:/journals";
     }
-
-
-    @GetMapping("/reviews/{id}/delete")
-    public String deleteReview(@PathVariable long id) {
-        reviewDao.delete(reviewDao.getById(id));
-        return "redirect:/reviews";
-    }
-
 
 }

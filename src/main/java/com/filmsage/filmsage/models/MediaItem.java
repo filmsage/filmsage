@@ -1,7 +1,4 @@
 package com.filmsage.filmsage.models;
-
-
-
 import javax.persistence.*;
 import java.util.List;
 

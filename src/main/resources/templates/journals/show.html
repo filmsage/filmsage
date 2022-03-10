@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Journal</title>
+    <th:block th:replace="partials/elements :: head(title='FilmSage Index')"></th:block>
+</head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${singleJournal.getTitle()}">Journal title</h5>
+        <p class="card-text" th:text="${singleJournal.getBody()}">  </p>
+    </div>
+    <span th:text="${singleJournal.getUser().getEmail()}"></span>
+</div>
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>
