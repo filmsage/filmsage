@@ -39,9 +39,7 @@ public class MediaController {
         StringBuffer sb = new StringBuffer("<p>");
         for (MediaSearchMapped movie : movies) {
             sb.append(movie.getTitle())
-                    .append("\n")
                     .append(movie.getYear())
-                    .append("\n")
                     .append(movie.getImdbID())
                     .append("<br/>");
         }
