@@ -24,25 +24,26 @@ public class JournalController {
 
     @GetMapping("/journals")
     public String showJournals(Model model) {
-        model.addAttribute("alljournals", journalDao.findAll());
-        return "/journals";
+        model.addAttribute("journals", journalDao.findAll());
+        return "journals/index";
+    }
+
+
+    @GetMapping("/journals/{id}")
+    public String showJournal(@PathVariable long id, Model model){
+        model.addAttribute("journals",journalDao.getById(id));
+        return "journals/show";
     }
 
     @GetMapping("/journals/create")
-    public String showCreate(Model model) {
+    public String showCJournalCreateForm(Model model) {
         model.addAttribute("journal", new Journal());
-        model.addAttribute("journals", journalDao.findAll());
-            return "journal/create";
+            return "journals/create";
         }
 
-        @GetMapping("/journals/{id}")
-    public String showReview(@PathVariable long id, Model model){
-        model.addAttribute("singleJournal",journalDao.getById(id));
-        return "journals/show";
-        }
 
-    @PostMapping("/journal/{id}/edit")
-    public String submitJournalEdit(@ModelAttribute Journal JournalToEdit, @PathVariable long id) {
+    @PostMapping("/journals/{id}/edit")
+    public String submitJournalEdit(@ModelAttribute @PathVariable long id) {
         return "redirect:/journals/" + id;
     }
 
