@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+
 @Controller
 public class ReviewController {
     private ReviewRepository reviewDao;
@@ -20,18 +22,10 @@ public class ReviewController {
         return "review-form";
     }
 
-//    @PostMapping("/userReview")
-//    public String createReview(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, Model model){
-//                Review r1 = new Review();
-//                r1.setTitle(title);
-//                r1.setBody(body);
-//                reviewDao.save(r1);
-//                return "test";
-//    }
-
     @PostMapping("/review")
     @ResponseBody
     public String createReview(@ModelAttribute Review review){
+        review.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         reviewDao.save(review);
         return review.getTitle();
     }
