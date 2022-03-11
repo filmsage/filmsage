@@ -29,10 +29,8 @@
         </div>
     </div>
     <div class="row">
-        <div th:each="review : ${reviews}">
-            <h2 th:text="${review.title}"></h2>
-            <p th:text="${review.body}"></p>
-        </div>
+<!--        TODO: display recent reviews for this movie on the page instead of just this link to all -->
+        <p><a th:href="@{/movies/{id}/reviews(id = ${movie.imdbID})}">Show user reviews</a></p>
     </div>
 </section>
 
