@@ -42,24 +42,36 @@ public class CollectionController {
 
     @PostMapping("/collections/create")
     public String createMovieCollection(@ModelAttribute Collection collection) {
-        collectionsDao.save(collection);
+    collectionsDao.save(collection);
         return "collect/create";
     }
 
 
     @GetMapping("/collections/{id}/edit")
     public String editMovieCollection(@PathVariable long id, Model model) {
+        Collection collectionToEdit = collectionsDao.getById(id);
+        Collection collection = (Collection)SecurityCotextHolder.getContext().getAuthentication().getPrincipal();
+        if(collectionToEdit.getId() == collection.getId()) {
         model.addAttribute("collection", collectionsDao.getById(id));
         return "collect/edit";
-    }
+    } else {
+            return "redirect:/collect";
+        }
 
     @PostMapping("/collections/{id}/edit")
-    public String submitEditMovieCollection(@ModelAttribute Collection submitCollection, @PathVariable long id) {
-       return "redirect:/collect" + id;
+    public String submitEditMovieCollection(@ModelAttribute Collection submitEditMovieCollection, @PathVariable long id) {
+       collectionToEdit = collectionsDao.getById(id);
+       collectionToEdit.setTitle(collectionToEdit).getTitle());
+
+
+
+        return "redirect:/collect" + id;
     }
 
     @GetMapping("collections/{id}/delete")
     public String deleteMovieCollection(@PathVariable long id) {
+        Collections collections = collectionsDao.getByIfd(id);
+        User user = (User) Security
         collectionsDao.delete(collectionsDao.getById(id));
         return "redirect:/collect";
     }
