@@ -1,9 +1,7 @@
 package com.filmsage.filmsage.controllers;
-
 import com.filmsage.filmsage.models.Journal;
 import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.repositories.JournalRepository;
-import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,8 +18,7 @@ public class JournalController {
     private UserRepository userDao;
 
 
-
-    public JournalController(UserRepository userDao, JournalRepository journalDao){
+    public JournalController(UserRepository userDao, JournalRepository journalDao) {
         this.userDao = userDao;
         this.journalDao = journalDao;
     }
@@ -33,29 +30,31 @@ public class JournalController {
     }
 
     @GetMapping("/journals/{id}")
-    public String showJournal(@PathVariable long id, Model model){
-        model.addAttribute("journals",journalDao.getById(id));
+    public String showJournal(@PathVariable long id, Model model) {
+        model.addAttribute("journal", journalDao.getById(id));
         return "journals/show";
     }
 
     @GetMapping("/journals/create")
     public String showJournalCreateForm(Model model) {
         model.addAttribute("journal", new Journal());
-            return "journals/create";
-        }
+        return "journals/create";
+    }
 
     @PostMapping("/journals/create")
-    public String showJournalCreateForm(@ModelAttribute Journal journal) {
+    public String submitCreate(@ModelAttribute Journal journal) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        journal.setUser(user);
         journalDao.save(journal);
         return "redirect:/journals";
     }
 
     @GetMapping("/journals/{id}/edit")
-    public String ShowEditForm(@PathVariable long id, Model model){
-        Journal journaltoEdit = journalDao.getById(id);
+    public String showEditForm(@PathVariable long id, Model model) {
+        Journal journal = journalDao.getById(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(journaltoEdit.getUser().getId() == user.getId()) {
-            model.addAttribute("journalToEdit", journaltoEdit);
+        if (journal.getUser().getId() == user.getId()) {
+            model.addAttribute("journalToEdit", journal);
             return "journals/edit";
         } else {
             return "redirect:/journals";
@@ -64,11 +63,10 @@ public class JournalController {
 
 
     @PostMapping("/journals/{id}/edit")
-    public String submitEdit(@ModelAttribute Journal journalToEdit, @PathVariable long id){
-         journalToEdit = journalDao.getById(id);
-         journalToEdit.setTitle(journalToEdit.getTitle());
-         journalToEdit.setBody(journalToEdit.getBody());
-         journalDao.save(journalToEdit);
+    public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        journal.setUser(user);
+        journalDao.save(journal);
 
         return "redirect:/journals";
     }
@@ -83,7 +81,7 @@ public class JournalController {
     public String deleteJournal(@PathVariable long id) {
         Journal journal = journalDao.getById(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(journal.getUser().getId() == user.getId()) {
+        if (journal.getUser().getId() == user.getId()) {
             journalDao.delete(journal);
         }
         return "redirect:/journals";
