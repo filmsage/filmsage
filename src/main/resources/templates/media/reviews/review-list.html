@@ -5,11 +5,14 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-    <h1>FilmSage Home</h1>
-    <section class="container" id="results">
+    <h1>All user reviews for <a th:href="@{'/movies/' + ${movie.imdbID}}" th:text="${movie.title}">Movie</a></h1>
+    <section class="container" id="reviews-container">
         <div th:each="review : ${reviews}">
-<!--            <a th:href="@{'movies/' + ${movie.imdbID}}"><p th:text="${movie.title} + ' ' + (${movie.year})"></p></a>-->
+<!--            <a th:href="@{'/movies/' + ${movie.imdbID} + '/reviews/show?r=' + ${review.id}}">-->
+<!--            <a th:href="@{/movies/{id}/reviews/show(id = ${movie.imdbID}, r = ${review.id})}">-->
+            <a th:href="@{reviews/show(r = ${review.id})}">
             <h2 th:text="${review.title}"></h2>
+            </a>
             <p th:text="${review.body}"></p>
         </div>
     </section>

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 public class ReviewController {
@@ -53,5 +54,12 @@ public class ReviewController {
         model.addAttribute("review", reviewDao.getById(r));
         model.addAttribute("movie", omdbRequester.getMovie(imdb));
         return "media/reviews/review";
+    }
+
+    @GetMapping("/movies/{imdb}/reviews")
+    public String showReview(Model model, @PathVariable String imdb) {
+        model.addAttribute("reviews", reviewDao.findAllByMediaItemImdb(imdb));
+        model.addAttribute("movie", omdbRequester.getMovie(imdb));
+        return "media/reviews/review-list";
     }
 }

@@ -5,7 +5,7 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-    <h1>Review</h1>
+    <h1><a th:href="@{'/movies/' + ${movie.imdbID}}" th:text="${movie.title}">Movie</a></h1>
     <h2 th:text="${review.title}"></h2>
     <p th:text="${review.body}"></p>
 </section>
