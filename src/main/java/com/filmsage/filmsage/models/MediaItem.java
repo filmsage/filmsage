@@ -27,6 +27,10 @@ public class MediaItem {
         this.imdb = imdb;
     }
 
+    public MediaItem(String imdb) {
+        this.imdb = imdb;
+    }
+
     public Long getId() {
         return id;
     }

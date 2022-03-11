@@ -8,28 +8,19 @@
   <h1>Movie Review</h1>
 </section>
 <div class="container">
-  <form th:action="@{/review}" th:method="post" th:object="${review}">
-<!--  <form action="/userReview" method="post">-->
+  <form th:action="@{'/movies/' + ${movie.imdbID} + '/reviews/create'}" th:method="post" th:object="${review}">
     <div class="form-group">
       <label>Review Title</label>
-      <br>
-<!--      <input type="text" name="title">-->
-      <input th:field="*{title}" class="field">
+      <input th:field="*{title}" class="field" required>
       <br>
       <label >Review Body</label>
+      <textarea th:field="*{body}" cols="30" rows="10" required></textarea>
       <br>
-      <textarea th:field="*{body}" cols="30" rows="10" ></textarea>
-<!--      <textarea name="body" id="body" cols="30" rows="10"></textarea>-->
+      <label>Score</label>
+      <input th:field="*{rating}" type="number" max="5" min="0" required>
     </div>
     <button type="submit">Submit</button>
   </form>
-
-  <div>
-    <p th:text="*{review.title}"></p>
-    <p th:text="*{review.body}"></p>
-  </div>
-
-
 </div>
 
 

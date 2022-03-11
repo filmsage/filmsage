@@ -6,10 +6,10 @@
 
 <h1>Search Page</h1>
 
-<form th:action="@{/search}" th:method="POST" >
+<form th:action="@{/search}" th:method="GET" >
     <div class="form-group">
         <label for="search">search</label>
-        <input type="text" class="form-control" id="search" name="search" th:field="*{search}">
+        <input type="text" class="form-control" id="search" name="q">
     </div>
     <button type="submit">Submit</button>
 </form>

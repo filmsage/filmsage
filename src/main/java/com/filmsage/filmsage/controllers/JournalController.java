@@ -28,7 +28,6 @@ public class JournalController {
         return "journals/index";
     }
 
-
     @GetMapping("/journals/{id}")
     public String showJournal(@PathVariable long id, Model model){
         model.addAttribute("journals",journalDao.getById(id));
@@ -41,10 +40,10 @@ public class JournalController {
             return "journals/create";
         }
 
-
-    @PostMapping("/journals/{id}/edit")
-    public String submitJournalEdit(@ModelAttribute @PathVariable long id) {
-        return "redirect:/journals/" + id;
+    @GetMapping("/reviews/{id}/delete")
+    public String deleteReview(@PathVariable long id) {
+        reviewDao.delete(reviewDao.getById(id));
+        return "redirect:/reviews";
     }
 
     @GetMapping("/journals/{id}/delete")

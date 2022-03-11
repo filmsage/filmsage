@@ -34,7 +34,7 @@ public class MediaItemMapped {
     @JsonProperty("Poster")
     private URL poster;
     @JsonProperty("Metascore")
-    private int metascore;
+    private String metascore;
     @JsonProperty("imdbRating")
     private float imdbRating;
     @JsonProperty("imdbVotes")
@@ -156,11 +156,11 @@ public class MediaItemMapped {
         this.poster = poster;
     }
 
-    public int getMetascore() {
+    public String getMetascore() {
         return metascore;
     }
 
-    public void setMetascore(int metascore) {
+    public void setMetascore(String metascore) {
         this.metascore = metascore;
     }
 

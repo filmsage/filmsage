@@ -1,9 +1,12 @@
 package com.filmsage.filmsage.controllers;
 
+import com.filmsage.filmsage.models.Review;
 import com.filmsage.filmsage.models.json.MediaItemMapped;
 import com.filmsage.filmsage.models.json.MediaSearchMapped;
+import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.services.OMDBRequester;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,40 +15,32 @@ import java.util.List;
 public class MediaController {
 
     OMDBRequester omdbRequester;
+    ReviewRepository reviewDao;
 
-    public MediaController(OMDBRequester omdbRequester) {
+    public MediaController(OMDBRequester omdbRequester, ReviewRepository reviewDao) {
         this.omdbRequester = omdbRequester;
+        this.reviewDao = reviewDao;
     }
 
     @GetMapping("/search")
     public String showSearchPage() {
-        return "search";
-    }
-
-    // all these methods with the @ResponseBody annotation need to be connected to templates
-    // and get their values consumed. the users are hungry, please feed the users our content
-    @GetMapping("/movies/{id}")
-    @ResponseBody
-    public String getMoviesById(@PathVariable String id) {
-        MediaItemMapped movie = omdbRequester.getMovie(id);
-        // vvv super temporary vvv
-        return movie.getTitle();
+        return "search/search";
     }
 
     @RequestMapping(value = "/search", params = "q")
-    @ResponseBody
-    public String searchMovies(@RequestParam("q") String query) {
+    public String searchMovies(@RequestParam("q") String query, Model model) {
         List<MediaSearchMapped> movies = omdbRequester.searchMovie(query);
-
-        // vvv temp stuff to be replaced vvv
-        StringBuffer sb = new StringBuffer("<p>");
-        for (MediaSearchMapped movie : movies) {
-            sb.append(movie.getTitle())
-                    .append(movie.getYear())
-                    .append(movie.getImdbID())
-                    .append("<br/>");
-        }
-        sb.append("</p>");
-        return sb.toString();
+        model.addAttribute("movies", movies);
+        return "search/results";
     }
+
+    @GetMapping("/movies/{imdb}")
+    public String getMoviesById(@PathVariable String imdb, Model model) {
+        MediaItemMapped movie = omdbRequester.getMovie(imdb);
+        List<Review> reviews = reviewDao.findAllByMediaItemImdb(imdb);
+        model.addAttribute("movie", movie);
+        model.addAttribute("reviews", reviews);
+        return "media/show";
+    }
+
 }

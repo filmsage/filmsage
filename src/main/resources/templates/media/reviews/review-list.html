@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='All reviews')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container">
+    <h1>All user reviews for <a th:href="@{/movies/{id}(id=${movie.imdbID})}" th:text="${movie.title}">Movie</a></h1>
+    <section class="container" id="reviews-container">
+        <div th:each="review : ${reviews}">
+            <a th:href="@{reviews/show(r = ${review.id})}">
+            <h2 th:text="${review.title}"></h2>
+            </a>
+            <p th:text="${review.body}"></p>
+        </div>
+    </section>
+</section>
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>
