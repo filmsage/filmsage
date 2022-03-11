@@ -8,7 +8,7 @@
     <h1>FilmSage Home</h1>
     <section class="container" id="results">
         <div th:each="movie : ${movies}">
-            <a th:href="@{'/movies/' + ${movie.imdbID}}"><p th:text="${movie.title} + ' ' + (${movie.year})"></p></a>
+            <a th:href="@{/movies/{id}(id = ${movie.imdbID})}"><p th:text="${movie.title + ' (' + movie.year + ')'}"></p></a>
         </div>
     </section>
 </section>
