@@ -43,10 +43,10 @@ public class JournalController {
             return "journals/create";
         }
 
-    @GetMapping("/reviews/{id}/delete")
-    public String deleteReview(@PathVariable long id) {
-        journalDao.delete(journalDao.getById(id));
-        return "redirect:/reviews";
+    @PostMapping("/journals/create")
+    public String showJournalCreateForm(@ModelAttribute Journal journal) {
+        journalDao.save(journal);
+        return "redirect:/journals";
     }
 
     @GetMapping("/journals/{id}/delete")
