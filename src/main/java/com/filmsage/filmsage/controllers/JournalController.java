@@ -3,6 +3,7 @@ package com.filmsage.filmsage.controllers;
 import com.filmsage.filmsage.models.Journal;
 import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.repositories.JournalRepository;
+import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class JournalController {
     private JournalRepository journalDao;
     private UserRepository userDao;
+
+
 
     public JournalController(UserRepository userDao, JournalRepository journalDao){
         this.userDao = userDao;
@@ -42,7 +45,7 @@ public class JournalController {
 
     @GetMapping("/reviews/{id}/delete")
     public String deleteReview(@PathVariable long id) {
-        reviewDao.delete(reviewDao.getById(id));
+        journalDao.delete(journalDao.getById(id));
         return "redirect:/reviews";
     }
 
