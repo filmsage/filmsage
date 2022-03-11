@@ -35,21 +35,18 @@ public class CollectionController {
         return "collect/show";
     }
 
-////  show movie collection
+/// show movie collection
     @GetMapping("/collections/create")
     public String createMovieCollection(Model model) {
         model.addAttribute("collection", new Collection());
         return "collect/create";
     }
 
-
     @PostMapping("/collections/create")
     public String submitMovieCollection(@ModelAttribute Collection collection) {
-//       Collection collection = (Collection)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     collectionsDao.save(collection);
         return "collect/create";
     }
-
 
     @GetMapping("/collections/{id}/edit")
     public String editMovieCollection(@PathVariable long id, Model model) {
@@ -65,9 +62,7 @@ public class CollectionController {
 
     @PostMapping("/collections/{id}/edit")
     public String submitEditMovieCollection(@ModelAttribute Collection collection, @PathVariable long id) {
-
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//       collection.setTitle(collection).getTitle());
         collection.setUser(user);
         collectionsDao.save(collection);
         return "redirect:/collect";
