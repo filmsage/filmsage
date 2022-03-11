@@ -55,7 +55,6 @@ public class JournalController {
         return "redirect:/reviews";
     }
 
-
     @GetMapping("/reviews/{id}/delete")
     public String deleteReview(@PathVariable long id) {
         reviewDao.delete(reviewDao.getById(id));
