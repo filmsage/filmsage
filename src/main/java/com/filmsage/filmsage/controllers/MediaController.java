@@ -27,19 +27,20 @@ public class MediaController {
         return "search/search";
     }
 
-    @GetMapping("/movies/{imdb}")
-    public String getMoviesById(@PathVariable String imdb, Model model) {
-        MediaItemMapped movie = omdbRequester.getMovie(imdb);
-        List<Review> reviews = reviewDao.findAllByMediaItemImdb(imdb);
-        model.addAttribute("movie", movie);
-        model.addAttribute("reviews", reviews);
-        return "movies/show";
-    }
-
     @RequestMapping(value = "/search", params = "q")
     public String searchMovies(@RequestParam("q") String query, Model model) {
         List<MediaSearchMapped> movies = omdbRequester.searchMovie(query);
         model.addAttribute("movies", movies);
         return "search/results";
     }
+
+    @GetMapping("/movies/{imdb}")
+    public String getMoviesById(@PathVariable String imdb, Model model) {
+        MediaItemMapped movie = omdbRequester.getMovie(imdb);
+        List<Review> reviews = reviewDao.findAllByMediaItemImdb(imdb);
+        model.addAttribute("movie", movie);
+        model.addAttribute("reviews", reviews);
+        return "media/show";
+    }
+
 }

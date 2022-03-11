@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<head th:replace="partials/elements :: head(title='Review')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-
+    <h1>Review</h1>
+    <h2 th:text="${review.title}"></h2>
+    <p th:text="${review.body}"></p>
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
