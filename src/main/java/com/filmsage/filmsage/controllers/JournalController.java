@@ -5,6 +5,7 @@ import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.repositories.JournalRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,15 +44,48 @@ public class JournalController {
             return "journals/create";
         }
 
-    @GetMapping("/reviews/{id}/delete")
-    public String deleteReview(@PathVariable long id) {
-        journalDao.delete(journalDao.getById(id));
-        return "redirect:/reviews";
+    @PostMapping("/journals/create")
+    public String showJournalCreateForm(@ModelAttribute Journal journal) {
+        journalDao.save(journal);
+        return "redirect:/journals";
     }
+
+    @GetMapping("/journals/{id}/edit")
+    public String ShowEditForm(@PathVariable long id, Model model){
+        Journal journaltoEdit = journalDao.getById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(journaltoEdit.getUser().getId() == user.getId()) {
+            model.addAttribute("journalToEdit", journaltoEdit);
+            return "journals/edit";
+        } else {
+            return "redirect:/journals";
+        }
+    }
+
+
+    @PostMapping("/journals/{id}/edit")
+    public String submitEdit(@ModelAttribute Journal journalToEdit, @PathVariable long id){
+         journalToEdit = journalDao.getById(id);
+         journalToEdit.setTitle(journalToEdit.getTitle());
+         journalToEdit.setBody(journalToEdit.getBody());
+         journalDao.save(journalToEdit);
+
+        return "redirect:/journals";
+    }
+
+    // this function defines that when a user attempts to delete a journal,
+    // we first look up that journal’s id from the url.
+    // We then check if the user who’s currently on the page from the session of their browser is also the user who created the journal.
+    // If they are,we delete the journal from our journals table.
+    // Whether they are the right user or not, we redirect them back to the journals index.
 
     @GetMapping("/journals/{id}/delete")
     public String deleteJournal(@PathVariable long id) {
-        journalDao.delete(journalDao.getById(id));
+        Journal journal = journalDao.getById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(journal.getUser().getId() == user.getId()) {
+            journalDao.delete(journal);
+        }
         return "redirect:/journals";
     }
 
