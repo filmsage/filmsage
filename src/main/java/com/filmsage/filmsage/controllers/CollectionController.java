@@ -1,9 +1,11 @@
 package com.filmsage.filmsage.controllers;
 
 import com.filmsage.filmsage.models.Collection;
+import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.repositories.CollectionRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +35,7 @@ public class CollectionController {
         return "collect/show";
     }
 
-////  view the form to create a new movie collection
+/// show movie collection
     @GetMapping("/collections/create")
     public String createMovieCollection(Model model) {
         model.addAttribute("collection", new Collection());
@@ -41,26 +43,38 @@ public class CollectionController {
     }
 
     @PostMapping("/collections/create")
-    public String createMovieCollection(@ModelAttribute Collection collection) {
-        collectionsDao.save(collection);
+    public String submitMovieCollection(@ModelAttribute Collection collection) {
+    collectionsDao.save(collection);
         return "collect/create";
     }
 
-
     @GetMapping("/collections/{id}/edit")
     public String editMovieCollection(@PathVariable long id, Model model) {
-        model.addAttribute("collection", collectionsDao.getById(id));
-        return "collect/edit";
+        Collection collection = collectionsDao.getById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (collection.getUser().getId() == user.getId()) {
+            model.addAttribute("collection", collectionsDao.getById(id));
+            return "collect/edit";
+        } else {
+            return "redirect:/collect";
+        }
     }
 
     @PostMapping("/collections/{id}/edit")
-    public String submitEditMovieCollection(@ModelAttribute Collection submitCollection, @PathVariable long id) {
-       return "redirect:/collect" + id;
-    }
-
-    @GetMapping("collections/{id}/delete")
-    public String deleteMovieCollection(@PathVariable long id) {
-        collectionsDao.delete(collectionsDao.getById(id));
+    public String submitEditMovieCollection(@ModelAttribute Collection collection, @PathVariable long id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        collection.setUser(user);
+        collectionsDao.save(collection);
         return "redirect:/collect";
     }
-}
+
+    @GetMapping("/collections/{id}/delete")
+    public String deleteMCollection(@PathVariable long id) {
+        Collection collection = collectionsDao.getById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(collection.getUser().getId() == user.getId()){
+                collectionsDao.delete(collection);
+            }
+        return "redirect:/collect";
+    }
+    }
