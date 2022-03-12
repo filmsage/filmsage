@@ -23,6 +23,10 @@
             <label for="password-confirm">Confirm Password</label>
             <input id="password-confirm" type="password" class="form-control" th:field="*{matchingPassword}"/>
         </div>
+        <div class="form-group" th:if="${#fields.hasErrors()}">
+            <small>There was an error registering your account.
+            Please double-check your details and try again.</small>
+        </div>
         <input type="submit" class="btn btn-primary mt-2"/>
     </form>
 </section>
