@@ -21,12 +21,10 @@ import java.sql.Timestamp;
 public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
-    private UserDetailsLoader userDetailsLoader;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, UserDetailsLoader userDetailsLoader) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
-        this.userDetailsLoader = userDetailsLoader;
     }
 
     @GetMapping("/register")
