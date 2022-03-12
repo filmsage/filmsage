@@ -1,14 +1,19 @@
 package com.filmsage.filmsage.models.auth;
 
 
+import com.filmsage.filmsage.annotation.PasswordMatches;
+import com.filmsage.filmsage.annotation.ValidEmail;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@PasswordMatches
 public class UserDTO {
     @NotNull
     @NotEmpty
     private String username;
 
+    @ValidEmail
     @NotNull
     @NotEmpty
     private String email;
@@ -26,6 +31,11 @@ public class UserDTO {
         this.email = email;
         this.password = password;
         this.matchingPassword = matchingPassword;
+    }
+
+    public UserDTO(String username, String email) {
+        this.username = username;
+        this.email = email;
     }
 
     public String getUsername() {

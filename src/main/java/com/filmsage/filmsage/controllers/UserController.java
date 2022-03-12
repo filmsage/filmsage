@@ -3,13 +3,13 @@ package com.filmsage.filmsage.controllers;
 import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.models.auth.UserDTO;
 import com.filmsage.filmsage.repositories.UserRepository;
-import com.filmsage.filmsage.services.UserDetailsLoader;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,14 +34,18 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute @Valid UserDTO userDTO) {
+    public String saveUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Model model) {
+        // TODO: more custom validation annotations on UserDTO
+        if (bindingResult.hasErrors()) {
+            return "users/register";
+        }
         if (userDao.existsUserByUsername(userDTO.getUsername())) {
-            // TODO: some page or route to send new users to if they try to register an account w/ a taken username
-            return "index";
+            // TODO: inform user that the username can't be used
+            return "users/register";
         }
         if (userDao.existsUserByEmail(userDTO.getEmail())) {
-            // TODO: some page or route to send new users to if they try to register an account w/ a taken email
-            return "index";
+            // TODO: inform user the email can't be used
+            return "users/register";
         }
         // map the form details into a new User for our persistence layer
         User user = new User(
