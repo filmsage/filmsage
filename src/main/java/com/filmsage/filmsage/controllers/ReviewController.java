@@ -2,9 +2,11 @@ package com.filmsage.filmsage.controllers;
 
 import com.filmsage.filmsage.models.MediaItem;
 import com.filmsage.filmsage.models.Review;
+import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.repositories.MediaItemRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.services.OMDBRequester;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +43,9 @@ public class ReviewController {
         } else {
             mediaItem = mediaItemDao.save(new MediaItem(imdb));
         }
+        // get and set the user to the new review
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        review.setUser(user);
         review.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         review.setMediaItem(mediaItem);
         reviewDao.save(review);
