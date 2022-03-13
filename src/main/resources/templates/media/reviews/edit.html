@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='Editing Review...')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container">
+    <h1>Editing Review</h1>
+</section>
+<div class="container">
+    <form th:action="@{'/movies/' + ${movie.imdbID} + '/reviews/edit'}" th:method="post" th:object="${review}">
+        <input th:field="${user.id}" type="hidden"/>
+        <input th:field="*{id}" type="hidden"/>
+        <div class="form-group">
+            <label>Review Title</label>
+            <input th:field="*{title}" class="field" required>
+            <br>
+            <label >Review Body</label>
+            <textarea th:field="*{body}" cols="30" rows="10" required></textarea>
+            <br>
+            <label>Score</label>
+            <input th:field="*{rating}" type="number" max="5" min="0" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>
