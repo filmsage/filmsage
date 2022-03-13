@@ -1,6 +1,6 @@
 package com.filmsage.filmsage.annotation;
 
-import com.filmsage.filmsage.models.auth.UserDTO;
+import com.filmsage.filmsage.models.dto.UserDTO;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
