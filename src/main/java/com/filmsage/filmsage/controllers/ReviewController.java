@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Controller
 public class ReviewController {
@@ -32,13 +31,11 @@ public class ReviewController {
 
     @GetMapping("/movies/{imdb}/reviews/create")
     public String showReviewForm(Model model, @PathVariable String imdb){
-        // step 1: get the UserPrinciple which contains account identifying info
-        UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // step 2: get the UserContent object which links to all that user's user-created content
-        UserContent userContent = userContentDao.findUserContentByUser(principle.getUser());
-        // step 3: store it into the model for retrieval later
+        // get the UserContent object which links to all that user's user-created content
+        UserContent userContent = getUserContent();
+        // store it into the model for retrieval later
         model.addAttribute("user", userContent);
-        // step 4: since we're creating a new review, we give it a fresh new Review to work with
+        // since we're creating a new review, we give it a fresh new Review to work with
         model.addAttribute("review", new Review());
         model.addAttribute("movie", omdbRequester.getMovie(imdb));
         return "media/reviews/create";
@@ -48,18 +45,13 @@ public class ReviewController {
     public String createReview(@ModelAttribute Review review, @PathVariable String imdb){
         // check if record exists already
         MediaItem mediaItem = getMediaItemRecord(imdb);
-        // get and set the user to the new review
-        // note: this is slightly more complex than before but more powerful and secure
-
-        // step 1: get the UserPrinciple which contains account identifying info
-        UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // step 2: get the UserContent object which links to all that user's user-created content
-        UserContent userContent = userContentDao.findUserContentByUser(principle.getUser());
-        // step 3: set the userContent field in the Review to results from step 2
+        // get the UserContent object which links to all that user's user-created content
+        UserContent userContent = getUserContent();
+        // set the userContent field in the Review
         review.setUserContent(userContent);
-        review.setCreatedAt(new Timestamp(System.currentTimeMillis())); //3.1 timestamp review
-        review.setMediaItem(mediaItem); // 3.2 associate MediaItem with review
-        // step 4: persist the review (ie store it in the database)
+        review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
+        review.setMediaItem(mediaItem); // associate MediaItem with review
+        // persist the review (ie store it in the database)
         reviewDao.save(review);
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }
@@ -68,7 +60,7 @@ public class ReviewController {
             method = RequestMethod.GET,
             params = "r")
     public String showReview(Model model, @PathVariable String imdb, @RequestParam long r) {
-        model.addAttribute("review", reviewDao.getById(r));
+        model.addAttribute("review", reviewDao.findReviewById(r));
         model.addAttribute("movie", omdbRequester.getMovie(imdb));
         return "media/reviews/review";
     }
@@ -84,31 +76,23 @@ public class ReviewController {
             method = RequestMethod.GET,
             params = "r")
     public String showEditForm(Model model, @PathVariable String imdb, @RequestParam long r) {
-        // step 1: get the UserPrinciple which contains account identifying info
-        UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // step 2: get the UserContent object which links to all that user's user-created content
-        UserContent userContent = userContentDao.findUserContentByUser(principle.getUser());
+        // get the UserContent object which links to all that user's user-created content
+        UserContent userContent = getUserContent();
         model.addAttribute("user", userContent);
-
         model.addAttribute("review", reviewDao.getById(r));
         model.addAttribute("movie", omdbRequester.getMovie(imdb));
-        return "media/reviews/create";
+        return "media/reviews/edit";
     }
 
+    @PostMapping("/movies/{imdb}/reviews/edit")
     public String submitEdit(@ModelAttribute Review review, @PathVariable String imdb){
-        // check if record exists already
+        // check if record exists already and prepare it for review
         MediaItem mediaItem = getMediaItemRecord(imdb);
-        // get and set the user to the new review
-        // note: this is slightly more complex than before but more powerful and secure
-        // step 1: get the UserPrinciple which contains account identifying info
-        UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // step 2: get the UserContent object which links to all that user's user-created content
-        UserContent userContent = userContentDao.findUserContentByUser(principle.getUser());
-        // step 3: set the userContent field in the Review to results from step 2
-        review.setUserContent(userContent);
-        // review.setCreatedAt(new Timestamp(System.currentTimeMillis())); //3.1 timestamp review
-        review.setMediaItem(mediaItem); // 3.2 associate MediaItem with review
-        // step 4: persist the review (ie store it in the database)
+        // set the userContent field in the Review
+        review.setUserContent(getUserContent());
+        review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
+        review.setMediaItem(mediaItem); // associate MediaItem with review
+        // persist the review (ie store it in the database)
         reviewDao.save(review);
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }
@@ -122,6 +106,14 @@ public class ReviewController {
            // if not, we make a new record and return that instead
            return mediaItemDao.save(new MediaItem(imdb));
        }
+   }
+
+   private UserContent getUserContent() {
+       // note: this is slightly more complex than before, I apologize
+       // step 1: get the UserPrinciple which contains account identifying info
+       UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       // step 2: get the UserContent object which links to all that user's user-created content
+       return userContentDao.findUserContentByUser(principle.getUser());
    }
 
 }
