@@ -1,6 +1,7 @@
 package com.filmsage.filmsage.repositories;
 
 import com.filmsage.filmsage.models.User;
+import com.filmsage.filmsage.models.UserContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -8,5 +9,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
     boolean existsUserByUsername(String username);
     boolean existsUserByEmail(String email);
+//    UserContent
 }
 

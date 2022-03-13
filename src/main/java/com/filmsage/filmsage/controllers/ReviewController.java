@@ -1,10 +1,9 @@
 package com.filmsage.filmsage.controllers;
 
-import com.filmsage.filmsage.models.MediaItem;
-import com.filmsage.filmsage.models.Review;
-import com.filmsage.filmsage.models.User;
+import com.filmsage.filmsage.models.*;
 import com.filmsage.filmsage.repositories.MediaItemRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
+import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.services.OMDBRequester;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,13 +17,17 @@ import java.util.List;
 public class ReviewController {
     private ReviewRepository reviewDao;
     private MediaItemRepository mediaItemDao;
+    private UserContentRepository userContentDao;
     private OMDBRequester omdbRequester;
 
-    public ReviewController(ReviewRepository reviewDao, MediaItemRepository mediaItemDao, OMDBRequester omdbRequester) {
+    public ReviewController(ReviewRepository reviewDao,
+                            MediaItemRepository mediaItemDao,
+                            UserContentRepository userContentDao,
+                            OMDBRequester omdbRequester) {
         this.reviewDao = reviewDao;
         this.mediaItemDao = mediaItemDao;
+        this.userContentDao = userContentDao;
         this.omdbRequester = omdbRequester;
-
     }
 
     @GetMapping("/movies/{imdb}/reviews/create")
@@ -44,10 +47,13 @@ public class ReviewController {
             mediaItem = mediaItemDao.save(new MediaItem(imdb));
         }
         // get and set the user to the new review
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        review.setUserContent(user.getUserContent());
+        UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserContent userContent = userContentDao.findUserContentByUser(principle.getUser());
+        review.setUserContent(userContent);
         review.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         review.setMediaItem(mediaItem);
+        System.out.println(review.getTitle());
+        System.out.println(review.getUserContent().getUser().getEmail());
         reviewDao.save(review);
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }

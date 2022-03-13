@@ -17,9 +17,9 @@ public class User {
     @Column(name = "id")
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private UserContent userContent;
+    private UserContent userContent = new UserContent(this);
 
     @Column(nullable = false, length = 255, unique = true)
     private String email;
@@ -58,7 +58,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.createdAt = createdAt;
-        this.enabled = false;
+//        this.enabled = false;
     }
 
     public User(User copy) {

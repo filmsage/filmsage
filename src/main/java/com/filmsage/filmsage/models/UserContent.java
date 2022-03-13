@@ -1,6 +1,8 @@
 package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,8 +14,9 @@ public class UserContent {
     @Column(name = "user_id")
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     @MapsId
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     // non-auth related user info
@@ -27,24 +30,36 @@ public class UserContent {
     private String country;
 
     // user created content
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
-    private List<Journal> journals;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
-    private List<Review> reviews;
+    @OneToMany(mappedBy = "userContent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Collection> collections = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
-    private List<Collection> collections;
+    @OneToMany(mappedBy = "userContent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Journal> journals = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userContent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
             name = "user_reviews_likes",
-            joinColumns = @JoinColumn(name = "id"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "review_id"))
     private Set<Review> likedReviews;
 
-
     public UserContent() {
+    }
+
+    public UserContent(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {
@@ -55,13 +70,6 @@ public class UserContent {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getFirstName() {
         return firstName;

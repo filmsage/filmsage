@@ -24,7 +24,7 @@ public class Review {
     private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private UserContent userContent;
 
     @ManyToOne
