@@ -81,8 +81,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                        "/movies/{imdb:^\\w{2}\\d+$}/reviews/create",
-                        "/movies/{imdb:^\\w{2}\\d+$}/reviews/{id:^\\d+$}/delete",
-                        "/movies/{imdb:^\\w{2}\\d+$}/reviews/{id:^\\d+$}/edit"
+                        "/movies/{imdb:^\\w{2}\\d+$}/reviews/delete",
+                        "/movies/{imdb:^\\w{2}\\d+$}/reviews/edit"
                 )
                 .authenticated()
         ;
