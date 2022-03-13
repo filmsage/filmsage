@@ -1,4 +1,4 @@
-package com.filmsage.filmsage.models.auth;
+package com.filmsage.filmsage.models.dto;
 
 
 import com.filmsage.filmsage.annotation.PasswordMatches;
