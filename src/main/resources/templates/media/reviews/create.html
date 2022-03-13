@@ -9,6 +9,7 @@
 </section>
 <div class="container">
   <form th:action="@{'/movies/' + ${movie.imdbID} + '/reviews/create'}" th:method="post" th:object="${review}">
+    <input th:field="${user}"/>
     <div class="form-group">
       <label>Review Title</label>
       <input th:field="*{title}" class="field" required>
