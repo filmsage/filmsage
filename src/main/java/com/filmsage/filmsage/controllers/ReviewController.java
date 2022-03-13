@@ -45,7 +45,7 @@ public class ReviewController {
         }
         // get and set the user to the new review
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        review.setUser(user);
+        review.setUserContent(user.getUserContent());
         review.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         review.setMediaItem(mediaItem);
         reviewDao.save(review);
