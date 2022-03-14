@@ -52,7 +52,7 @@ public class CollectionController {
     public String editMovieCollection(@PathVariable long id, Model model) {
         Collection collection = collectionsDao.getById(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (collection.getUser().getId() == user.getId()) {
+        if (collection.getUserContent().getId() == user.getId()) {
             model.addAttribute("collection", collectionsDao.getById(id));
             return "collect/edit";
         } else {
@@ -63,7 +63,7 @@ public class CollectionController {
     @PostMapping("/collections/{id}/edit")
     public String submitEditMovieCollection(@ModelAttribute Collection collection, @PathVariable long id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        collection.setUser(user);
+        collection.setUserContent(user.getUserContent());
         collectionsDao.save(collection);
         return "redirect:/collect";
     }
@@ -72,7 +72,7 @@ public class CollectionController {
     public String deleteMCollection(@PathVariable long id) {
         Collection collection = collectionsDao.getById(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(collection.getUser().getId() == user.getId()){
+        if(collection.getUserContent().getId() == user.getId()){
                 collectionsDao.delete(collection);
             }
         return "redirect:/collect";
