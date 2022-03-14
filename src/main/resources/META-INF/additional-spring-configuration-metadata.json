@@ -4,5 +4,20 @@
       "name": "app.omdb.key",
       "type": "java.lang.String",
       "description": "API key for OMDB."
-  }
-] }
+    },
+    {
+      "name": "app.admin.email",
+      "type": "java.lang.String",
+      "description": "Admin account email address."
+    },
+    {
+      "name": "app.admin.password",
+      "type": "java.lang.String",
+      "description": "Admin account password."
+    },
+    {
+      "name": "app.admin.username",
+      "type": "java.lang.String",
+      "description": "Admin account username."
+    }
+  ] }

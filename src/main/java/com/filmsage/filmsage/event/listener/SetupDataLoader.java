@@ -4,6 +4,7 @@ import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.models.UserContent;
 import com.filmsage.filmsage.models.auth.Privilege;
 import com.filmsage.filmsage.models.auth.Role;
+import com.filmsage.filmsage.properties.AdminAccountProperties;
 import com.filmsage.filmsage.repositories.UserRepository;
 import com.filmsage.filmsage.repositories.auth.PrivilegeRepository;
 import com.filmsage.filmsage.repositories.auth.RoleRepository;
@@ -33,14 +34,18 @@ public class SetupDataLoader implements
 
     private PasswordEncoder passwordEncoder;
 
+    private AdminAccountProperties adminProperties;
+
     public SetupDataLoader(UserRepository userDao,
                            RoleRepository roleDao,
                            PrivilegeRepository privilegeDao,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder,
+                           AdminAccountProperties adminProperties) {
         this.userDao = userDao;
         this.roleDao = roleDao;
         this.privilegeDao = privilegeDao;
         this.passwordEncoder = passwordEncoder;
+        this.adminProperties = adminProperties;
     }
 
     @Override
@@ -85,9 +90,9 @@ public class SetupDataLoader implements
         if (!userDao.existsUserByUsername(testAdminUsername)) {
             Role adminRole = roleDao.findByName("ROLE_ADMIN");
             User user = new User();
-            user.setPassword(passwordEncoder.encode("test"));
-            user.setEmail("test@test.com");
-            user.setUsername("admin");
+            user.setPassword(passwordEncoder.encode(adminProperties.getPassword()));
+            user.setEmail(adminProperties.getEmail());
+            user.setUsername(adminProperties.getUsername());
             user.setRoles(Arrays.asList(adminRole));
             user.setEnabled(true);
             user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
