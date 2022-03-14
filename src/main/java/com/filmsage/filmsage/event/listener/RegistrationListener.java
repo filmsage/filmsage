@@ -2,7 +2,6 @@ package com.filmsage.filmsage.event.listener;
 
 import com.filmsage.filmsage.event.event.OnRegistrationComplete;
 import com.filmsage.filmsage.models.User;
-import com.filmsage.filmsage.services.UserDetailsLoader;
 import com.filmsage.filmsage.services.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -13,6 +12,7 @@ import java.util.UUID;
 
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationComplete> {
+
     private UserService service;
 
     private MessageSource messages;
@@ -42,7 +42,6 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String subject = "FilmSage - Confirm Your Account";
         String confirmationUrl = event.getAppUrl() + "/registration-confirm?token=" + token;
         String from = "registration@filmsage.net";
-//        String message = messages.getMessage("message.regSucc", null, event.getLocale());
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);

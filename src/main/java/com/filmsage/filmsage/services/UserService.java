@@ -2,7 +2,6 @@ package com.filmsage.filmsage.services;
 
 import com.filmsage.filmsage.exception.UserAlreadyExistException;
 import com.filmsage.filmsage.models.User;
-import com.filmsage.filmsage.models.UserContent;
 import com.filmsage.filmsage.models.VerificationToken;
 import com.filmsage.filmsage.models.dto.UserDTO;
 import com.filmsage.filmsage.repositories.UserRepository;
@@ -76,24 +75,4 @@ public class UserService implements IUserService {
         VerificationToken myToken = new VerificationToken(token, user);
         tokenDao.save(myToken);
     }
-
-//     old
-//    @Override
-//    public User registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException {
-//        if (emailExist(userDto.getEmail())) {
-//            throw new UserAlreadyExistException(
-//                    "There is an account with that email adress: "
-//                            + userDto.getEmail());
-//        }
-//
-//        User user = new User(
-//                userDto.getEmail(),
-//                userDto.getUsername(),
-//                passwordEncoder.encode(userDto.getPassword()),
-//                new Timestamp(System.currentTimeMillis())
-//        );
-//        user.setRole(new Role(Integer.valueOf(1), user));
-//        return userDao.save(user);
-//    }
-
 }

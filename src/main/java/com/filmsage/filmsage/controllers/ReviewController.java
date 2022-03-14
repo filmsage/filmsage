@@ -1,6 +1,7 @@
 package com.filmsage.filmsage.controllers;
 
 import com.filmsage.filmsage.models.*;
+import com.filmsage.filmsage.models.auth.UserPrinciple;
 import com.filmsage.filmsage.repositories.MediaItemRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;

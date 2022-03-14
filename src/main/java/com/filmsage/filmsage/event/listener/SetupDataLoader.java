@@ -86,7 +86,6 @@ public class SetupDataLoader implements
         createRoleIfNotFound("ROLE_GUEST", guestPrivileges);
 
         String testAdminUsername = "admin";
-//      ------vvv TESTING ONLY vvv------
         if (!userDao.existsUserByUsername(testAdminUsername)) {
             Role adminRole = roleDao.findByName("ROLE_ADMIN");
             User user = new User();
@@ -98,7 +97,6 @@ public class SetupDataLoader implements
             user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
             userDao.save(user);
         }
-//      ------^^^ TESTING ONLY ^^^------
 
         alreadySetup = true;
     }
