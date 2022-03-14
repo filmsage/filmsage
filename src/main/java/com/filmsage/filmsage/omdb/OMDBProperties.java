@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OMDBProperties {
-    @Value("APP_OMDB_KEY")
+    @Value("${APP_OMDB_KEY}")
     private String key;
 
     public OMDBProperties(String key) {
