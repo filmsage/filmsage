@@ -26,6 +26,30 @@ public class Collection {
 
     public Collection() {}
 
+    public Collection(long id, String title, Timestamp createdAt, User user, MediaItem mediaItem) {
+        this.id = id;
+        this.title = title;
+        this.createdAt = createdAt;
+        this.user = user;
+        this.mediaItem = mediaItem;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public MediaItem getMediaItem() {
+        return mediaItem;
+    }
+
+    public void setMediaItem(MediaItem mediaItem) {
+        this.mediaItem = mediaItem;
+    }
+
     public Collection(long id, String title, Timestamp createdAt) {
         this.id = id;
         this.title = title;
