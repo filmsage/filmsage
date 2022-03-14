@@ -44,7 +44,7 @@ public class JournalController {
     @PostMapping("/journals/create")
     public String submitCreate(@ModelAttribute Journal journal) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        journal.setUser(user);
+        journal.setUserContent(user.getUserContent());
         journalDao.save(journal);
         return "redirect:/journals";
     }
@@ -53,7 +53,7 @@ public class JournalController {
     public String showEditForm(@PathVariable long id, Model model) {
         Journal journal = journalDao.getById(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (journal.getUser().getId() == user.getId()) {
+        if (journal.getUserContent().getId() == user.getId()) {
             model.addAttribute("journalToEdit", journal);
             return "journals/edit";
         } else {
@@ -65,7 +65,7 @@ public class JournalController {
     @PostMapping("/journals/{id}/edit")
     public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        journal.setUser(user);
+        journal.setUserContent(user.getUserContent());
         journalDao.save(journal);
         return "redirect:/journals";
     }
@@ -80,7 +80,7 @@ public class JournalController {
     public String deleteJournal(@PathVariable long id) {
         Journal journal = journalDao.getById(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (journal.getUser().getId() == user.getId()) {
+        if (journal.getUserContent().getId() == user.getId()) {
             journalDao.delete(journal);
         }
         return "redirect:/journals";

@@ -30,16 +30,16 @@ public class Collection {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
-        this.user = user;
+        this.userContent = userContent;
         this.mediaItem = mediaItem;
     }
 
-    public User getUser() {
-        return user;
+    public UserContent getUserContent() {
+        return userContent;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserContent(UserContent userContent) {
+        this.userContent = userContent;
     }
 
     public MediaItem getMediaItem() {
