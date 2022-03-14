@@ -21,17 +21,6 @@ public class UserPrinciple implements UserDetails {
     private boolean accountNonLocked;
     private Collection<GrantedAuthority> authorities;
 
-//    public UserPrinciple(User user, boolean enabled, boolean accountNonExpired,
-//                         boolean credentialsNonExpired, boolean accountNonLocked,
-//                         Collection<GrantedAuthority> authorities) {
-//        this.user = user;
-//        this.enabled = enabled;
-//        this.accountNonExpired = accountNonExpired;
-//        this.credentialsNonExpired = credentialsNonExpired;
-//        this.accountNonLocked = accountNonLocked;
-//        this.authorities = authorities;
-//    }
-
     public UserPrinciple(User user) {
         this.user = user;
         this.enabled = user.isEnabled();
@@ -40,15 +29,6 @@ public class UserPrinciple implements UserDetails {
         this.accountNonLocked = true;
         this.authorities = getGrantedAuthorities(getPrivileges(user.getRoles()));;
     }
-
-//    @Override
-//    public Collection<GrantedAuthority> getAuthorities() {
-//        return AuthorityUtils.commaSeparatedStringToAuthorityList(
-//                user.getRoles().stream()
-//                        .map(Role::toString)
-//                        .collect(Collectors.joining(","))
-//        );
-//    }
 
     @Override
     public String getPassword() {
