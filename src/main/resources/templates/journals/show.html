@@ -6,8 +6,9 @@
 
 <section class="container">
     <h1>Viewing Journal</h1>
-    <h2 th:text="${journal.title}"></h2>
-    <p th:text="${journal.body}"></p>
+    <h2 th:text="${journal.title}">Journal title</h2>
+    <p th:text="${journal.body}">Journal body</p>
+    <p th:text="${journal.getUserContent().getUser().getUsername()}">Creator username</p>
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
