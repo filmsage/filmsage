@@ -58,7 +58,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.createdAt = createdAt;
-//        this.enabled = false;
+        this.enabled = false;
     }
 
     public User(User copy) {

@@ -40,13 +40,15 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         String recipientAddress = user.getEmail();
         String subject = "FilmSage - Confirm Your Account";
-        String confirmationUrl = event.getAppUrl() + "/registration-confirm.html?token=" + token;
-        String message = messages.getMessage("message.regSucc", null, event.getLocale());
+        String confirmationUrl = event.getAppUrl() + "/registration-confirm?token=" + token;
+        String from = "registration@filmsage.net";
+//        String message = messages.getMessage("message.regSucc", null, event.getLocale());
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
+        email.setFrom(from);
         email.setSubject(subject);
-        email.setText(message + "\r\n" + applicationUrl + confirmationUrl);
+        email.setText("Go here to confirm your account: " + "\r\n" + applicationUrl + confirmationUrl);
         mailSender.send(email);
     }
 }
