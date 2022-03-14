@@ -1,7 +1,10 @@
 package com.filmsage.filmsage.models;
 
+import com.filmsage.filmsage.models.auth.Role;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -11,7 +14,12 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserContent userContent = new UserContent(this);
 
     @Column(nullable = false, length = 255, unique = true)
     private String email;
@@ -22,49 +30,47 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
-    @Column(nullable = false)
-    private boolean admin;
-
-    @Column(nullable = true, length = 255)
-    private String firstName;
-
-    @Column(nullable = true, length = 255)
-    private String lastName;
-
-    @Column(nullable = true, length = 255)
-    private String country;
-
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Journal> journals;
+    @Column(name = "enabled")
+    private boolean enabled;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Review> reviews;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Collection> collections;
+    @Column(name = "token_expired")
+    private boolean tokenExpired;
 
     @ManyToMany
     @JoinTable(
-            name = "user_reviews_likes",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "review_id"))
-    private Set<Review> likedReviews;
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private java.util.Collection<Role> roles;
 
-    public User() {}
+    public User() {
+        super();
+        this.enabled = false;
+    }
 
-    public User(long id, String email, String username, String password, boolean admin, String firstName, String lastName, String country, Timestamp createdAt) {
-        this.id = id;
+    public User(String email, String username, String password, Timestamp createdAt) {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.admin = admin;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
         this.createdAt = createdAt;
+        this.enabled = false;
+    }
+
+    public User(User copy) {
+        id = copy.id;
+        userContent = copy.userContent;
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+        createdAt = copy.createdAt;
+        enabled = copy.enabled;
+        tokenExpired = copy.tokenExpired;
+        roles = copy.roles;
     }
 
     public long getId() {
@@ -99,20 +105,12 @@ public class User {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public UserContent getUserContent() {
+        return userContent;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setUserContent(UserContent userContent) {
+        this.userContent = userContent;
     }
 
     public Timestamp getCreatedAt() {
@@ -123,63 +121,27 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public String getLastName() {
-        return lastName;
+    public boolean isTokenExpired() {
+        return tokenExpired;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTokenExpired(boolean tokenExpired) {
+        this.tokenExpired = tokenExpired;
     }
 
-    public List<Journal> getJournals() {
-        return journals;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setJournals(List<Journal> journals) {
-        this.journals = journals;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public List<Collection> getCollections() {
-        return collections;
-    }
-
-    public void setCollections(List<Collection> collections) {
-        this.collections = collections;
-    }
-
-    public Set<Review> getLikedReviews() {
-        return likedReviews;
-    }
-
-    public void setLikedReviews(Set<Review> likedReviews) {
-        this.likedReviews = likedReviews;
-    }
-
-    public User(User copy) {
-        id = copy.id;
-        email = copy.email;
-        username = copy.username;
-        password = copy.password;
-        admin = copy.admin;
-        firstName = copy.firstName;
-        lastName = copy.lastName;
-        country = copy.country;
-        createdAt = copy.createdAt;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

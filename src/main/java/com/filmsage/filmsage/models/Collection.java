@@ -18,7 +18,7 @@ public class Collection {
 
     @ManyToOne
     @JoinColumn (name = "user_id")
-    private User user;
+    private UserContent userContent;
 
     @ManyToOne
     @JoinColumn (name = "media_id")

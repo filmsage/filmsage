@@ -11,8 +11,6 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    // foreign keys
-
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -26,23 +24,23 @@ public class Review {
     private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_id")
+    private UserContent userContent;
 
     @ManyToOne
     @JoinColumn (name = "media_id")
     private MediaItem mediaItem;
 
     @ManyToMany(mappedBy = "likedReviews")
-    Set<User> userLikes;
+    Set<UserContent> userLikes;
 
-    public Review(long id, String title, String body, int rating, Timestamp createdAt, User user, MediaItem mediaItem) {
+    public Review(long id, String title, String body, int rating, Timestamp createdAt, UserContent userContent, MediaItem mediaItem) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.rating = rating;
         this.createdAt = createdAt;
-        this.user = user;
+        this.userContent = userContent;
         this.mediaItem = mediaItem;
     }
 
@@ -88,12 +86,12 @@ public class Review {
         this.createdAt = createdAt;
     }
 
-    public User getUser() {
-        return user;
+    public UserContent getUserContent() {
+        return userContent;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserContent(UserContent userContent) {
+        this.userContent = userContent;
     }
 
     public MediaItem getMediaItem() {

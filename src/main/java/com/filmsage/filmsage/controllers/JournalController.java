@@ -67,7 +67,6 @@ public class JournalController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         journal.setUser(user);
         journalDao.save(journal);
-
         return "redirect:/journals";
     }
 

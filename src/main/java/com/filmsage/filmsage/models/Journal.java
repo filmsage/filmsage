@@ -19,13 +19,13 @@ public class Journal {
 
     @ManyToOne
     @JoinColumn (name = "user_id")
-    private User user;
+    private UserContent userContent;
 
-    public Journal(long id, String title, String body, User user) {
+    public Journal(long id, String title, String body, UserContent userContent) {
         this.id = id;
         this.title = title;
         this.body = body;
-        this.user = user;
+        this.userContent = userContent;
     }
 
     public Journal() {}
@@ -54,11 +54,11 @@ public class Journal {
         this.body = body;
     }
 
-    public User getUser() {
-        return user;
+    public UserContent getUserContent() {
+        return userContent;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserContent(UserContent userContent) {
+        this.userContent = userContent;
     }
 }

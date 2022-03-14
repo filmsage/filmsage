@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='FilmSage Registration')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container">
+    <h1>Registration Error</h1>
+    <p th:text="${message}"></p>
+</section>
+
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>
