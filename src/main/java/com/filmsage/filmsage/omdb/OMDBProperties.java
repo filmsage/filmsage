@@ -1,12 +1,13 @@
 package com.filmsage.filmsage.omdb;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@ConfigurationProperties("app.omdb")
 @Component
 public class OMDBProperties {
-    private String key = "";
+    @Value("APP_OMDB_KEY")
+    private String key;
 
     public OMDBProperties(String key) {
         this.key = key;
