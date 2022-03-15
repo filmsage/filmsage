@@ -6,6 +6,9 @@
 
 <section class="container">
     <h1>Journal Page</h1>
+    <div class="container">
+       <th:block th:replace="partials/content/journals-nav" :: nav/>
+    </div>
     <div class="container" id="journals-container">
         <div th:each="journal : ${journals}">
             <a th:href="@{/journals(id=${journal.id})}">

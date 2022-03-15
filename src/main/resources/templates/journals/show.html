@@ -5,8 +5,11 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
+    <h1>Viewing Journal</h1>
     <div class="container">
-        <h1>Viewing Journal</h1>
+        <th:block th:replace="partials/content/journals-nav" :: nav/>
+    </div>
+    <div class="container">
         <h2 th:text="${journal.title}">Journal title</h2>
         <p th:text="${journal.body}">Journal body</p>
         <p>
@@ -17,6 +20,8 @@
                 Creator username
             </a>
         </p>
+        <a class="btn btn-primary" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
+        <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
     </div>
 </section>
 
