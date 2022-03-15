@@ -32,7 +32,6 @@
 
 <section>
     <div th:each="review : ${reviews}">
-        <a th:href="@{reviews/show(r = ${review.id})}">
             <h2 th:text="${review.title}"></h2>
         <p th:text="${review.body}"></p>
     </div>
