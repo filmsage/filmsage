@@ -5,7 +5,9 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-<h1>FilmSage Home</h1>
+    <h1>FilmSage Home</h1>
+    <a th:href="@{/movies/tt5727208}">link to a movie</a>
+    <a th:href="@{/journals}">Journals index (All journals, all users)</a>
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
