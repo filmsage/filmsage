@@ -42,13 +42,6 @@ public class JournalController {
         return "journals/index";
     }
 
-//    @GetMapping("journals/byUser{user}")
-//    public String showJournals(@PathVariable long id, Model model) {
-//        UserContent userContent = userContentDao.findUserContentById(id);
-//        model.addAttribute("journals", userContent.getJournals());
-//        return "journals/index";
-//    }
-
     @GetMapping("/journals/{id}")
     public String showJournal(@PathVariable long id, Model model) {
         model.addAttribute("journal", journalDao.getById(id));
@@ -63,8 +56,6 @@ public class JournalController {
 
     @PostMapping("/journals/create")
     public String submitCreate(@ModelAttribute Journal journal) {
-        //User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         journal.setUserContent(getUserContent());
         journal = journalDao.save(journal);
@@ -74,9 +65,8 @@ public class JournalController {
     @GetMapping("/journals/{id}/edit")
     public String showEditForm(@PathVariable long id, Model model) {
         Journal journal = journalDao.getById(id);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (journal.getUserContent().getId() == user.getId()) {
-            model.addAttribute("journalToEdit", journal);
+        if (journal.getUserContent().getId() == getUserContent().getId()) {
+            model.addAttribute("journal", journal);
             return "journals/edit";
         } else {
             return "redirect:/journals";
@@ -86,8 +76,8 @@ public class JournalController {
 
     @PostMapping("/journals/{id}/edit")
     public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        journal.setUserContent(user.getUserContent());
+        journal.setUserContent(getUserContent());
+        journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         journalDao.save(journal);
         return "redirect:/journals";
     }
@@ -101,8 +91,7 @@ public class JournalController {
     @GetMapping("/journals/{id}/delete")
     public String deleteJournal(@PathVariable long id) {
         Journal journal = journalDao.getById(id);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (journal.getUserContent().getId() == user.getId()) {
+        if (journal.getUserContent().getId() == getUserContent().getId()) {
             journalDao.delete(journal);
         }
         return "redirect:/journals";
