@@ -1,4 +1,4 @@
-package com.filmsage.filmsage.omdb;
+package com.filmsage.filmsage.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
