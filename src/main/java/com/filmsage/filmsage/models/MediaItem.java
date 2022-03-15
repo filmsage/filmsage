@@ -16,7 +16,7 @@ public class MediaItem {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
     private List<Review> reviews;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "mediaItems")
     private List<Collection> collections;
 
 
@@ -45,5 +45,21 @@ public class MediaItem {
 
     public void setImdb(String imdb) {
         this.imdb = imdb;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Collection> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(List<Collection> collections) {
+        this.collections = collections;
     }
 }
