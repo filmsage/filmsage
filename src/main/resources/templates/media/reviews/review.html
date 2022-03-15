@@ -5,6 +5,7 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
+    <th:block th:replace="partials/content/reviews-nav" :: ul/>
     <h1><a th:href="@{/movies/{imdb}(imdb=${movie.imdbID})}" th:text="${movie.title}">Movie</a></h1>
     <h2 th:text="${review.title}"></h2>
     <p th:text="${review.body}"></p>

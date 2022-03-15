@@ -6,6 +6,25 @@
 
 <section class="container">
     <h1>Journal Page</h1>
+    <div class="container">
+       <th:block th:replace="partials/content/journals-nav" :: nav/>
+    </div>
+    <div class="container" id="journals-container">
+        <div th:each="journal : ${journals}">
+            <a th:href="@{/journals(id=${journal.id})}">
+                <h2 th:text="${journal.title}">Journal title</h2>
+            </a>
+            <a th:href="@{/journals(id=${journal.id})}">
+                <a
+                        th:text="${journal.getUserContent().getUser().getUsername()}"
+                        th:href="@{/journals(user=${journal.getUserContent().getId()})}"
+                >
+                    Journal title
+                </a>
+            </a>
+            <p th:text="${journal.body}">Journal body...</p>
+        </div>
+    </div>
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>

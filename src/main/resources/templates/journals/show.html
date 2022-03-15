@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Single Journal</title>
-    <th:block th:replace="partials/elements :: head(title='FilmSage Index')"></th:block>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/elements :: head(title='Journal')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
-<div class="card" style="width: 18rem;">
-    <div class="card-body"></div>
 
-</div>
+<section class="container">
+    <h1>Viewing Journal</h1>
+    <div class="container">
+        <th:block th:replace="partials/content/journals-nav" :: nav/>
+    </div>
+    <div class="container">
+        <h2 th:text="${journal.title}">Journal title</h2>
+        <p th:text="${journal.body}">Journal body</p>
+        <p>
+            <a
+                    th:href="@{/journals(user=${journal.getUserContent().getId()})}"
+                    th:text="${journal.getUserContent().getUser().getUsername()}"
+            >
+                Creator username
+            </a>
+        </p>
+        <a class="btn btn-primary" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
+        <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
+    </div>
+</section>
+
 <th:block th:replace="partials/elements :: footer"></th:block>
-
 </body>
 </html>
