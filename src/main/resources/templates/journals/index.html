@@ -6,6 +6,12 @@
 
 <section class="container">
     <h1>Journal Page</h1>
+    <section class="container" id="journals-container">
+        <div th:each="journal : ${journals}">
+            <h2 th:text="${journal.title}"></h2>
+            <p th:text="${journal.body}"></p>
+        </div>
+    </section>
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
