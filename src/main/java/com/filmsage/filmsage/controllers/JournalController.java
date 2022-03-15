@@ -21,7 +21,6 @@ public class JournalController {
     private UserRepository userDao;
     private UserContentRepository userContentDao;
 
-
     public JournalController(UserRepository userDao, JournalRepository journalDao, UserContentRepository userContentDao) {
         this.userDao = userDao;
         this.journalDao = journalDao;
@@ -42,11 +41,11 @@ public class JournalController {
         return "journals/index";
     }
 
-    @GetMapping("/journals/{id}")
-    public String showJournal(@PathVariable long id, Model model) {
-        model.addAttribute("journal", journalDao.getById(id));
-        return "journals/show";
-    }
+//    @GetMapping("/journals/{id}")
+//    public String showJournal(@PathVariable long id, Model model) {
+//        model.addAttribute("journal", journalDao.getById(id));
+//        return "journals/show";
+//    }
 
     @GetMapping("/journals/create")
     public String showJournalCreateForm(Model model) {
@@ -59,7 +58,7 @@ public class JournalController {
         journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         journal.setUserContent(getUserContent());
         journal = journalDao.save(journal);
-        return "redirect:/journals" + "?id=" + journal.getId();
+        return "redirect:/journals?id=" + journal.getId();
     }
 
     @GetMapping("/journals/{id}/edit")
@@ -79,7 +78,7 @@ public class JournalController {
         journal.setUserContent(getUserContent());
         journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         journalDao.save(journal);
-        return "redirect:/journals";
+        return "redirect:/journals?id=" + journal.getId();
     }
 
     // this function defines that when a user attempts to delete a journal,
