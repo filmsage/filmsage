@@ -1,6 +1,7 @@
 package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "journals")
@@ -16,6 +17,9 @@ public class Journal {
     @Lob
     @Column(nullable = false)
     private String body;
+
+    @Column(name = "created_at", nullable = false)
+    private Timestamp createdAt;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -52,6 +56,14 @@ public class Journal {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     public UserContent getUserContent() {
