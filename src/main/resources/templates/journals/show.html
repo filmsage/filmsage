@@ -5,10 +5,19 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-    <h1>Viewing Journal</h1>
-    <h2 th:text="${journal.title}">Journal title</h2>
-    <p th:text="${journal.body}">Journal body</p>
-    <p th:text="${journal.getUserContent().getUser().getUsername()}">Creator username</p>
+    <div class="container">
+        <h1>Viewing Journal</h1>
+        <h2 th:text="${journal.title}">Journal title</h2>
+        <p th:text="${journal.body}">Journal body</p>
+        <p>
+            <a
+                    th:href="@{/journals(user=${journal.getUserContent().getId()})}"
+                    th:text="${journal.getUserContent().getUser().getUsername()}"
+            >
+                Creator username
+            </a>
+        </p>
+    </div>
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
