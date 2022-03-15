@@ -28,24 +28,23 @@ public class JournalController {
     }
 
     @GetMapping("/journals")
-    public String showJournals(Model model, @RequestParam(required = false) String id, @RequestParam(required = false) String user) {
+    public String showJournals(Model model,
+                               @RequestParam(required = false) String id,
+                               @RequestParam(required = false) String user,
+                               @RequestParam(required = false) String username) {
         if (StringUtils.hasText(id)) {
             model.addAttribute("journal", journalDao.getById(Long.parseLong(id)));
             return "journals/show";
-        }
-        if (StringUtils.hasText(user)) {
+        } else if (StringUtils.hasText(user)) {
             model.addAttribute("journals", journalDao.findAllByUserContent_Id(Long.parseLong(user)));
+        } else if (StringUtils.hasText(username)) {
+            model.addAttribute("journals",
+                    journalDao.findAllByUserContent_User(userDao.findByUsername(username)) );
         } else {
             model.addAttribute("journals", journalDao.findAll());
         }
         return "journals/index";
     }
-
-//    @GetMapping("/journals/{id}")
-//    public String showJournal(@PathVariable long id, Model model) {
-//        model.addAttribute("journal", journalDao.getById(id));
-//        return "journals/show";
-//    }
 
     @GetMapping("/journals/create")
     public String showJournalCreateForm(Model model) {
