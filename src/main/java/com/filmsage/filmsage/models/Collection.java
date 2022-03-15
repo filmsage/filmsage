@@ -47,11 +47,11 @@ public class Collection {
         this.userContent = userContent;
     }
 
-    public Set<MediaItem> getMediaItem() {
+    public Set<MediaItem> getMediaItems() {
         return mediaItems;
     }
 
-    public void setMediaItem(Set<MediaItem> mediaItems) {
+    public void setMediaItems(Set<MediaItem> mediaItems) {
         this.mediaItems = mediaItems;
     }
 
