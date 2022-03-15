@@ -11,6 +11,10 @@
     <p><a th:href="@{/movies/{imdb}/reviews(imdb=${movie.imdbID})}" th:text="${'Back to ' + movie.title + ' reviews'}"></a></p>
 </section>
 
+<div class="likes container">
+    <p><i onclick="myFunction(this)" class="fa fa-thumbs-up"></i></p>
+    <button onclick="myFunction(this)">Report Abusive Content </button>
+</div>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>
 </html>
