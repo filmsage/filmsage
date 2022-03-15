@@ -13,8 +13,8 @@
 </section>
 
 <div class="likes container">
-    <p><i onclick="myFunction(this)" class="fa fa-thumbs-up"></i></p>
-    <button onclick="myFunction(this)">Report Abusive Content </button>
+    <p><i class="fa fa-thumbs-up"></i></p>
+    <a th:href="@{/report/{id}(id=${review.id})}">Report Abusive Content </a>
 </div>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>
