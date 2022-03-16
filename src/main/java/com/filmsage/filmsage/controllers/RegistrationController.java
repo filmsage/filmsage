@@ -82,4 +82,6 @@ public class RegistrationController {
 
         return "users/register-email-confirmation";
     }
+
+
 }
