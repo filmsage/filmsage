@@ -6,6 +6,7 @@ import com.filmsage.filmsage.models.auth.UserPrinciple;
 import com.filmsage.filmsage.repositories.JournalRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
+import com.filmsage.filmsage.services.UserContentService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,11 +22,13 @@ public class JournalController {
     private JournalRepository journalDao;
     private UserRepository userDao;
     private UserContentRepository userContentDao;
+    private UserContentService userContentService;
 
-    public JournalController(UserRepository userDao, JournalRepository journalDao, UserContentRepository userContentDao) {
+    public JournalController(UserRepository userDao, JournalRepository journalDao, UserContentRepository userContentDao, UserContentService userContentService) {
         this.userDao = userDao;
         this.journalDao = journalDao;
         this.userContentDao = userContentDao;
+        this.userContentService = userContentService;
     }
 
     @GetMapping("/journals")
@@ -57,7 +60,7 @@ public class JournalController {
     @PostMapping("/journals/create")
     public String submitCreate(@ModelAttribute Journal journal) {
         journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        journal.setUserContent(getUserContent());
+        journal.setUserContent(userContentService.getUserContent());
         journal = journalDao.save(journal);
         return "redirect:/journals?id=" + journal.getId();
     }
@@ -65,7 +68,7 @@ public class JournalController {
     @GetMapping("/journals/{id}/edit")
     public String showEditForm(@PathVariable long id, Model model) {
         Journal journal = journalDao.getById(id);
-        if (journal.getUserContent().getId() == getUserContent().getId()) {
+        if (journal.getUserContent().getId() == userContentService.getUserContent().getId()) {
             model.addAttribute("journal", journal);
             return "journals/edit";
         } else {
@@ -73,10 +76,9 @@ public class JournalController {
         }
     }
 
-
     @PostMapping("/journals/{id}/edit")
     public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
-        journal.setUserContent(getUserContent());
+        journal.setUserContent(userContentService.getUserContent());
         journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         journalDao.save(journal);
         return "redirect:/journals?id=" + journal.getId();
@@ -91,18 +93,10 @@ public class JournalController {
     @GetMapping("/journals/{id}/delete")
     public String deleteJournal(@PathVariable long id) {
         Journal journal = journalDao.getById(id);
-        if (journal.getUserContent().getId() == getUserContent().getId()) {
+        if (journal.getUserContent().getId() == userContentService.getUserContent().getId()) {
             journalDao.delete(journal);
         }
         return "redirect:/journals";
-    }
-
-    private UserContent getUserContent() {
-        // note: this is slightly more complex than before, I apologize
-        // step 1: get the UserPrinciple which contains account identifying info
-        UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // step 2: get the UserContent object which links to all that user's user-created content
-        return userContentDao.findUserContentByUser(principle.getUser());
     }
 
 }
