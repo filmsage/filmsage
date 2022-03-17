@@ -9,6 +9,7 @@
         <div class = "form-group">
             <label for="title">Collection Title</label>
             <input type="text" class="form-control" id=title placeholder="Watchlist Name" name="title" th:field="*{title}">
+            <input type="text" class="form-control" name="imdb" th:value="${imdb}">
         </div>
         <button type="submit">Search</button>
     </form>
