@@ -2,13 +2,15 @@ package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "collections")
 public class Collection {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, length = 255)
     private String title;
@@ -17,21 +19,24 @@ public class Collection {
     private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private UserContent userContent;
 
-    @ManyToOne
-    @JoinColumn (name = "media_id")
-    private MediaItem mediaItem;
+    @ManyToMany
+    @JoinTable(
+            name = "has_media",
+            joinColumns = @JoinColumn(name = "coll_id"),
+            inverseJoinColumns = @JoinColumn(name = "media_id"))
+    private Set<MediaItem> mediaItems;
 
     public Collection() {}
 
-    public Collection(long id, String title, Timestamp createdAt, User user, MediaItem mediaItem) {
+    public Collection(long id, String title, Timestamp createdAt, UserContent userContent, Set<MediaItem> mediaItems) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
         this.userContent = userContent;
-        this.mediaItem = mediaItem;
+        this.mediaItems = mediaItems;
     }
 
     public UserContent getUserContent() {
@@ -42,12 +47,12 @@ public class Collection {
         this.userContent = userContent;
     }
 
-    public MediaItem getMediaItem() {
-        return mediaItem;
+    public Set<MediaItem> getMediaItem() {
+        return mediaItems;
     }
 
-    public void setMediaItem(MediaItem mediaItem) {
-        this.mediaItem = mediaItem;
+    public void setMediaItem(Set<MediaItem> mediaItems) {
+        this.mediaItems = mediaItems;
     }
 
     public Collection(long id, String title, Timestamp createdAt) {

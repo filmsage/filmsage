@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.filmsage.filmsage.models.json.MediaItemMapped;
 import com.filmsage.filmsage.models.json.MediaSearchMapped;
 import com.filmsage.filmsage.models.json.SearchMapped;
-import com.filmsage.filmsage.omdb.OMDBProperties;
+import com.filmsage.filmsage.properties.OMDBProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

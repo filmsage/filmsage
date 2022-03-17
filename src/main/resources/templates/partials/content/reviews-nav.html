@@ -1,0 +1,7 @@
+<ul th:fragment="reviews-nav" class="list-group">
+    <li class="list-group-item">
+        <a th:href="@{/movies/{imdb}/reviews/create(imdb=${movie.imdbID})}" class="btn btn-primary">
+            Create Review
+        </a>
+    </li>
+</ul>

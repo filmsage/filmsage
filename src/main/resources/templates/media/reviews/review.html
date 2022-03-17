@@ -5,12 +5,17 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
+    <th:block th:replace="partials/content/reviews-nav" :: ul/>
     <h1><a th:href="@{/movies/{imdb}(imdb=${movie.imdbID})}" th:text="${movie.title}">Movie</a></h1>
     <h2 th:text="${review.title}"></h2>
     <p th:text="${review.body}"></p>
     <p><a th:href="@{/movies/{imdb}/reviews(imdb=${movie.imdbID})}" th:text="${'Back to ' + movie.title + ' reviews'}"></a></p>
 </section>
 
+<div class="likes container">
+    <p><i onclick="myFunction(this)" class="fa fa-thumbs-up"></i></p>
+    <button onclick="myFunction(this)">Report Abusive Content </button>
+</div>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>
 </html>

@@ -18,12 +18,18 @@
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/register">Register</a>
+
             </li>
 
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" th:method="post">
-                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                    <button class="btn-link btn">Logout</button>
                 </form>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/profile}">
+                    <button class="btn-link btn">Profile</button>
+                </a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" th:action="@{/search}" th:method="GET">
