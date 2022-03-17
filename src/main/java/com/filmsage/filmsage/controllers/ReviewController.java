@@ -8,6 +8,8 @@ import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.services.MediaItemService;
 import com.filmsage.filmsage.services.OMDBRequester;
+import com.filmsage.filmsage.services.UserContentService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,22 +22,25 @@ public class ReviewController {
     private ReviewRepository reviewDao;
     private MediaItemService mediaItemService;
     private UserContentRepository userContentDao;
+    private UserContentService userContentService;
     private OMDBRequester omdbRequester;
 
     public ReviewController(ReviewRepository reviewDao,
                             MediaItemService mediaItemService,
                             UserContentRepository userContentDao,
+                            UserContentService userContentService,
                             OMDBRequester omdbRequester) {
         this.reviewDao = reviewDao;
         this.mediaItemService = mediaItemService;
         this.userContentDao = userContentDao;
+        this.userContentService = userContentService;
         this.omdbRequester = omdbRequester;
     }
 
     @GetMapping("/movies/{imdb}/reviews/create")
     public String showReviewForm(Model model, @PathVariable String imdb){
         // get the UserContent object which links to all that user's user-created content
-        UserContent userContent = getUserContent();
+        UserContent userContent = userContentService.getUserContent();
         // store it into the model for retrieval later
         model.addAttribute("user", userContent);
         // since we're creating a new review, we give it a fresh new Review to work with
@@ -49,7 +54,7 @@ public class ReviewController {
         // check if record exists already
         MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
         // get the UserContent object which links to all that user's user-created content
-        UserContent userContent = getUserContent();
+        UserContent userContent = userContentService.getUserContent();
         // set the userContent field in the Review
         review.setUserContent(userContent);
         review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
@@ -80,7 +85,7 @@ public class ReviewController {
             params = "r")
     public String showEditForm(Model model, @PathVariable String imdb, @RequestParam long r) {
         // get the UserContent object which links to all that user's user-created content
-        UserContent userContent = getUserContent();
+        UserContent userContent = userContentService.getUserContent();
         model.addAttribute("user", userContent);
         model.addAttribute("review", reviewDao.getById(r));
         model.addAttribute("movie", omdbRequester.getMovie(imdb));
@@ -92,7 +97,7 @@ public class ReviewController {
         // check if record exists already and prepare it for review
         MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
         // set the userContent field in the Review
-        review.setUserContent(getUserContent());
+        review.setUserContent(userContentService.getUserContent());
         review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
         review.setMediaItem(mediaItem); // associate MediaItem with review
         // persist the review (ie store it in the database)
@@ -102,12 +107,5 @@ public class ReviewController {
 
 
 
-   private UserContent getUserContent() {
-       // note: this is slightly more complex than before, I apologize
-       // step 1: get the UserPrinciple which contains account identifying info
-       UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       // step 2: get the UserContent object which links to all that user's user-created content
-       return userContentDao.findUserContentByUser(principle.getUser());
-   }
 
 }

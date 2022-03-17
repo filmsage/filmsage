@@ -54,6 +54,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     -- James
     */
 
+    /*
+    NEW NOTE 03/16/22
+    I think we're going to move over to Spring's method security system instead.
+    Spring's docs actually recommend it over this specific configuration, and it should
+    be easier for everyone to define different behaviors for different roles. I will leave
+    this setup as-is for now and implement all future work with method security.
+    unless it causes problems and then I will absolutely annihilate this class 👿
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

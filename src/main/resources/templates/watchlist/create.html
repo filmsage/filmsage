@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='Create Movie Collection')"></head>
+<head th:replace="partials/elements :: head(title='Create a Watchlist')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
@@ -8,7 +8,7 @@
     <form th:action='@{/watchlist/create}' th:method="POST" th:object="${watchlist}">
         <div class = "form-group">
             <label for="title">Collection Title</label>
-            <input type="text" class="form-control" id=title placeholder="title" name="title" th:field="*{title}">
+            <input type="text" class="form-control" id=title placeholder="Watchlist Name" name="title" th:field="*{title}">
         </div>
         <button type="submit">Search</button>
     </form>
