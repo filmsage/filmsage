@@ -6,6 +6,7 @@
 
 <section class="container">
     <h1 th:text="${watchlist.title}">Collection title</h1>
+    <p th:text="${#temporals.format(watchlist.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
     <div class="container row" th:each="item : ${mediaItems}">
         <div class="col-3">
             <img class="img-fluid" th:src="${item.poster}" th:alt="${'Promotional poster for ' + item.title}"
