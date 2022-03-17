@@ -14,9 +14,10 @@
 </section>
 
 <div class="likes container">
-    <p><i class="fa fa-thumbs-up"></i></p>
+    <p id="like-button" th:data-id="${review.id}"><i class="fa fa-thumbs-up"></i><span id="like-count" th:text="${likes}"></span></p>
     <a th:href="@{/report/{id}(id=${review.id})}">Report Abusive Content </a>
 </div>
 <th:block th:replace="partials/elements :: footer"></th:block>
+<script th:src="@{/js/like-button.js}"></script>
 </body>
 </html>
