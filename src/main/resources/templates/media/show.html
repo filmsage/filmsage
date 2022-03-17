@@ -38,7 +38,7 @@
         <div class="dropdown">
             <a class="dropdown-item" th:each="watchlist: ${watchlists}"
                th:href="@{/watchlist/{id}/add(id=${watchlist.id},imdb=${movie.imdbID})}"
-               th:value="${watchlist.title}">Watchlist title</a>
+               th:text="${watchlist.title}">Watchlist title</a>
             <a class="dropdown-item" th:href="@{/watchlist/create(imdb=${movie.imdbID})}">
                 Add to a new watchlist
             </a>

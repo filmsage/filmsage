@@ -8,8 +8,8 @@
     <form th:action='@{/watchlist/create}' th:method="POST" th:object="${watchlist}">
         <div class = "form-group">
             <label for="title">Collection Title</label>
-            <input type="text" class="form-control" id=title placeholder="Watchlist Name" name="title" th:field="*{title}">
-            <input type="text" class="form-control" name="imdb" th:value="${imdb}">
+            <input type="text" class="form-control" id=title name="title" th:field="*{title}">
+            <input type="hidden" class="form-control" name="imdb" th:value="${imdb}">
         </div>
         <button type="submit">Search</button>
     </form>
