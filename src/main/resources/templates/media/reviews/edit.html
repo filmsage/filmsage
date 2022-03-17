@@ -16,12 +16,12 @@
             <input th:field="*{title}" class="field" required>
             <br>
             <label >Review Body</label>
-            <textarea th:field="*{body}" cols="30" rows="10" required></textarea>
+            <textarea class="form-control" th:field="*{body}" cols="30" rows="10" required></textarea>
             <br>
             <label>Score</label>
             <input th:field="*{rating}" type="number" max="5" min="0" required>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
