@@ -5,12 +5,10 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-    <div class="card">
-        <div class ="card-body">
-            <h2 class="card-title" th:text="${collection.title}">Collections </h2>
-        </div>
+    <h1 class="card-title" th:text="${collection.title}">Collection title</h1>
+    <div class="container" th:each="item : ${collection.mediaItems}">
+        <p th:text="${item.imdb}"></p>
     </div>
-
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
