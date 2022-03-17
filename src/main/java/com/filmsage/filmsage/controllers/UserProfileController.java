@@ -36,6 +36,7 @@ public class UserProfileController {
         model.addAttribute("user", userDao.getById(id));
 //        get back a collection of items that the user reviewed
         model.addAttribute("reviews", reviewDao.findAllByUserContent_Id(id));
+        model.addAttribute("usercontent",userContentDao.getById(id));
         return "profile/profile-page";
     }
 
@@ -44,21 +45,6 @@ public class UserProfileController {
     public String showOwnUserProfile(){
         return "redirect:/profile/" + getUserContent().getId();
     }
-
-//    get the users firstname on their profile page
-//    @GetMapping("/profile/{userFirstName}")
-//    public String showOwnUserFirstName(Model model, @PathVariable String firstName) {
-//        model.addAttribute("firstname",getUserContent(firstName);
-//        return "profile/profile-page";
-//    }
-
-
-    @GetMapping("/profile")
-    public String showUserFirstName(Model model, @PathVariable String firstName){
-        model.addAttribute("user",userContentDao.findUserContentByFirstName((firstName)));
-        return "profile/profile-page";
-    }
-
 
 
     private UserContent getUserContent() {

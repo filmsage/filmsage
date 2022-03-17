@@ -2,14 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
 <body>
+<nav th:replace="partials/elements :: navbar"></nav>
 <h2>Profile Page</h2>
-<img src="img.jpg" alt="James" style="width:100%">
-
-
 <div>
-    <p th:text="${firstName}"> First Name</p>
+    <p th:text=" ${usercontent.firstname}"> First Name</p>
 
-    <p th:text="%{lastName}"> Last Name</p>
+    <p th:text="${usercontent.lastname}"> Last Name</p>
 
     <p>Username</p>
 
@@ -19,7 +17,7 @@
 
     <p><a href="#">Reset-Password</a></p>
 
-    <li>Posts</li>
+    <p>Posts</p>
 </div>
 
 <div class="social">
