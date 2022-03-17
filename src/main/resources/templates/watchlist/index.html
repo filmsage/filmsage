@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<head th:replace="partials/elements :: head(title='All Watchlists')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
     <h1>Collections</h1>
     <div class="card-body" th:each= "watchlist : ${watchlists}">
-        <h3 class="card-title" th:text="${watchlist.title}">Collection Title</h3>
+        <h3>
+            <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
+                Watchlist title
+            </a>
+        </h3>
+        <p th:text="${watchlist.getUserContent().getUser().getUsername()}"></p>
     </div>
 
 </section>

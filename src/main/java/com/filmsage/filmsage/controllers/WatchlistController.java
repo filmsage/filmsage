@@ -29,7 +29,7 @@ public class WatchlistController {
 
     @GetMapping("/watchlist")
     public String viewWatchlists(Model model) {
-        model.addAttribute("watchlist", watchlistDao.findAll());
+        model.addAttribute("watchlists", watchlistDao.findAll());
         return "watchlist/index";
     }
 
