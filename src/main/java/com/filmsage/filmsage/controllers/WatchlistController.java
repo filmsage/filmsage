@@ -44,17 +44,22 @@ public class WatchlistController {
 
 /// show movie watchlist
     @GetMapping("/watchlist/create")
-    public String createWatchlist(Model model) {
+    public String createWatchlist(Model model, @RequestParam(required = false) String imdb) {
         model.addAttribute("watchlist", new Watchlist());
+        model.addAttribute("imdb", imdb);
         return "watchlist/create";
     }
 
     @PostMapping("/watchlist/create")
-    public String submitWatchlist(@ModelAttribute Watchlist watchlist) {
+    public String submitWatchlist(@ModelAttribute Watchlist watchlist, @RequestParam(required = false, name = "imdb") String imdb) {
         watchlist.setUserContent(getUserContent());
         watchlist.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        if (imdb != null) {
+            MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
+            watchlist.getMediaItems().add(mediaItem);
+        }
         watchlistDao.save(watchlist);
-        return "watchlist/create";
+        return "redirect:/watchlist";
     }
 
     // commented out for now because we are going to have to treat this different :/
