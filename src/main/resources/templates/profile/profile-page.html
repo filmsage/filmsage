@@ -2,25 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
 <body>
+<nav th:replace="partials/elements :: navbar"></nav>
 <h2>Profile Page</h2>
-<img src="img.jpg" alt="James" style="width:100%">
+<div>
+    <p th:text=" ${usercontent.firstName}"> First Name</p>
 
+    <p th:text="${usercontent.lastName}"> Last Name</p>
 
-<ul>
-    <li> First Name</li>
+    <p>Username</p>
 
-    <li> Last Name</li>
+    <p>Email</p>
 
-    <li>Username</li>
+    <p>Password</p>
 
-    <li>Email</li>
+    <p><a href="#">Reset-Password</a></p>
 
-    <li>Password</li>
-
-    <li><a href="#">Reset-Password</a></li>
-
-    <li>Posts</li>
-</ul>
+    <p>Posts</p>
+</div>
 
 <div class="container">
 <button class="btn btn-primary">Movie Name</button>

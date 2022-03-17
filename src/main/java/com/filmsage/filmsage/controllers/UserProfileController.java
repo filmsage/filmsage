@@ -36,8 +36,16 @@ public class UserProfileController {
         model.addAttribute("user", userDao.getById(id));
 //        get back a collection of items that the user reviewed
         model.addAttribute("reviews", reviewDao.findAllByUserContent_Id(id));
+        model.addAttribute("usercontent",userContentDao.getById(id));
         return "profile/profile-page";
     }
+
+//    get the users own review to display on their profile page
+    @GetMapping("/profile")
+    public String showOwnUserProfile(){
+        return "redirect:/profile/" + getUserContent().getId();
+    }
+
 
     private UserContent getUserContent() {
         UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
