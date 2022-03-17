@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="partials/elements :: head(title='Movie Collection')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+<section class="container">
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <img class="img-fluid" th:src="${movie.poster}" alt="Movie poster"/>
+        </div>
+        <div class="col-12 col-md-9">
+            <h1 class="" th:text="${movie.title}"></h1>
+            <h2 class="" th:text="${movie.year}"></h2>
+            <h3 class="" th:text="${movie.id}"></h3>
+            <ul class="list-group">
+                <li class="list-group-item" th:text="${movie.title}"></li>
+                <li class="list-group-item" th:text="${movie.year}"></li>
+                <li class="list-group-item" th:text="${movie.id}"></li>
+                <li class="list-group-item" th:text="${movie.genre}"></li>
+                <li class="list-group-item" th:text="${movie.poster}"></li>
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>
