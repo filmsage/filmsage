@@ -39,6 +39,28 @@ public class UserProfileController {
         return "profile/profile-page";
     }
 
+//    get the users own review to display on their profile page
+    @GetMapping("/profile")
+    public String showOwnUserProfile(){
+        return "redirect:/profile/" + getUserContent().getId();
+    }
+
+//    get the users firstname on their profile page
+//    @GetMapping("/profile/{userFirstName}")
+//    public String showOwnUserFirstName(Model model, @PathVariable String firstName) {
+//        model.addAttribute("firstname",getUserContent(firstName);
+//        return "profile/profile-page";
+//    }
+
+
+    @GetMapping("/profile")
+    public String showUserFirstName(Model model, @PathVariable String firstName){
+        model.addAttribute("user",userContentDao.findUserContentByFirstName((firstName)));
+        return "profile/profile-page";
+    }
+
+
+
     private UserContent getUserContent() {
         UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userContentDao.findUserContentByUser(principle.getUser());

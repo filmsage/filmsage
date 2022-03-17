@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserContentRepository extends JpaRepository<UserContent, Long> {
     UserContent findUserContentByUser(User user);
     UserContent findUserContentById(long id);
+    UserContent findUserContentByFirstName(String firstName);
 }
