@@ -20,16 +20,13 @@ public class LikesService {
         this.reviewDao = reviewDao;
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public long likeReview(long reviewId) {
         UserContent user = userContentService.getUserContent();
         Review review = reviewDao.findReviewById(reviewId);
         if (!user.getLikedReviews().contains(review)) {
             user.getLikedReviews().add(review);
-            System.out.println("________ ADDED LIKE ________");
         } else {
             user.getLikedReviews().remove(review);
-            System.out.println("________ REMOVED LIKE ________");
         }
         userContentService.save(user);
         return review.getUserLikes().size();

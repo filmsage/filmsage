@@ -4,6 +4,7 @@ import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.services.LikesService;
 import com.filmsage.filmsage.services.UserContentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ public class LikeController {
         this.likesService = likesService;
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/like")
     public ResponseEntity<?> likeReview(@RequestParam long r) {
         long result = likesService.likeReview(r);
