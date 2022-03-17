@@ -2,10 +2,11 @@ package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "collections")
+@Table(name = "watchlist")
 public class Watchlist {
 
     @Id
@@ -25,9 +26,9 @@ public class Watchlist {
     @ManyToMany
     @JoinTable(
             name = "has_media",
-            joinColumns = @JoinColumn(name = "coll_id"),
+            joinColumns = @JoinColumn(name = "watch_id"),
             inverseJoinColumns = @JoinColumn(name = "media_id"))
-    private Set<MediaItem> mediaItems;
+    private Set<MediaItem> mediaItems = new HashSet<>();
 
     public Watchlist() {}
 
@@ -38,34 +39,17 @@ public class Watchlist {
         this.userContent = userContent;
         this.mediaItems = mediaItems;
     }
-
-    public UserContent getUserContent() {
-        return userContent;
-    }
-
-    public void setUserContent(UserContent userContent) {
-        this.userContent = userContent;
-    }
-
-    public Set<MediaItem> getMediaItems() {
-        return mediaItems;
-    }
-
-    public void setMediaItems(Set<MediaItem> mediaItems) {
-        this.mediaItems = mediaItems;
-    }
-
     public Watchlist(long id, String title, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -84,4 +68,21 @@ public class Watchlist {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
+    public UserContent getUserContent() {
+        return userContent;
+    }
+
+    public void setUserContent(UserContent userContent) {
+        this.userContent = userContent;
+    }
+
+    public Set<MediaItem> getMediaItems() {
+        return mediaItems;
+    }
+
+    public void setMediaItems(Set<MediaItem> mediaItems) {
+        this.mediaItems = mediaItems;
+    }
+
 }
