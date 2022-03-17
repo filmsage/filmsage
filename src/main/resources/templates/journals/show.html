@@ -25,7 +25,7 @@
         <p th:text="${#temporals.format(journal.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
     </div>
 </section>
-
+<a th:href="@{/report/{id}(id=${journal.id})}">Report Abusive Content </a>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>
 </html>
