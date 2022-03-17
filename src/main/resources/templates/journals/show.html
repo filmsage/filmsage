@@ -26,6 +26,7 @@
     </div>
 </section>
 <a th:href="@{/report/{id}(id=${journal.id})}">Report Abusive Content </a>
+<p><a th:href="@{/journals(user=${journal.getUserContent().getId()})}" th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a></p>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>
 </html>
