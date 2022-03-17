@@ -6,8 +6,16 @@
 
 <section class="container">
     <h1 class="card-title" th:text="${watchlist.title}">Collection title</h1>
-    <div class="container" th:each="item : ${watchlist.mediaItems}">
-        <p th:text="${item.imdb}"></p>
+    <div class="container row" th:each="item : ${mediaItems}">
+        <div class="col-3">
+            <img class="img-fluid" th:src="${item.poster}" th:alt="${'Promotional poster for ' + item.title}"
+            style="max-height: 15vh"/>
+        </div>
+        <div class="col-9">
+            <p th:text="${item.title}"></p>
+            <p th:text="${item.year}"></p>
+            <p th:text="${item.genre}"></pth:>
+        </div>
     </div>
 </section>
 

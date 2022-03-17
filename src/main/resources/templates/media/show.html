@@ -33,17 +33,24 @@
         <p><a th:href="@{/movies/{id}/reviews(id = ${movie.imdbID})}">Show user reviews</a></p>
     </div>
     <div class="row">
-        <h2>Add this movie to a collection</h2>
-<!--        <select th:object="${watchlists}" th:action="@{/watchlist/add}" th:method="POST" name="watchlists">-->
-        <div class="dropdown">
-            <a class="dropdown-item" th:each="watchlist: ${watchlists}"
-               th:href="@{/watchlist/{id}/add(id=${watchlist.id},imdb=${movie.imdbID})}"
-               th:text="${watchlist.title}">Watchlist title</a>
-            <a class="dropdown-item" th:href="@{/watchlist/create(imdb=${movie.imdbID})}">
-                Add to a new watchlist
-            </a>
+        <div class="col">
+            <h2>Add this movie to a collection</h2>
+            <br/>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="watchlist-dropdown-button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add to watch list...
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:each="watchlist: ${watchlists}"
+                      th:href="@{/watchlist/{id}/add(id=${watchlist.id},imdb=${movie.imdbID})}"
+                      th:text="${watchlist.title}">Watchlist title</a>
+                    <a class="dropdown-item" th:href="@{/watchlist/create(imdb=${movie.imdbID})}">
+                        A new watchlist
+                    </a>
+                </div>
+            </div>
         </div>
-        </select>
     </div>
 </section>
 

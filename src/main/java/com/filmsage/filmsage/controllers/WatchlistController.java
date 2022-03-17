@@ -38,7 +38,7 @@ public class WatchlistController {
     public String getWatchlist(@PathVariable long id, Model model) {
         Watchlist watchlist = watchlistDao.getById(id);
         model.addAttribute("watchlist", watchlist);
-        model.addAttribute("movies", watchlist.getMediaItems());
+        model.addAttribute("mediaItems", watchlist.getMediaItems());
         return "watchlist/show";
     }
 
