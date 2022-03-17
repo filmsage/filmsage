@@ -101,6 +101,11 @@
             <artifactId>javassist</artifactId>
             <version>3.25.0-GA</version>
         </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-java8time</artifactId>
+            <version>3.0.4.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
