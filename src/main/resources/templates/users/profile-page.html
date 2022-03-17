@@ -2,25 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
 <body>
-<nav th:replace="partials/elements :: navbar"></nav>
-<h2>Profile Page</h2>
+
+<nav th:replace="partials/elements-without-registerLink :: navbar"></nav>
+<h2><span th:text="${user.username}"></span>'s Profile Page</h2>
 <img src="img.jpg" alt="James" style="width:100%">
 
 
 <ul>
-    <li> First Name</li>
+    <li th:text="${usercontent.firstName}">First Name</li>
 
-    <li> Last Name</li>
+    <li th:text="${usercontent.lastName}">Last Name</li>
 
-    <li>Username</li>
+    <li th:text="${user.username}"> Username</li>
 
-    <li>Email</li>
+    <li th:text="${user.email}">Email</li>
 
-    <li>Password</li>
+    <li th:text="${user.password}">Password</li>
 
-    <li><a href="#">Reset-Password</a></li>
+    <li><a th:href="@{/update-password/{id}(id=${user.id})}">Reset-Password</a></li>
 
-    <li>Posts</li>
+<!--    <div th:each="review : ${usercontent.reviews}">-->
+    <li th:text="${usercontent.getReviews()}">Posts</li>
+<!--    </div>-->
+
 </ul>
 
 <button class="btn btn-primary">Movie Name</button>
@@ -32,5 +36,7 @@
         <p>This is the number of likes </p>
     </div>
 </footer>
+<th:block th:replace="partials/elements :: footer"></th:block>
+
 </body>
 </html>
