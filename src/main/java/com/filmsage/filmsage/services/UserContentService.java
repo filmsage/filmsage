@@ -5,6 +5,7 @@ import com.filmsage.filmsage.models.UserContent;
 import com.filmsage.filmsage.models.auth.UserPrinciple;
 import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class UserContentService {
     }
 
     // this method will get the currently authenticated user's content from the database
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public UserContent getUserContent() {
         // note: this is slightly more complex than before, I apologize
         // step 1: get the UserPrinciple which contains account identifying info

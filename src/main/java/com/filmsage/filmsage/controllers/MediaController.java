@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,11 +21,13 @@ public class MediaController {
     private OMDBRequester omdbRequester;
     private ReviewRepository reviewDao;
     private WatchlistRepository watchlistDao;
+    private UserContentService userContentService;
 
     public MediaController(OMDBRequester omdbRequester, ReviewRepository reviewDao, WatchlistRepository watchlistDao, UserContentService userContentService) {
         this.omdbRequester = omdbRequester;
         this.reviewDao = reviewDao;
         this.watchlistDao = watchlistDao;
+        this.userContentService = userContentService;
     }
 
     @GetMapping("/search")
@@ -40,12 +43,15 @@ public class MediaController {
     }
 
     @GetMapping("/movies/{imdb}")
-    public String getMoviesById(@PathVariable String imdb, Model model) {
+    public String getMoviesById(@PathVariable String imdb, Model model, Principal principal) {
         MediaItemMapped movie = omdbRequester.getMovie(imdb);
         List<Review> reviews = reviewDao.findAllByMediaItemImdb(imdb);
-        //List<Watchlist> watchlists = watchlistDao.findWatchlistsByUserContent();
         model.addAttribute("movie", movie);
         model.addAttribute("reviews", reviews);
+        if (principal != null) {
+            List<Watchlist> watchlists = watchlistDao.findWatchlistsByUserContent(userContentService.getUserContent());
+            model.addAttribute("watchlists", watchlists);
+        }
 
         return "media/show";
     }
