@@ -2,9 +2,11 @@ package com.filmsage.filmsage.controllers;
 
 import com.filmsage.filmsage.models.*;
 import com.filmsage.filmsage.models.auth.UserPrinciple;
+import com.filmsage.filmsage.models.json.MediaItemMapped;
 import com.filmsage.filmsage.repositories.MediaItemRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
+import com.filmsage.filmsage.services.MediaItemService;
 import com.filmsage.filmsage.services.OMDBRequester;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,16 +18,16 @@ import java.sql.Timestamp;
 @Controller
 public class ReviewController {
     private ReviewRepository reviewDao;
-    private MediaItemRepository mediaItemDao;
+    private MediaItemService mediaItemService;
     private UserContentRepository userContentDao;
     private OMDBRequester omdbRequester;
 
     public ReviewController(ReviewRepository reviewDao,
-                            MediaItemRepository mediaItemDao,
+                            MediaItemService mediaItemService,
                             UserContentRepository userContentDao,
                             OMDBRequester omdbRequester) {
         this.reviewDao = reviewDao;
-        this.mediaItemDao = mediaItemDao;
+        this.mediaItemService = mediaItemService;
         this.userContentDao = userContentDao;
         this.omdbRequester = omdbRequester;
     }
@@ -45,7 +47,7 @@ public class ReviewController {
     @PostMapping("/movies/{imdb}/reviews/create")
     public String createReview(@ModelAttribute Review review, @PathVariable String imdb){
         // check if record exists already
-        MediaItem mediaItem = getMediaItemRecord(imdb);
+        MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
         // get the UserContent object which links to all that user's user-created content
         UserContent userContent = getUserContent();
         // set the userContent field in the Review
@@ -88,7 +90,7 @@ public class ReviewController {
     @PostMapping("/movies/{imdb}/reviews/edit")
     public String submitEdit(@ModelAttribute Review review, @PathVariable String imdb){
         // check if record exists already and prepare it for review
-        MediaItem mediaItem = getMediaItemRecord(imdb);
+        MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
         // set the userContent field in the Review
         review.setUserContent(getUserContent());
         review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
@@ -98,16 +100,7 @@ public class ReviewController {
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }
 
-   private MediaItem getMediaItemRecord(String imdb) {
-        // if we have a record of this imdb in our system,
-       if (mediaItemDao.existsByImdb(imdb)) {
-           // we retrieve that record
-           return mediaItemDao.findByImdb(imdb);
-       } else {
-           // if not, we make a new record and return that instead
-           return mediaItemDao.save(new MediaItem(imdb));
-       }
-   }
+
 
    private UserContent getUserContent() {
        // note: this is slightly more complex than before, I apologize
