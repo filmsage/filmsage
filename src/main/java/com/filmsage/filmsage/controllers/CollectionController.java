@@ -1,8 +1,7 @@
 package com.filmsage.filmsage.controllers;
 
-import com.filmsage.filmsage.models.Collection;
+import com.filmsage.filmsage.models.Watchlist;
 import com.filmsage.filmsage.models.MediaItem;
-import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.models.UserContent;
 import com.filmsage.filmsage.models.auth.UserPrinciple;
 import com.filmsage.filmsage.repositories.*;
@@ -37,24 +36,24 @@ public class CollectionController {
 //    to View an individual collection
     @GetMapping("/collections/{id}/show")
     public String getMovieCollection(@PathVariable long id, Model model) {
-        Collection collection = collectionsDao.getById(id);
-        model.addAttribute("collection", collection);
-        model.addAttribute("movies", collection.getMediaItems());
+        Watchlist watchlist = collectionsDao.getById(id);
+        model.addAttribute("collection", watchlist);
+        model.addAttribute("movies", watchlist.getMediaItems());
         return "collect/show";
     }
 
 /// show movie collection
     @GetMapping("/collections/create")
     public String createMovieCollection(Model model) {
-        model.addAttribute("collection", new Collection());
+        model.addAttribute("collection", new Watchlist());
         return "collect/create";
     }
 
     @PostMapping("/collections/create")
-    public String submitMovieCollection(@ModelAttribute Collection collection) {
-        collection.setUserContent(getUserContent());
-        collection.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        collectionsDao.save(collection);
+    public String submitMovieCollection(@ModelAttribute Watchlist watchlist) {
+        watchlist.setUserContent(getUserContent());
+        watchlist.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        collectionsDao.save(watchlist);
         return "collect/create";
     }
 
@@ -62,7 +61,7 @@ public class CollectionController {
     // gosh darn many-to-many relationships!!
 //    @GetMapping("/collections/{id}/edit")
 //    public String editMovieCollection(@PathVariable long id, Model model) {
-//        Collection collection = collectionsDao.getById(id);
+//        Watchlist collection = collectionsDao.getById(id);
 //        if (collection.getUserContent().getId() == user.getId()) {
 //            model.addAttribute("collection", collectionsDao.getById(id));
 //            return "collect/edit";
@@ -72,7 +71,7 @@ public class CollectionController {
 //    }
 //
 //    @PostMapping("/collections/{id}/edit")
-//    public String submitEditMovieCollection(@ModelAttribute Collection collection, @PathVariable long id) {
+//    public String submitEditMovieCollection(@ModelAttribute Watchlist collection, @PathVariable long id) {
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        collection.setUserContent(user.getUserContent());
 //        collectionsDao.save(collection);
@@ -81,10 +80,10 @@ public class CollectionController {
 
     @GetMapping("/collections/{id}/delete")
     public String deleteCollection(@PathVariable long id) {
-        Collection collection = collectionsDao.getById(id);
+        Watchlist watchlist = collectionsDao.getById(id);
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(collection.getUserContent().getId() == getUserContent().getId()){
-                collectionsDao.delete(collection);
+        if(watchlist.getUserContent().getId() == getUserContent().getId()){
+                collectionsDao.delete(watchlist);
         }
         return "redirect:/collections";
     }
@@ -92,10 +91,10 @@ public class CollectionController {
     @GetMapping("/collections/{id}/add")
     public String addToCollection(@PathVariable long id, @RequestParam String imdb, Model model) {
         MediaItem item = mediaItemService.getMediaItemRecord(imdb);
-        Collection collection = collectionsDao.getById(id);
-        collection.getMediaItems().add(item);
-        collectionsDao.save(collection);
-        model.addAttribute("collection", collection);
+        Watchlist watchlist = collectionsDao.getById(id);
+        watchlist.getMediaItems().add(item);
+        collectionsDao.save(watchlist);
+        model.addAttribute("collection", watchlist);
         return "redirect:/collections/" + id + "/show";
     }
 

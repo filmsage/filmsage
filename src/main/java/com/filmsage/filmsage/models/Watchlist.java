@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "collections")
-public class Collection {
+public class Watchlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,9 @@ public class Collection {
             inverseJoinColumns = @JoinColumn(name = "media_id"))
     private Set<MediaItem> mediaItems;
 
-    public Collection() {}
+    public Watchlist() {}
 
-    public Collection(long id, String title, Timestamp createdAt, UserContent userContent, Set<MediaItem> mediaItems) {
+    public Watchlist(long id, String title, Timestamp createdAt, UserContent userContent, Set<MediaItem> mediaItems) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
@@ -55,7 +55,7 @@ public class Collection {
         this.mediaItems = mediaItems;
     }
 
-    public Collection(long id, String title, Timestamp createdAt) {
+    public Watchlist(long id, String title, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;

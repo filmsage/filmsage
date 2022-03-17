@@ -29,7 +29,7 @@ public class MediaItem {
     private List<Review> reviews;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "mediaItems")
-    private List<Collection> collections;
+    private List<Watchlist> watchlists;
 
 
     public MediaItem() {}
@@ -111,11 +111,11 @@ public class MediaItem {
         this.reviews = reviews;
     }
 
-    public List<Collection> getCollections() {
-        return collections;
+    public List<Watchlist> getCollections() {
+        return watchlists;
     }
 
-    public void setCollections(List<Collection> collections) {
-        this.collections = collections;
+    public void setCollections(List<Watchlist> watchlists) {
+        this.watchlists = watchlists;
     }
 }

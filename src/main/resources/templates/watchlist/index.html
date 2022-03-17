@@ -6,8 +6,8 @@
 
 <section class="container">
     <h1>Collections</h1>
-    <div class="card-body" th:each= "collection : ${collections}">
-        <h3 class="card-title" th:text="${collection.title}">Collection Title</h3>
+    <div class="card-body" th:each= "watchlist : ${watchlists}">
+        <h3 class="card-title" th:text="${watchlist.title}">Collection Title</h3>
     </div>
 
 </section>
