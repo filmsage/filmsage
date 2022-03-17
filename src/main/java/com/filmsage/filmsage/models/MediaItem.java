@@ -13,6 +13,18 @@ public class MediaItem {
     @Column(nullable = false, length = 255, name = "imdb")
     private String imdb;
 
+    @Column(nullable = false, length = 255, name = "title")
+    private String title;
+
+    @Column(name = "year")
+    private int year;
+
+    @Column(length = 100, name = "genre")
+    private String genre;
+
+    @Column(nullable = false, length = 255, name = "poster")
+    private String poster;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
     private List<Review> reviews;
 
@@ -22,9 +34,21 @@ public class MediaItem {
 
     public MediaItem() {}
 
-    public MediaItem(Long id, String imdb) {
+    public MediaItem(String imdb, String title, int year, String genre, String poster) {
+        this.imdb = imdb;
+        this.title = title;
+        this.year = year;
+        this.genre = genre;
+        this.poster = poster;
+    }
+
+    public MediaItem(Long id, String imdb, String title, int year, String genre, String poster) {
         this.id = id;
         this.imdb = imdb;
+        this.title = title;
+        this.year = year;
+        this.genre = genre;
+        this.poster = poster;
     }
 
     public MediaItem(String imdb) {
@@ -45,6 +69,38 @@ public class MediaItem {
 
     public void setImdb(String imdb) {
         this.imdb = imdb;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
     public List<Review> getReviews() {
