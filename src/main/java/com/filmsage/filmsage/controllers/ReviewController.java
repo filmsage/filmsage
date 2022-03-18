@@ -6,6 +6,7 @@ import com.filmsage.filmsage.models.json.MediaItemMapped;
 import com.filmsage.filmsage.repositories.MediaItemRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
+import com.filmsage.filmsage.services.LikesService;
 import com.filmsage.filmsage.services.MediaItemService;
 import com.filmsage.filmsage.services.OMDBRequester;
 import com.filmsage.filmsage.services.UserContentService;
@@ -24,17 +25,20 @@ public class ReviewController {
     private UserContentRepository userContentDao;
     private UserContentService userContentService;
     private OMDBRequester omdbRequester;
+    private LikesService likesService;
 
     public ReviewController(ReviewRepository reviewDao,
                             MediaItemService mediaItemService,
                             UserContentRepository userContentDao,
                             UserContentService userContentService,
-                            OMDBRequester omdbRequester) {
+                            OMDBRequester omdbRequester,
+                            LikesService likesService) {
         this.reviewDao = reviewDao;
         this.mediaItemService = mediaItemService;
         this.userContentDao = userContentDao;
         this.userContentService = userContentService;
         this.omdbRequester = omdbRequester;
+        this.likesService = likesService;
     }
 
     @GetMapping("/movies/{imdb}/reviews/create")
@@ -68,8 +72,10 @@ public class ReviewController {
             method = RequestMethod.GET,
             params = "r")
     public String showReview(Model model, @PathVariable String imdb, @RequestParam long r) {
-        model.addAttribute("review", reviewDao.findReviewById(r));
+        Review review = reviewDao.getById(r);
+        model.addAttribute("review", review);
         model.addAttribute("movie", omdbRequester.getMovie(imdb));
+        model.addAttribute("likes", review.getUserLikes().size());
         return "media/reviews/review";
     }
 
