@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<body>
+<nav th:replace="partials/elements :: navbar"></nav>
+<h2>Profile Page</h2>
+<div>
+    <p th:text=" ${usercontent.firstName}"> First Name</p>
+
+    <p th:text="${usercontent.lastName}"> Last Name</p>
+
+    <p>Username</p>
+
+    <p>Email</p>
+
+    <p>Password</p>
+
+    <p><a href="#">Reset-Password</a></p>
+
+    <p>Posts</p>
+</div>
+
+<div class="container">
+<button class="btn btn-primary">Movie Name</button>
+<button class="btn btn-primary">Contact</button>
+</div>
+<section>
+    <div th:each="review : ${reviews}">
+            <h2 th:text="${review.title}"></h2>
+        <p th:text="${review.body}"></p>
+    </div>
+    <div class="likes">
+        <p>
+            <i class="fa fa-heart"></i>
+            <span th:text="${likes}"></span>
+        </p>
+    </div>
+
+</section>
+<th:block th:replace="partials/elements :: footer"></th:block>
+</body>
+</html>

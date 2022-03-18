@@ -101,4 +101,12 @@ public class Review {
     public void setMediaItem(MediaItem mediaItem) {
         this.mediaItem = mediaItem;
     }
+
+    public Set<UserContent> getUserLikes() {
+        return userLikes;
+    }
+
+    public void setUserLikes(Set<UserContent> userLikes) {
+        this.userLikes = userLikes;
+    }
 }

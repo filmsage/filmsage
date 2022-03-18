@@ -34,7 +34,7 @@ public class RegistrationController {
         this.eventPublisher = eventPublisher;
     }
 
-    @GetMapping("/register-token-confirm")
+    @GetMapping("/registration-confirm")
     public String confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token) {
 
         VerificationToken verificationToken = service.getVerificationToken(token);
@@ -82,4 +82,6 @@ public class RegistrationController {
 
         return "users/register-email-confirmation";
     }
+
+
 }

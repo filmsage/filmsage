@@ -1,7 +1,6 @@
 package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +31,7 @@ public class UserContent {
     // user created content
 
     @OneToMany(mappedBy = "userContent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Collection> collections = new ArrayList<>();
+    private List<Watchlist> watchlists = new ArrayList<>();
 
     @OneToMany(mappedBy = "userContent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Journal> journals = new ArrayList<>();
@@ -111,12 +110,12 @@ public class UserContent {
         this.reviews = reviews;
     }
 
-    public List<Collection> getCollections() {
-        return collections;
+    public List<Watchlist> getCollections() {
+        return watchlists;
     }
 
-    public void setCollections(List<Collection> collections) {
-        this.collections = collections;
+    public void setCollections(List<Watchlist> watchlists) {
+        this.watchlists = watchlists;
     }
 
     public Set<Review> getLikedReviews() {
