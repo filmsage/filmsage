@@ -10,12 +10,20 @@
     <div class="container row" th:each="item : ${mediaItems}">
         <div class="col-3">
             <img class="img-fluid" th:src="${item.poster}" th:alt="${'Promotional poster for ' + item.title}"
-            style="max-height: 15vh"/>
+                 style="max-height: 15vh"/>
         </div>
         <div class="col-9">
             <p th:text="${item.title}"></p>
             <p th:text="${item.year}"></p>
             <p th:text="${item.genre}"></p>
+
+            <form th:action="@{/deleteFromWatchlist}" th:method="POST" >
+                <input name="id" type="hidden" th:value="${watchlist.id}" >
+                <input name="imdb" type="hidden" th:value="${item.imdb}">
+                <button type="submit">Remove</button>
+            </form>
+            <br>
+            <br>
         </div>
     </div>
 </section>

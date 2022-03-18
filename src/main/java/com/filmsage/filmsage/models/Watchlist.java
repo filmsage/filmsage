@@ -32,14 +32,14 @@ public class Watchlist {
 
     public Watchlist() {}
 
-    public Watchlist(long id, String title, Timestamp createdAt, UserContent userContent, Set<MediaItem> mediaItems) {
+    public Watchlist(Long id, String title, Timestamp createdAt, UserContent userContent, Set<MediaItem> mediaItems) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
         this.userContent = userContent;
         this.mediaItems = mediaItems;
     }
-    public Watchlist(long id, String title, Timestamp createdAt) {
+    public Watchlist(Long id, String title, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;

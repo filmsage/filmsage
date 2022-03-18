@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.sql.Timestamp;
 
 @Controller
@@ -33,7 +34,7 @@ public class WatchlistController {
         return "watchlist/index";
     }
 
-//    to View an individual watchlist
+    //    to View an individual watchlist
     @GetMapping("/watchlist/{id}/show")
     public String getWatchlist(@PathVariable long id, Model model) {
         Watchlist watchlist = watchlistDao.getById(id);
@@ -42,7 +43,7 @@ public class WatchlistController {
         return "watchlist/show";
     }
 
-/// show movie watchlist
+    /// show movie watchlist
     @GetMapping("/watchlist/create")
     public String createWatchlist(Model model, @RequestParam(required = false) String imdb) {
         model.addAttribute("watchlist", new Watchlist());
@@ -88,8 +89,16 @@ public class WatchlistController {
         Watchlist watchlist = watchlistDao.getById(id);
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(watchlist.getUserContent().getId() == getUserContent().getId()){
-                watchlistDao.delete(watchlist);
+            watchlistDao.delete(watchlist);
         }
+        return "redirect:/watchlist";
+    }
+
+    @PostMapping("/watchlist/delete")
+    public String deleteWatchlistButton(@RequestParam long id) {
+        System.out.println("*********************************************");
+        Watchlist watchlist = watchlistDao.getById(id);
+        watchlistDao.delete(watchlist);
         return "redirect:/watchlist";
     }
 
@@ -110,4 +119,17 @@ public class WatchlistController {
         // step 2: get the UserContent object which links to all that user's user-created content
         return userContentDao.findUserContentByUser(principle.getUser());
     }
+
+    @PostMapping("/deleteFromWatchlist")
+    public String deleteFromWatchlist(@RequestParam long id, @RequestParam String imdb){
+//        System.out.println("HelloHelloHelloHelloHelloHelloHelloHelloHello");
+        Watchlist watchlist = watchlistDao.getById(id);
+        MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
+        watchlist.getMediaItems().remove(mediaItem);
+        watchlistDao.save(watchlist);
+        return "redirect:/watchlist/" + id + "/show";
+    }
+
 }
+
+
