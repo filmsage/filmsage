@@ -4,7 +4,6 @@ import com.filmsage.filmsage.models.Review;
 import com.filmsage.filmsage.models.UserContent;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 @Service
