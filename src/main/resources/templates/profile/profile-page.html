@@ -30,8 +30,10 @@
         <p th:text="${review.body}"></p>
     </div>
     <div class="likes">
-        <p><i class="fa fa-heart"></i></p>
-        <p>This is the number of likes </p>
+        <p>
+            <i class="fa fa-heart"></i>
+            <span th:text="${likes}"></span>
+        </p>
     </div>
 
 </section>

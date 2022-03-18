@@ -110,5 +110,4 @@ public class ReviewController {
         reviewDao.save(review);
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }
-
 }
