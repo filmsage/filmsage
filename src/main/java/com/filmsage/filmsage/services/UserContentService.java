@@ -35,4 +35,7 @@ public class UserContentService {
         return principle.getUser();
     }
 
+    public UserContent save(UserContent user) {
+        return userContentDao.save(user);
+    }
 }
