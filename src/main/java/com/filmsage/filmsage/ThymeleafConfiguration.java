@@ -11,13 +11,4 @@ public class ThymeleafConfiguration {
     public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
     }
-//    public SpringTemplateEngine templateEngine() {
-//        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//        templateEngine.setTemplateResolver(templateResolver());
-//        templateEngine.addDialect(new TilesDialect());
-//        templateEngine.addDialect(new SpringSecurityDialect());
-//        return templateEngine;
-//    }
-
-
 }
