@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<div th:fragment="mediaitemslist(listofmovies)">
+    <section class="container" th:each="movie : ${listofmovies}">
+        <div>
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <img class="img-fluid" th:src="${movie.poster}" alt="Movie poster"/>
+                </div>
+                <div class="col-12 col-md-9">
+                    <ul class="list-group">
+                        <li class="list-group-item" th:text="${movie.title}"></li>
+                        <li class="list-group-item" th:text="${movie.year}"></li>
+                        <li class="list-group-item" th:text="${movie.genre}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
