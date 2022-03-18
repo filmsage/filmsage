@@ -6,8 +6,6 @@ import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class LikesService {
 
@@ -33,10 +31,4 @@ public class LikesService {
         return review.getUserLikes().size();
     }
 
-    public int getAllLikesForUser(UserContent userContent) {
-        List<Review> reviews = userContent.getReviews();
-        return reviews.stream()
-                .map(review -> review.getUserLikes().size())
-                .reduce(0 , Integer::sum);
-    }
 }

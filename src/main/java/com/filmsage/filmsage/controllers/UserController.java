@@ -26,6 +26,13 @@ public class UserController {
         this.userContentDao = userContentDao;
     }
 
+    @GetMapping("/users/profile-page/{id}")
+    public String showProfilePage(@PathVariable long id, Model model){
+        model.addAttribute("user", userDao.getById(id));
+        model.addAttribute("usercontent", userContentDao.getById(id));
+        return "/users/profile-page";
+    }
+
     @GetMapping("/update-password/{id}")
     public String showUpdatePassword(@PathVariable long id, Model model){
         model.addAttribute("userPassword", new UpdatePasswordDTO(id));
@@ -48,7 +55,7 @@ public class UserController {
                 System.out.println("updated user");
             }
         }
-        return "redirect:/profile/" + updatePasswordDTO.getId();
+        return "redirect:/users/profile-page/" + updatePasswordDTO.getId();
     }
 
 }
