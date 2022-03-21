@@ -7,7 +7,7 @@
     <h1>Profile Update</h1>
 </section>
 <div class="container">
-    <form th:action="@{/profile/{userId}/edit(userId= ${user.id})}" th:method="POST" th:object="${user}">
+    <form th:action="@{/profile/{userId}/edit(userId=${user.id})}" th:method="POST" th:object="${user}">
         <div class="form-group">
             <input name="id" type="hidden" th:value="*{id}">
             <label for="first-Name">First Name: </label>
