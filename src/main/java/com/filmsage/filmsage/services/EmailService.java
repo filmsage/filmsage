@@ -12,7 +12,7 @@ public class EmailService {
 
     public JavaMailSender emailSender;
 
-    @Value("${spring.mail.from}")
+    @Value("${SPRING_MAIL_FROM}")
     private String from;
 
     public EmailService(JavaMailSender emailSender) {
