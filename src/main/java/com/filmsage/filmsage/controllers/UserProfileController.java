@@ -51,6 +51,19 @@ public class UserProfileController {
         return "redirect:/profile/" + getUserContent().getId();
     }
 
+    @GetMapping("/profile/edit")
+    public String getUpdateProfileForm(Model model) {
+       model.addAttribute("profile", getUserContent());
+//       model.addAttribute("email",getUserContent());
+       model.addAttribute("username", getUserContent());
+       return "/profile/update-Profile";
+    }
+
+//    @PostMapping("profile")
+//    public String submitUpdateProfileForm(Model model) {
+//        model.addAttribute()
+//
+//    }
 
     private UserContent getUserContent() {
         UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
