@@ -58,7 +58,7 @@ public class ReviewController {
                              @RequestParam String imdb) {
         Review review = reviewDao.getById(r);
         model.addAttribute("review", review);
-        model.addAttribute("movie", mediaItemService.getMediaItemRecord(imdb));
+        model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
         model.addAttribute("likes", review.getUserLikes().size());
         return "reviews/review";
     }
@@ -70,17 +70,13 @@ public class ReviewController {
         if (imdb == null && userId == null) {
             model.addAttribute("reviews", reviewDao.findAll());
             model.addAttribute("for", "all");
-            System.out.println("showing all reviews");
-            for (Review review : reviewDao.findAll()) {
-                System.out.println();
-            }
         } else if (imdb == null) {
             model.addAttribute("reviews", reviewDao.findAllByUserContent_Id(Long.parseLong(userId)));
             model.addAttribute("user", userContentDao.getById(Long.parseLong(userId)));
             model.addAttribute("for", "user");
         } else if (userId == null) {
             model.addAttribute("reviews", reviewDao.findAllByMediaItemImdb(imdb));
-            model.addAttribute("movie", omdbRequester.getMovie(imdb));
+            model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
             model.addAttribute("for", "movie");
         }
         return "reviews/review-list";
@@ -95,7 +91,7 @@ public class ReviewController {
         model.addAttribute("user", userContent);
         // since we're creating a new review, we give it a fresh new Review to work with
         model.addAttribute("review", new Review());
-        model.addAttribute("movie", omdbRequester.getMovie(imdb));
+        model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
         return "reviews/create";
     }
 
@@ -124,7 +120,7 @@ public class ReviewController {
         UserContent userContent = userContentService.getUserContent();
         model.addAttribute("user", userContent);
         model.addAttribute("review", reviewDao.getById(r));
-        model.addAttribute("movie", omdbRequester.getMovie(imdb));
+        model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
         return "reviews/edit";
     }
 
@@ -132,7 +128,7 @@ public class ReviewController {
     @PostMapping("/reviews/edit")
     public String submitEdit(@ModelAttribute Review review, @RequestParam String imdb){
         // check if record exists already and prepare it for review
-        MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
+        MediaItem mediaItem = mediaItemService.getTempMediaItemRecord(imdb);
         // set the userContent field in the Review
         review.setUserContent(userContentService.getUserContent());
         review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
