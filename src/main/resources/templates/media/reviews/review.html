@@ -21,7 +21,7 @@
 </div>
 <div class="author-controls">
     <a class="btn btn-primary" th:href="@{/movies/{imdb}/reviews/edit(imdb = ${movie.imdbID}, r = ${review.id})}">Edit</a>
-    <a class="btn btn-primary" th:href="@{/movies/{imdb}/reviews/delete(imdb = ${movie.imdbID}, r = ${review.id})}">Delete</a>
+<!--    <a class="btn btn-primary" th:href="@{/movies/{imdb}/reviews/delete(imdb = ${movie.imdbID}, r = ${review.id})}">Delete</a>-->
 </div>
 <th:block th:replace="partials/elements :: footer"></th:block>
 <script th:src="@{/js/like-button.js}"></script>
