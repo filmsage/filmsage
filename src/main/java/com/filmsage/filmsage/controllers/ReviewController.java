@@ -41,35 +41,6 @@ public class ReviewController {
         this.likesService = likesService;
     }
 
-    @GetMapping("/movies/{imdb}/reviews/create")
-    public String showReviewForm(Model model, @PathVariable String imdb){
-        // get the UserContent object which links to all that user's user-created content
-        UserContent userContent = userContentService.getUserContent();
-        // store it into the model for retrieval later
-        model.addAttribute("user", userContent);
-        // since we're creating a new review, we give it a fresh new Review to work with
-        model.addAttribute("review", new Review());
-        model.addAttribute("movie", omdbRequester.getMovie(imdb));
-        return "media/reviews/create";
-    }
-
-    @PostMapping("/movies/{imdb}/reviews/create")
-    public String createReview(@ModelAttribute Review review, @PathVariable String imdb){
-        // check if record exists already
-        MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
-        // get the UserContent object which links to all that user's user-created content
-        UserContent userContent = userContentService.getUserContent();
-        // set the userContent field in the Review
-        review.setUserContent(userContent);
-        review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
-        review.setMediaItem(mediaItem); // associate MediaItem with review
-        // persist the review (ie store it in the database)
-        review = reviewDao.save(review);
-        // user automatically likes their new review
-        likesService.initialLikeReview(review.getId());
-        return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
-    }
-
     @RequestMapping(value = "/movies/{imdb}/reviews/show",
             method = RequestMethod.GET,
             params = "r")
@@ -88,6 +59,38 @@ public class ReviewController {
         return "media/reviews/review-list";
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping("/movies/{imdb}/reviews/create")
+    public String showReviewForm(Model model, @PathVariable String imdb){
+        // get the UserContent object which links to all that user's user-created content
+        UserContent userContent = userContentService.getUserContent();
+        // store it into the model for retrieval later
+        model.addAttribute("user", userContent);
+        // since we're creating a new review, we give it a fresh new Review to work with
+        model.addAttribute("review", new Review());
+        model.addAttribute("movie", omdbRequester.getMovie(imdb));
+        return "media/reviews/create";
+    }
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @PostMapping("/movies/{imdb}/reviews/create")
+    public String createReview(@ModelAttribute Review review, @PathVariable String imdb){
+        // check if record exists already
+        MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
+        // get the UserContent object which links to all that user's user-created content
+        UserContent userContent = userContentService.getUserContent();
+        // set the userContent field in the Review
+        review.setUserContent(userContent);
+        review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
+        review.setMediaItem(mediaItem); // associate MediaItem with review
+        // persist the review (ie store it in the database)
+        review = reviewDao.save(review);
+        // user automatically likes their new review
+        likesService.initialLikeReview(review.getId());
+        return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
+    }
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = "/movies/{imdb}/reviews/edit",
             method = RequestMethod.GET,
             params = "r")
@@ -100,6 +103,7 @@ public class ReviewController {
         return "media/reviews/edit";
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/movies/{imdb}/reviews/edit")
     public String submitEdit(@ModelAttribute Review review, @PathVariable String imdb){
         // check if record exists already and prepare it for review
