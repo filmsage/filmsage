@@ -65,6 +65,8 @@ public class ReviewController {
         review.setMediaItem(mediaItem); // associate MediaItem with review
         // persist the review (ie store it in the database)
         review = reviewDao.save(review);
+        // user automatically likes their new review
+        likesService.initialLikeReview(review.getId());
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }
 
