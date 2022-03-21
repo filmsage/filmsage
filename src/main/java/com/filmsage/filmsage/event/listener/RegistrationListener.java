@@ -20,7 +20,8 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private JavaMailSender mailSender;
 
     // TODO: we will need to replace this when we deploy
-    private String applicationUrl = "http://localhost:8080";
+    //private String applicationUrl = "http://localhost:8080";
+    private String applicationUrl = "https://filmsage.net";
 
     public RegistrationListener(UserService service, MessageSource messages, JavaMailSender mailSender) {
         this.service = service;

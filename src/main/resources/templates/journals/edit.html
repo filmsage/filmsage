@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Edit a Post</title>
-    <th:block th:replace="partials/elements :: head(title='Create a Journal')"></th:block>
-</head>
+<head th:replace="partials/elements :: head(title='Editing Journal')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
-<form th:action="@{'/journals/' + ${journal.id} + '/edit'}" th:method="POST" th:object="${journal}">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title" th:value="*{title}" th:fields="*{title}">
-    </div>
-    <input type="hidden" th:field="*{id}">
-    <div class="form-group">
-        <label for="body">Body</label>
-        <textarea class="form-control" id="body" rows="3" name="body" th:field="*{body}"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<section class="container">
+    <form th:action="@{'/journals/' + ${journal.id} + '/edit'}" th:method="POST" th:object="${journal}">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" th:value="*{title}" th:fields="*{title}">
+        </div>
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea class="form-control" id="body" rows="3" name="body" th:field="*{body}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
 <th:block th:replace="partials/bootstrap :: scripts"></th:block>
 </body>
 </html>

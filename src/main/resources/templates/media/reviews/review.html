@@ -9,6 +9,7 @@
     <h1><a th:href="@{/movies/{imdb}(imdb=${movie.imdbID})}" th:text="${movie.title}">Movie</a></h1>
     <h2 th:text="${review.title}"></h2>
     <p th:text="${review.body}"></p>
+    <p>Rating: <span th:text="${review.rating}"></span> / 5</p>
     <p th:text="${#temporals.format(review.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
     <p><a th:href="@{/movies/{imdb}/reviews(imdb=${movie.imdbID})}" th:text="${'Back to ' + movie.title + ' reviews'}"></a></p>
 </section>
@@ -17,6 +18,10 @@
     <p><i class="fa fa-thumbs-up" th:data-id="${review.id}" th:attr="id=${#authorization.expression('isAuthenticated()') ? 'like-button' : ''}"></i>
         <span id="like-count" th:text="${likes}"></span></p>
     <a th:href="@{/report/{id}(id=${review.id})}">Report Abusive Content </a>
+</div>
+<div class="author-controls">
+    <a class="btn btn-primary" th:href="@{/movies/{imdb}/reviews/edit(imdb = ${movie.imdbID}, r = ${review.id})}">Edit</a>
+<!--    <a class="btn btn-primary" th:href="@{/movies/{imdb}/reviews/delete(imdb = ${movie.imdbID}, r = ${review.id})}">Delete</a>-->
 </div>
 <th:block th:replace="partials/elements :: footer"></th:block>
 <script th:src="@{/js/like-button.js}"></script>
