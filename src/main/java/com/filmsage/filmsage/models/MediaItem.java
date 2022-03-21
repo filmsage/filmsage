@@ -1,5 +1,6 @@
 package com.filmsage.filmsage.models;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,11 +27,10 @@ public class MediaItem {
     private String poster;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "mediaItems")
-    private List<Watchlist> watchlists;
-
+    private List<Watchlist> watchlists = new ArrayList<>();
 
     public MediaItem() {}
 

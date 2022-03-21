@@ -4,6 +4,7 @@ import com.filmsage.filmsage.models.auth.Role;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,7 @@ public class User {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private java.util.Collection<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     public User() {
         super();
