@@ -9,6 +9,7 @@ import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
 import com.filmsage.filmsage.services.LikesService;
 import com.filmsage.filmsage.services.OMDBRequester;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,19 +53,38 @@ public class UserProfileController {
     }
 
 //    get the
-    @GetMapping("/profile/edit")
-    public String getUpdateProfileForm(Model model) {
-       model.addAttribute("profile", getUserContent());
-//       model.addAttribute("email",getUserContent());
-       model.addAttribute("username", getUserContent());
+    @GetMapping("/profile/{userId}/edit")
+    public String getUpdateProfileForm(Model model, @PathVariable String userId) {
+        long id = Long.parseLong(userId);
+//       model.addAttribute("firstName", getUserContent().getFirstName());
+//       model.addAttribute("lastName",getUserContent());
+       model.addAttribute("user", getUserContent());
        return "/profile/update-Profile";
     }
 
-    @PostMapping("profile")
-    public String submitUpdateProfileForm(Model model) {
-        model.addAttribute()
-
+    @PostMapping("/profile/{id}/edit")
+    public String submitUpdatedProfile(@ModelAttribute UserContent userContent, @PathVariable long id) {
+//        userContent = user
+        UserContent existingUser = userContentDao.getById(id);
+        existingUser.setFirstName(userContent.getFirstName());
+        existingUser.setLastName(userContent.getLastName());
+        existingUser.setCountry(userContent.getCountry());
+        userContentDao.save(existingUser);
+        return "redirect:/profile/" + id;
     }
+//
+//    @PostMapping("/profile")
+//    public String submitUpdateProfileForm(@ModelAttribute ("update-Profile"), Model model) {
+//        if()
+//
+//    }
+//@PostMapping("/profile/{id}/edit")
+//public String submitUpdateProfile(@ModelAttribute Profile profile, @PathVariable long id) {
+//    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    Profile.setUserContent(user.getUserContent());
+//    userContentDao.save(profile);
+//    return "redirect:/profile/";
+//}
 
     private UserContent getUserContent() {
         UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

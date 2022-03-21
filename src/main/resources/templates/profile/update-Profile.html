@@ -7,15 +7,9 @@
     <h1>Profile Update</h1>
 </section>
 <div class="container">
-    <form th:action="@{/update-Profile}" th:method="POST" th:object="${profile}">
+    <form th:action="@{/profile/{userId}/edit(userId= ${user.id})}" th:method="POST" th:object="${user}">
         <div class="form-group">
             <input name="id" type="hidden" th:value="*{id}">
-            <label for="email">Email: </label>
-            <input type="text" class="field" id="email" th:field="*{email}" >
-            <br>
-            <label for="username">Username: </label>
-            <input type="text" class="field" id="username" th:field="*{username}" >
-            <br>
             <label for="first-Name">First Name: </label>
             <input type="text" class="field" id="first-Name" th:field="*{firstName}" >
             <br>
