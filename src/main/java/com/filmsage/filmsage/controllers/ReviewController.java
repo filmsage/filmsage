@@ -64,7 +64,7 @@ public class ReviewController {
         review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
         review.setMediaItem(mediaItem); // associate MediaItem with review
         // persist the review (ie store it in the database)
-        reviewDao.save(review);
+        review = reviewDao.save(review);
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }
 
