@@ -25,6 +25,9 @@
                     link to movie review is for
                 </a>
             </h3>
+            <p th:text="${review.getUserContent().getUser().getUsername()}">
+                Posted by user
+            </p>
 <!--            <p th:text="${review.body}"></p>-->
         </div>
     </section>
