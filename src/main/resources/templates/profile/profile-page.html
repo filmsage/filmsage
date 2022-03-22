@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 <h2>Profile Page</h2>
-<div>
+<div class="container">
     <p th:text=" ${usercontent.firstName}"> First Name</p>
 
     <p th:text="${usercontent.lastName}"> Last Name</p>
@@ -15,7 +15,7 @@
 <button class="btn btn-primary">Edit Profile</button>
 <button class="btn btn-primary">Password</button>
 </div>
-<section>
+<section class="container" id="content-area">
     <div th:each="review : ${reviews}">
             <h2 th:text="${review.title}"></h2>
         <p th:text="${review.body}"></p>
