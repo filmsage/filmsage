@@ -7,11 +7,11 @@
 <section class="container">
     <form th:action='@{/watchlist/create}' th:method="POST" th:object="${watchlist}">
         <div class = "form-group">
-            <label for="title">Collection Title</label>
+            <label for="title">Watchlist Title</label>
             <input type="text" class="form-control" id=title name="title" th:field="*{title}">
             <input type="hidden" class="form-control" name="imdb" th:value="${imdb}">
         </div>
-        <button type="submit">Create WatchList</button>
+        <button class="btn btn-primary" type="submit">Create WatchList</button>
     </form>
 </section>
 

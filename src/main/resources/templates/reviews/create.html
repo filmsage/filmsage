@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='Reviewing... ')"></head>
+<head th:replace="partials/elements :: head(title='Reviewing...')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-  <h1>Movie Review</h1>
+  <h1>Review for <span th:text="${movie.title}">media title</span></h1>
 </section>
 <div class="container">
-  <form th:action="@{'/movies/' + ${movie.imdbID} + '/reviews/create'}" th:method="post" th:object="${review}">
-    <input th:field="${user.id}" type="hidden"/>
+  <form th:action="@{/reviews/create(imdb=${movie.imdb})}" th:method="post" th:object="${review}">
     <div class="form-group">
       <label>Review Title</label>
       <input th:field="*{title}" class="field" required>

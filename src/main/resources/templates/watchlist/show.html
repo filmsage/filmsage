@@ -17,10 +17,10 @@
             <p th:text="${item.year}"></p>
             <p th:text="${item.genre}"></p>
 
-            <form th:action="@{/deleteFromWatchlist}" th:method="POST" >
+            <form class="form-group" th:action="@{/deleteFromWatchlist}" th:method="POST" >
                 <input name="id" type="hidden" th:value="${watchlist.id}" >
-                <input name="imdb" type="hidden" th:value="${item.imdb}">
-                <button type="submit">Remove</button>
+                <input class="form-control" name="imdb" type="hidden" th:value="${item.imdb}">
+                <button class="btn btn-primary" type="submit">Remove</button>
             </form>
             <br>
             <br>

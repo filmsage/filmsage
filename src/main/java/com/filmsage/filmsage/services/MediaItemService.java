@@ -34,4 +34,21 @@ public class MediaItemService {
             return mediaItemDao.save(mediaItem);
         }
     }
+
+    public MediaItem getTempMediaItemRecord(String imdb) {
+        // if we have a record of this imdb in our system,
+        if (mediaItemDao.existsByImdb(imdb)) {
+            // we retrieve that record
+            return mediaItemDao.findByImdb(imdb);
+        } else {
+            MediaItemMapped mediaItemMapped = omdbRequester.getMovie(imdb);
+            return new MediaItem(
+                    mediaItemMapped.getImdbID(),
+                    mediaItemMapped.getTitle(),
+                    mediaItemMapped.getYear(),
+                    mediaItemMapped.getGenre(),
+                    mediaItemMapped.getPoster().toString()
+            );
+        }
+    }
 }

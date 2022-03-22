@@ -2,6 +2,7 @@ package com.filmsage.filmsage.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,12 +40,12 @@ public class UserContent {
     @OneToMany(mappedBy = "userContent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.PERSIST})
     @JoinTable(
             name = "user_reviews_likes",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "review_id"))
-    private Set<Review> likedReviews;
+    private Set<Review> likedReviews = new HashSet<>();
 
     public UserContent() {
     }
