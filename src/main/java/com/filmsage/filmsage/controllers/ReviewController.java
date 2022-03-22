@@ -1,11 +1,13 @@
 package com.filmsage.filmsage.controllers;
 
 import com.filmsage.filmsage.models.*;
+import com.filmsage.filmsage.models.auth.Role;
 import com.filmsage.filmsage.models.auth.UserPrinciple;
 import com.filmsage.filmsage.models.json.MediaItemMapped;
 import com.filmsage.filmsage.repositories.MediaItemRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
+import com.filmsage.filmsage.repositories.auth.RoleRepository;
 import com.filmsage.filmsage.services.LikesService;
 import com.filmsage.filmsage.services.MediaItemService;
 import com.filmsage.filmsage.services.OMDBRequester;
@@ -26,19 +28,22 @@ public class ReviewController {
     private UserContentService userContentService;
     private OMDBRequester omdbRequester;
     private LikesService likesService;
+    private RoleRepository roleDao;
 
     public ReviewController(ReviewRepository reviewDao,
                             MediaItemService mediaItemService,
                             UserContentRepository userContentDao,
                             UserContentService userContentService,
                             OMDBRequester omdbRequester,
-                            LikesService likesService) {
+                            LikesService likesService,
+                            RoleRepository roleDao) {
         this.reviewDao = reviewDao;
         this.mediaItemService = mediaItemService;
         this.userContentDao = userContentDao;
         this.userContentService = userContentService;
         this.omdbRequester = omdbRequester;
         this.likesService = likesService;
+        this.roleDao = roleDao;
     }
 
 //    @RequestMapping(value = "/movies/{imdb}/reviews/show",
@@ -60,6 +65,7 @@ public class ReviewController {
         model.addAttribute("review", review);
         model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
         model.addAttribute("likes", review.getUserLikes().size());
+
         return "reviews/review";
     }
 
@@ -136,5 +142,23 @@ public class ReviewController {
         // persist the review (ie store it in the database)
         reviewDao.save(review);
         return String.format("redirect:/reviews/show?imdb=%s&r=%d", imdb, review.getId());
+    }
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @PostMapping("/reviews/delete")
+    public String submitDelete(@RequestParam(name = "review-id") long id){
+        Review review = reviewDao.getById(id);
+        // check if record exists already and prepare it for review
+        if (userContentService.getUserContent().getId() == review.getUserContent().getId() ||
+                userContentService.getUser().getRoles().contains(roleDao.findByName("ROLE_ADMIN"))) {
+            System.out.println("User matches or role is admin");
+            for(UserContent usersWhoLike : review.getUserLikes()) {
+//                review.getUserLikes().remove(userLikes);
+                usersWhoLike.getLikedReviews().remove(review);
+                review.getUserLikes().remove(usersWhoLike);
+            }
+            reviewDao.delete(review);
+        }
+        return String.format("redirect:/reviews/index?user=%s", review.getUserContent().getId());
     }
 }

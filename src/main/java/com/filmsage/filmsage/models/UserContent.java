@@ -40,7 +40,7 @@ public class UserContent {
     @OneToMany(mappedBy = "userContent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.PERSIST})
     @JoinTable(
             name = "user_reviews_likes",
             joinColumns = @JoinColumn(name = "user_id"),

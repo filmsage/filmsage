@@ -1,5 +1,8 @@
 package com.filmsage.filmsage.models;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -32,7 +35,7 @@ public class Review {
     @JoinColumn (name = "media_id")
     private MediaItem mediaItem;
 
-    @ManyToMany(mappedBy = "likedReviews")
+    @ManyToMany(mappedBy = "likedReviews", cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     Set<UserContent> userLikes = new HashSet<>();
 
     public Review(long id, String title, String body, int rating, Timestamp createdAt, UserContent userContent, MediaItem mediaItem) {

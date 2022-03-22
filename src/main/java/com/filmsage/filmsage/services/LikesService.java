@@ -56,4 +56,9 @@ public class LikesService {
                 .map(review -> review.getUserLikes().size())
                 .reduce(0 , Integer::sum);
     }
+
+    public void removeLikesFromReview(Review review) {
+        review.getUserLikes();
+
+    }
 }

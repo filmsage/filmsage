@@ -12,4 +12,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findAllByMediaItemImdb(String imdb);
     Review findReviewById(long id);
     List<Review> findAllByUserContent_Id(long id);
+    void deleteReviewById(long id);
 }
