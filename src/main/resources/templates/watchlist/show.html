@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <h1 th:text="${watchlist.title}">Collection title</h1>
     <p th:text="${#temporals.format(watchlist.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
     <div class="container row" th:each="item : ${mediaItems}">
@@ -26,8 +26,8 @@
             <br>
         </div>
     </div>
+    <p><a th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
 </section>
-<p><a th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>
 </html>

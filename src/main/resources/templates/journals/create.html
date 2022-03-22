@@ -5,7 +5,7 @@
 </head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
-<section class="container">
+<section class="container" id="content-area">
     <form th:action="@{/journals/create}" th:method="POST" th:object="${journal}">
         <div class="form-group">
             <label for="title">Title</label>
