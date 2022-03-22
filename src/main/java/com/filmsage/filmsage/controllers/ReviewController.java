@@ -84,7 +84,7 @@ public class ReviewController {
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/reviews/create")
-    public String showReviewForm(Model model, @RequestParam String imdb){
+    public String showReviewForm(Model model, @RequestParam String imdb) {
         // get the UserContent object which links to all that user's user-created content
         UserContent userContent = userContentService.getUserContent();
         // store it into the model for retrieval later

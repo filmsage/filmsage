@@ -35,6 +35,7 @@
 <!--        TODO: display recent reviews for this movie on the page instead of just this link to all -->
             <a class="btn btn-primary btn-block" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a Review!</a>
             <p><a th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show user reviews</a></p>
+            <th:block th:replace="partials/review-list :: review-list(reviews=${reviews})"></th:block>
         </div>
         <div class="col-12 col-md-6">
             <h2>On Watchlists</h2>
