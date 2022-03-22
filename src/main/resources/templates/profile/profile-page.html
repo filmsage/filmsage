@@ -5,9 +5,8 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 <div class="container">
     <h2><span th:text="${user.getUsername()}"> </span> Profile Page</h2>
-    <a class="btn btn-primary" th:href="@{/profile/{userId}/edit(userId= ${usercontent.getId()})}">Edit Profile</a>
+    <a class="btn btn-primary" th:href="@{/profile/{userId}/edit (userId = ${usercontent.getId()})}">Edit Profile</a>
 </div>
-<br>
 <div class="container">
     <ul>
         <li>First Name: <span th:text="${usercontent.firstName}"></span></li>
@@ -20,12 +19,14 @@
 </div>
 
 <section class="container">
+    <h3>Reviews</h3>
     <div th:each="review : ${reviews}">
-        <h3>Reviews</h3>
+
             <a th:text="${review.title}" th:href="@{/movies/{imdb}/reviews/(imdb=${review.getMediaItem().getImdb()})}"></a>
     </div>
+    <h3>WatchList</h3>
     <div th:each="collection : ${usercontent.getCollections()}">
-        <h3>WatchList</h3>
+
         <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
 
 
