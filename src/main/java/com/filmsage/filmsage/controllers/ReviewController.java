@@ -110,4 +110,12 @@ public class ReviewController {
         reviewDao.save(review);
         return String.format("redirect:/movies/%s/reviews/show?r=%d", imdb, review.getId());
     }
+
+//    @GetMapping("/reviews/index")
+//    public String  reviewsIndex(Model model){
+//        model.addAttribute("reviews", reviewDao.findAll());
+//        return "/media/reviews/review-list";
+//    }
+
+
 }

@@ -5,6 +5,8 @@ import com.filmsage.filmsage.models.UserContent;
 import com.filmsage.filmsage.models.dto.UpdatePasswordDTO;
 import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
+import com.filmsage.filmsage.repositories.WatchlistRepository;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,11 +21,13 @@ public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
     private UserContentRepository userContentDao;
+    private WatchlistRepository watchlistDao;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, UserContentRepository userContentDao) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, UserContentRepository userContentDao, WatchlistRepository watchlistDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.userContentDao = userContentDao;
+        this.watchlistDao = watchlistDao;
     }
 
     @GetMapping("/update-password/{id}")
