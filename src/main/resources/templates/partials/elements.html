@@ -24,6 +24,15 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
             <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <div>
+            <span><strong>|</strong></span>
+            <a th:href="@{/journals}">Journals</a>
+            <span><strong>|</strong></span>
+            <a th:href="@{/reviews/index}">Reviews</a>
+            <span><strong>|</strong></span>
+            <a th:href="@{/about-us}">About the Magical Quartet</a>
+            <span><strong>|</strong></span>
+        </div>
         <ul class="navbar-nav mr-2 ml-auto" >
             <li  sec:authorize="!isAuthenticated()" class="nav-item active">
                 <a class="nav-link" href="/login">Login</a>
