@@ -6,13 +6,15 @@
 
 <h1>Search Page</h1>
 
-<form th:action="@{/search}" th:method="GET" >
-    <div class="form-group">
-        <label for="search">search</label>
-        <input type="text" class="form-control" id="search" name="q">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<section class="container" id="content-area">
+    <form th:action="@{/search}" th:method="GET">
+        <div class="form-group">
+            <label for="search">search</label>
+            <input type="text" class="form-control" id="search" name="q">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>

@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <div th:switch="${for}">
         <h1 th:case="'movie'">All reviews for <a th:href="@{/movies/{imdb}(imdb=${movie.imdb})}" th:text="${movie.title}">Movie</a></h1>
         <h1 th:case="'user'">All reviews for <a th:href="@{/profile/{id}(id=${user.getId()})}" th:text="${user.getUser().getUsername()}">User</a></h1>

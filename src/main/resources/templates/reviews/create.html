@@ -5,23 +5,25 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container">
-  <h1>Review for <span th:text="${movie.title}">media title</span></h1>
+  <section class="container">
+    <h1>Review for <span th:text="${movie.title}">media title</span></h1>
+  </section>
+  <div class="container">
+    <form th:action="@{/reviews/create(imdb=${movie.imdb})}" th:method="post" th:object="${review}">
+      <div class="form-group">
+        <label>Review Title</label>
+        <input th:field="*{title}" class="field" required>
+        <br>
+        <label >Review Body</label>
+        <textarea class="form-control" th:field="*{body}" cols="30" rows="10" required></textarea>
+        <br>
+        <label>Score</label>
+        <input th:field="*{rating}" type="number" max="5" min="0" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
 </section>
-<div class="container">
-  <form th:action="@{/reviews/create(imdb=${movie.imdb})}" th:method="post" th:object="${review}">
-    <div class="form-group">
-      <label>Review Title</label>
-      <input th:field="*{title}" class="field" required>
-      <br>
-      <label >Review Body</label>
-      <textarea class="form-control" th:field="*{body}" cols="30" rows="10" required></textarea>
-      <br>
-      <label>Score</label>
-      <input th:field="*{rating}" type="number" max="5" min="0" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
 
 
 

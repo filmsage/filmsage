@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/elements-without-registerLink :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <h1>Create Your Account!</h1>
     <form th:action="@{/register}" th:method="post" th:object="${user}">
         <div class="form-group">

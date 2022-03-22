@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <form th:action='@{/watchlist/create}' th:method="POST" th:object="${watchlist}">
         <div class = "form-group">
             <label for="title">Watchlist Title</label>

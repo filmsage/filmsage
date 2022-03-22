@@ -4,22 +4,23 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <h1>User Created List</h1>
-</section>
-<div class="container">
-    <form th:action="@{/createList}" th:method="POST" >
-        <div class="form-group">
-            <label for="search">search</label>
-            <input type="text" class="form-control" id="search" name="search" >  <-- th:field="*{createList}" -->
+    <div class="container">
+        <form th:action="@{/createList}" th:method="POST" >
+            <div class="form-group">
+                <label for="search">search</label>
+                <input type="text" class="form-control" id="search" name="search" >  <-- th:field="*{createList}" -->
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="card-body" >
+            <h5 class="card-title"> <--Title of List--></h5>
+            <h5 class="card-text"> <--list object? --></h5>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <div class="card-body" >
-        <h5 class="card-title"> <--Title of List--></h5>
-        <h5 class="card-text"> <--list object? --></h5>
     </div>
-</div>
+
+</section>
 
 
 
