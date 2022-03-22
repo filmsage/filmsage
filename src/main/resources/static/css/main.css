@@ -1,0 +1,13 @@
+body{
+    /*background-color: #8b0000;*/
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(140,17,8,1) 52%, rgba(252,176,69,1) 100%);
+}
+
+.navbar{
+    background-color: black;
+}
+
+a:hover{
+    background-color: red;
+}
