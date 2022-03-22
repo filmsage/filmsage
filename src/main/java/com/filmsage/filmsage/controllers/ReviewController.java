@@ -153,7 +153,6 @@ public class ReviewController {
                 userContentService.getUser().getRoles().contains(roleDao.findByName("ROLE_ADMIN"))) {
             System.out.println("User matches or role is admin");
             for(UserContent usersWhoLike : review.getUserLikes()) {
-//                review.getUserLikes().remove(userLikes);
                 usersWhoLike.getLikedReviews().remove(review);
                 review.getUserLikes().remove(usersWhoLike);
             }
