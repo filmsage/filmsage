@@ -3,6 +3,8 @@
 <head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
+
+<section class="container" id="content-area">
 <div class="container">
     <h2><span th:text="${user.getUsername()}"> </span> Profile Page</h2>
     <a class="btn btn-primary" th:href="@{/profile/{userId}/edit (userId = ${usercontent.getId()})}">Edit Profile</a>
@@ -17,7 +19,6 @@
         <li>Password: <a class="btn btn-primary" th:href="@{/update-password/{id} (id = ${user.getId()})}">Change Password</a></li>
     </ul>
 </div>
-
 <section class="container">
     <h3>Reviews</h3>
     <div th:each="review : ${reviews}">
