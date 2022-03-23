@@ -21,3 +21,8 @@ body{
 /*a:hover{*/
 /*    background-color: red;*/
 /*}*/
+
+#error-page{
+    height: auto;
+    width: 80%;
+}
