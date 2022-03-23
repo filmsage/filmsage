@@ -26,7 +26,7 @@
         <div th:each="review : ${reviews}">
 
             <a th:text="${review.title}"
-               th:href="@{/movies/{imdb}/reviews/(imdb=${review.getMediaItem().getImdb()})}"></a>
+               th:href="@{/reviews/(imdb=${review.getMediaItem().getImdb()}, id=${review.getId()})}"></a>
         </div>
         <h3>WatchList</h3>
         <div th:each="collection : ${usercontent.getCollections()}">

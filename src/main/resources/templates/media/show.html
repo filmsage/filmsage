@@ -14,17 +14,17 @@
             <h3 class="" th:text="${movie.year}"></h3>
             <p class="" th:text="${movie.plot}"></p>
             <ul class="list-group">
-                <li class="list-group-item" th:text="${movie.released}"></li>
-                <li class="list-group-item" th:text="${movie.runtime}"></li>
-                <li class="list-group-item" th:text="${movie.genre}"></li>
-                <li class="list-group-item" th:text="${movie.directors}"></li>
-                <li class="list-group-item" th:text="${movie.writers}"></li>
-                <li class="list-group-item" th:text="${movie.actors}"></li>
-                <li class="list-group-item" th:text="${movie.languages}"></li>
-                <li class="list-group-item" th:text="${movie.country}"></li>
-                <li class="list-group-item" th:text="${movie.awards}"></li>
-                <li class="list-group-item" th:text="${movie.metascore}"></li>
-                <li class="list-group-item" th:text="${movie.boxOffice}"></li>
+                <li class="list-group-item">Released: <span th:text="${movie.released}"></span></li>
+                <li class="list-group-item">Runtime: <span th:text="${movie.runtime}"></span></li>
+                <li class="list-group-item">Genre <span th:text="${movie.genre}"></span></li>
+                <li class="list-group-item">Director(s): <span th:text="${movie.directors}"></span></li>
+                <li class="list-group-item">Writers: <span th:text="${movie.writers}"></span></li>
+                <li class="list-group-item">Actors: <span th:text="${movie.actors}"></span></li>
+                <li class="list-group-item">Languages: <span th:text="${movie.languages}"></span></li>
+                <li class="list-group-item">Countries: <span th:text="${movie.country}"></span></li>
+                <li class="list-group-item">Awards: <span th:text="${movie.awards}"></span></li>
+                <li class="list-group-item">Metascore: <span th:text="${movie.metascore}"></span></li>
+                <li class="list-group-item">Box office revenue: <span th:text="${movie.boxOffice}"></span></li>
             </ul>
         </div>
     </div>
