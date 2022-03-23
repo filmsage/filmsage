@@ -5,18 +5,19 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <h1>FilmSage Home</h1>
-<!--    <a th:href="@{/movies/tt5727208}">link to a movie</a>-->
-<!--    <a th:href="@{/journals}">Journals index (All journals, all users)</a>-->
-
-    <div class="my-5 text-align-center">placeholder for full-width banner image</div>
-
-    <section>
-        <h2>Welcome to FilmSage!</h2>
-        <p>
-            FilmSage was created for movie watchers like you to share your personal thoughts and reviews on your favorite movies with other users. Read real reviews from other movie lovers, vote on reviews you like, curate a personal watch list of MUST-SEE movies and organize your favorite movies in your own personal journal. FilmSage is a place for all movie lovers.
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to FilmSage!</h1>
+        <p class="lead"> FilmSage was created for movie watchers like you to share
+            your personal thoughts and reviews on your favorite movies with other users.
+            Read real reviews from other movie lovers, vote on reviews you like,
+            curate a personal watch list of MUST-SEE movies and organize your
+            favorite movies in your own personal journal.
+            FilmSage is a place for all movie lovers.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </p>
-    </section>
+    </div>
+
     <th:block th:replace="partials/mediaitemlist :: mediaitemslist(listofmovies=${movies})"></th:block>
 </section>
 
