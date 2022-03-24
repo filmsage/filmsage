@@ -70,7 +70,8 @@ public class JournalController {
     @GetMapping("/journals/{id}/edit")
     public String showEditForm(@PathVariable long id, Model model) {
         Journal journal = journalDao.getById(id);
-        if (journal.getUserContent().getId() == userContentService.getUserContent().getId()) {
+        if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
+                userContentService.isAdmin()) {
             model.addAttribute("journal", journal);
             return "journals/edit";
         } else {
