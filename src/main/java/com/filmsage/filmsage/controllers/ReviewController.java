@@ -145,7 +145,6 @@ public class ReviewController {
         // check if record exists already and prepare it for review
         if (userContentService.getUserContent().getId() == review.getUserContent().getId() ||
                 userContentService.isAdmin()) {
-            System.out.println("User matches or role is admin");
             for(UserContent usersWhoLike : review.getUserLikes()) {
                 usersWhoLike.getLikedReviews().remove(review);
                 review.getUserLikes().remove(usersWhoLike);
@@ -154,12 +153,5 @@ public class ReviewController {
         }
         return String.format("redirect:/reviews/index?user=%s", review.getUserContent().getId());
     }
-
-//    @GetMapping("/reviews/index")
-//    public String  reviewsIndex(Model model){
-//        model.addAttribute("reviews", reviewDao.findAll());
-//        return "/media/reviews/review-list";
-//    }
-
 
 }
