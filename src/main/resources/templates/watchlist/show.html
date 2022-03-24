@@ -6,10 +6,10 @@
 
 <section class="container" id="content-area">
     <h1 th:text="${watchlist.title}">Collection title</h1>
-    <p th:text="${#temporals.format(watchlist.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
+    <p>Created at: <span th:replace="partials/timestamp :: timeanddate(instant=${watchlist.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
     <div class="container row" th:each="item : ${mediaItems}">
         <div class="col-3">
-            <img class="img-fluid" th:src="${item.poster}" th:alt="${'Promotional poster for ' + item.title}"
+            <img class="img-fluid" th:src="${item.poster}" th:alt="'Promotional poster for ' + ${item.title}"
                  style="max-height: 15vh"/>
         </div>
         <div class="col-9">
