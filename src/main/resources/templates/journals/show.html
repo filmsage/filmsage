@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/elements :: head(title='Journal')"></head>
+
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <h1>Viewing Journal</h1>
+    <div class="p-0 m-0 d-flex">
+        <h1>Viewing Journal</h1>
+
+        <p class="ml-auto mr-0">
+            <a class="btn btn-danger"
+               th:href="@{/journals(user=${journal.getUserContent().getId()})}"
+               th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a>
+        </p>
+
+
+    </div>
+
     <div class="container">
         <th:block th:replace="partials/content/journals-nav" :: nav/>
     </div>
@@ -24,10 +36,11 @@
         <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
         <p th:text="${#temporals.format(journal.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
     </div>
+    <a class="btn btn-danger" th:href="@{/report/{id}(id=${journal.id})}">Report Abusive Content </a>
+
+    <!--    <p><a class="btn btn-danger"    th:href="@{/journals(user=${journal.getUserContent().getId()})}"-->
+    <!--             th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a></p>-->
 </section>
-<a th:href="@{/report/{id}(id=${journal.id})}">Report Abusive Content </a>
-<p><a th:href="@{/journals(user=${journal.getUserContent().getId()})}"
-      th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a></p>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>
 </html>
