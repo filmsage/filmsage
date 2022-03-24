@@ -5,28 +5,34 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <h1 th:text="${watchlist.title}">Collection title</h1>
-    <p>Created at: <span th:replace="partials/timestamp :: timeanddate(instant=${watchlist.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
+    <div class="d-flex">
+        <h1 th:text="${watchlist.title}">Collection title</h1>
+        <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
+    </div>
+    <p>
+        Created at: <span th:replace="partials/timestamp :: timeanddate(instant=${watchlist.getCreatedAt().toInstant().atZone('GMT-0500')})"></span>
+    </p>
     <div class="container row" th:each="item : ${mediaItems}">
-        <div class="col-3">
-            <img class="img-fluid" th:src="${item.poster}" th:alt="'Promotional poster for ' + ${item.title}"
-                 style="max-height: 15vh"/>
-        </div>
-        <div class="col-9">
-            <p th:text="${item.title}"></p>
-            <p th:text="${item.year}"></p>
-            <p th:text="${item.genre}"></p>
-
-            <form class="form-group" th:action="@{/deleteFromWatchlist}" th:method="POST" >
-                <input name="id" type="hidden" th:value="${watchlist.id}" >
-                <input class="form-control" name="imdb" type="hidden" th:value="${item.imdb}">
-                <button class="btn btn-primary" type="submit">Remove</button>
-            </form>
-            <br>
-            <br>
+        <div class="col my-2 p-1 shadow-sm">
+            <a class="d-flex" th:href="@{/movies/{imdb}(imdb=${item.imdb})}">
+                <img class="img-fluid mr-3" style="max-height: 200px" th:src="${item.poster}"
+                     th:alt="${'Poster for ' + item.title}"/>
+                <div>
+                    <h5 class="card-title" th:text="${item.title}"></h5>
+                    <p class="card-text" th:text="${item.year}"></p>
+                    <p class="card-text" th:text="${item.genre}"></p>
+                    <form class="form-group" th:if="${canDelete}" th:action="@{watchlist/delete}" th:method="POST">
+                        <input name="id" type="hidden" th:value="${watchlist.id}">
+                        <input class="form-control" name="imdb" type="hidden" th:value="${item.imdb}">
+                        <button class="btn btn-danger" type="submit">Remove</button>
+                    </form>
+                </div>
+            </a>
         </div>
     </div>
-    <p><a th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
+    <div class="d-flex">
+        <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
+    </div>
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
 </body>

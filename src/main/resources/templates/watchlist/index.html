@@ -6,7 +6,7 @@
 
 <section class="container" id="content-area">
     <h1>Collections</h1>
-    <div class="card-body" th:each= "watchlist : ${watchlists}">
+    <div th:each= "watchlist : ${watchlists}">
         <h3>
             <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
                 Watchlist title
