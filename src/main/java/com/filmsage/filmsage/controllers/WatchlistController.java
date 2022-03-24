@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.Media;
+import java.security.Principal;
 import java.sql.Timestamp;
 
 @Controller
@@ -33,17 +34,27 @@ public class WatchlistController {
     }
 
     @GetMapping("/watchlist")
-    public String viewWatchlists(Model model) {
-        model.addAttribute("watchlists", watchlistDao.findAll());
+    public String viewWatchlists(Model model, @RequestParam(required = false) String user) {
+        if (user != null) {
+            model.addAttribute("watchlists", watchlistDao.findWatchlistsByUserContent_Id(Long.parseLong(user)));
+        } else {
+            model.addAttribute("watchlists", watchlistDao.findAll());
+        }
         return "watchlist/index";
     }
 
     //    to View an individual watchlist
     @GetMapping("/watchlist/{id}/show")
-    public String getWatchlist(@PathVariable long id, Model model) {
+    public String getWatchlist(@PathVariable long id, Model model, Principal principal) {
         Watchlist watchlist = watchlistDao.getById(id);
         model.addAttribute("watchlist", watchlist);
         model.addAttribute("mediaItems", watchlist.getMediaItems());
+        if (principal != null) {
+            if (watchlist.getUserContent().getId() == userContentService.getUserContent().getId() ||
+                    userContentService.isAdmin()) {
+                model.addAttribute("canDelete", true);
+            }
+        }
         return "watchlist/show";
     }
 
@@ -55,6 +66,7 @@ public class WatchlistController {
         model.addAttribute("imdb", imdb);
         return "watchlist/create";
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/watchlist/create")
     public String submitWatchlist(@ModelAttribute Watchlist watchlist, @RequestParam(required = false, name = "imdb") String imdb) {
@@ -104,9 +116,9 @@ public class WatchlistController {
         return "redirect:/watchlist/" + id + "/show";
     }
 
-    @PostMapping("/deleteFromWatchlist")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @PostMapping("/delete")
     public String deleteFromWatchlist(@RequestParam long id, @RequestParam String imdb){
-//        System.out.println("HelloHelloHelloHelloHelloHelloHelloHelloHello");
         Watchlist watchlist = watchlistDao.getById(id);
         MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);
         if (watchlist.getUserContent().getId() == userContentService.getUserContent().getId() ||
