@@ -117,7 +117,7 @@ public class WatchlistController {
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    @PostMapping("/delete")
+    @PostMapping("/watchlist/deleteitem")
     public String deleteFromWatchlist(@RequestParam long id, @RequestParam String imdb){
         Watchlist watchlist = watchlistDao.getById(id);
         MediaItem mediaItem = mediaItemService.getMediaItemRecord(imdb);

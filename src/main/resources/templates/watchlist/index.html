@@ -13,12 +13,6 @@
             </a>
         </h3>
         <p th:text="${watchlist.getUserContent().getUser().getUsername()}"></p>
-
-        <form th:action="@{/watchlist/delete}" th:method="POST">
-            <input name="id" type="hidden" th:value="${watchlist.id}">
-            <p th:text="${watchlist.id}"></p>
-            <button type="submit">Delete</button>
-        </form>
     </div>
 
 </section>

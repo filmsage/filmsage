@@ -21,7 +21,7 @@
                     <h5 class="card-title" th:text="${item.title}"></h5>
                     <p class="card-text" th:text="${item.year}"></p>
                     <p class="card-text" th:text="${item.genre}"></p>
-                    <form class="form-group" th:if="${canDelete}" th:action="@{watchlist/delete}" th:method="POST">
+                    <form class="form-group" th:if="${canDelete}" th:action="@{/watchlist/deleteitem}" th:method="POST">
                         <input name="id" type="hidden" th:value="${watchlist.id}">
                         <input class="form-control" name="imdb" type="hidden" th:value="${item.imdb}">
                         <button class="btn btn-danger" type="submit">Remove</button>
