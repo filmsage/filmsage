@@ -22,11 +22,11 @@
         <a th:href="@{/report/{id}(id=${review.id})}">Report Abusive Content </a>
     </div>
     <div class="author-controls container">
-        <a class="btn btn-primary" th:href="@{/reviews/edit(imdb=${movie.getImdb()}, r=${review.id})}">Edit</a>
+        <a class="btn btn-danger" th:href="@{/reviews/edit(imdb=${movie.getImdb()}, r=${review.id})}">Edit</a>
         <form method="post" th:action="@{/reviews/delete(imdb=${movie.getImdb()})}">
             <!--        <input type="hidden" th:value="${review.id}">-->
             <input type="hidden" name="review-id" th:value="${review.getUserContent().id}">
-            <button type="submit" class="btn btn-primary">Delete</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
         </form>
     </div>
 </section>
