@@ -37,6 +37,9 @@ public class MediaController {
 
     @RequestMapping(value = "/search", params = "q")
     public String searchMovies(@RequestParam("q") String query, Model model) {
+        if (query.isBlank()) {
+            return "search/search";
+        }
         List<MediaSearchMapped> movies = omdbRequester.searchMovie(query);
         model.addAttribute("movies", movies);
         return "search/results";
