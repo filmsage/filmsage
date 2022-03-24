@@ -57,6 +57,7 @@ public class JournalController {
         return "journals/create";
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/journals/create")
     public String submitCreate(@ModelAttribute Journal journal) {
         journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
@@ -65,6 +66,7 @@ public class JournalController {
         return "redirect:/journals?id=" + journal.getId();
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/journals/{id}/edit")
     public String showEditForm(@PathVariable long id, Model model) {
         Journal journal = journalDao.getById(id);
@@ -76,11 +78,15 @@ public class JournalController {
         }
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/journals/{id}/edit")
     public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
-        journal.setUserContent(userContentService.getUserContent());
-        journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        journalDao.save(journal);
+        if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
+                userContentService.isAdmin()) {
+            journal.setUserContent(userContentService.getUserContent());
+            journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            journalDao.save(journal);
+        }
         return "redirect:/journals?id=" + journal.getId();
     }
 
@@ -89,11 +95,12 @@ public class JournalController {
     // We then check if the user who’s currently on the page from the session of their browser is also the user who created the journal.
     // If they are,we delete the journal from our journals table.
     // Whether they are the right user or not, we redirect them back to the journals index.
-
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/journals/{id}/delete")
     public String deleteJournal(@PathVariable long id) {
         Journal journal = journalDao.getById(id);
-        if (journal.getUserContent().getId() == userContentService.getUserContent().getId()) {
+        if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
+                userContentService.isAdmin()) {
             journalDao.delete(journal);
         }
         return "redirect:/journals";
