@@ -7,7 +7,7 @@
 <section class="container" id="content-area">
     <div class="container">
         <h2><span th:text="${user.getUsername()}"> </span> Profile Page</h2>
-        <a class="btn btn-primary" th:href="@{/profile/{userId}/edit (userId = ${usercontent.getId()})}">Edit
+        <a class="btn btn-danger" th:href="@{/profile/{userId}/edit (userId = ${usercontent.getId()})}">Edit
             Profile</a>
     </div>
     <div class="container">
@@ -17,7 +17,7 @@
             <li>UserName: <span th:text="${user.getUsername()}"></span></li>
             <li>Email: <span th:text="${user.getEmail()}"></span></li>
             <li>Country: <span th:text="${usercontent.getCountry()}"></span></li>
-            <li>Password: <a class="btn btn-primary" th:href="@{/update-password/{id} (id = ${user.getId()})}">Change
+            <li>Password: <a class="btn btn-danger" th:href="@{/update-password/{id} (id = ${user.getId()})}">Change
                 Password</a></li>
         </ul>
     </div>

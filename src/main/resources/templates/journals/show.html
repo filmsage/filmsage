@@ -20,8 +20,8 @@
                 Creator username
             </a>
         </p>
-        <a class="btn btn-primary" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
-        <a class="btn btn-primary" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
+        <a class="btn btn-danger" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
+        <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
         <p th:text="${#temporals.format(journal.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
     </div>
 </section>

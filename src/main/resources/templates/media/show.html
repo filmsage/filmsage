@@ -33,7 +33,7 @@
             <h2>Reviews</h2>
             <br/>
 <!--        TODO: display recent reviews for this movie on the page instead of just this link to all -->
-            <a class="btn btn-primary btn-block" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a Review!</a>
+            <a class="btn btn-danger btn-block" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a Review!</a>
             <p><a th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show user reviews</a></p>
             <th:block th:replace="partials/review-list :: review-list(reviews=${reviews})"></th:block>
         </div>
@@ -41,7 +41,7 @@
             <h2>On Watchlists</h2>
             <br/>
             <div class="dropdown">
-                <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="watchlist-dropdown-button"
+                <button class="btn btn-danger btn-block dropdown-toggle" type="button" id="watchlist-dropdown-button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Add to watch list...
                 </button>
@@ -54,6 +54,7 @@
                     </a>
                 </div>
             </div>
+        </div>
         </div>
 </section>
 

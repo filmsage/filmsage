@@ -20,7 +20,7 @@
             <form class="form-group" th:action="@{/deleteFromWatchlist}" th:method="POST" >
                 <input name="id" type="hidden" th:value="${watchlist.id}" >
                 <input class="form-control" name="imdb" type="hidden" th:value="${item.imdb}">
-                <button class="btn btn-primary" type="submit">Remove</button>
+                <button class="btn btn-danger" type="submit">Remove</button>
             </form>
             <br>
             <br>
