@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <h1>Edit Movie Collections</h1>
     <form th:action="@{'/watchlists/' + ${watchlist.id} + '/edit'}" th:method="POST" th:object="${watchlist}">
         <div class = "form-group">

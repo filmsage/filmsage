@@ -1,7 +1,5 @@
 package com.filmsage.filmsage.controllers;
 
-import com.filmsage.filmsage.models.MediaItem;
-import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.models.UserContent;
 import com.filmsage.filmsage.models.auth.UserPrinciple;
 import com.filmsage.filmsage.repositories.ReviewRepository;
@@ -9,7 +7,6 @@ import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
 import com.filmsage.filmsage.services.LikesService;
 import com.filmsage.filmsage.services.OMDBRequester;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,7 +56,7 @@ public class UserProfileController {
 //       model.addAttribute("firstName", getUserContent().getFirstName());
 //       model.addAttribute("lastName",getUserContent());
        model.addAttribute("user", getUserContent());
-       return "/profile/update-Profile";
+       return "profile/update-profile";
     }
 
     @PostMapping("/profile/{id}/edit")

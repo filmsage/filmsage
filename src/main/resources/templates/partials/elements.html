@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <title th:text="${title} + ' - FilmSage'">Title TBD - FilmSage</title>
     <th:block th:replace="partials/bootstrap :: styles"></th:block>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,500;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+
+    <a class="navbar-brand" href="/"><img th:src="@{~/img/filmSageLogo.png}" alt="film-sage logo" id="logo" class="img-Fluid">FilmSage</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <!--        <div class="container col-4 text-center">-->
         <div sec:authorize="isAuthenticated()">
