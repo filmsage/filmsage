@@ -11,16 +11,11 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
 
-    <a class="navbar-brand" href="/"><img th:src="@{~/img/filmSageLogo.png}" alt="film-sage logo" id="logo" class="img-Fluid">FilmSage</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <!--        <div class="container col-4 text-center">-->
         <div sec:authorize="isAuthenticated()">
             <a th:href="@{/profile}">
-                <i class="fa-solid fa-user"><button class="btn-link btn">Profile</button></i>
+                <i class="fa-solid fa-user"><small> Profile</small></i>
             </a>
         </div>
         <div class="mx-2">
@@ -33,19 +28,13 @@
     </div>
 
     <div class="col col-4">
-        <a class="navbar-brand" href="/"><img th:src="@{/static/images/filmSageLogo.png}" alt="film-sage logo" class="img-Fluid">FilmSage</a>
+        <a class="navbar-brand" href="/"><img th:src="@{~/img/filmSageLogo.png}" alt="film-sage logo" id="logo" class="img-Fluid">FilmSage</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
     <div>
         <ul class="navbar-nav mr-2 ml-auto" >
-            <li  sec:authorize="!isAuthenticated()" class="nav-item active">
-                <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-            </li>
-            <li sec:authorize="isAnonymous()" class="nav-item active">
-                <a class="nav-link" href="/register"><i class="fa-solid fa-registered"></i> Register</a>
-            </li>
             <form class="form-inline my-2 my-lg-0 mr-auto" th:action="@{/search}" th:method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
                 <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
@@ -54,6 +43,12 @@
                 <form th:action="@{/logout}" th:method="post">
                     <button class="btn-link btn">Logout</button>
                 </form>
+            </li>
+            <li  sec:authorize="!isAuthenticated()" class="nav-item active">
+                <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            </li>
+            <li sec:authorize="isAnonymous()" class="nav-item active">
+                <a class="nav-link" href="/register"><i class="fa-solid fa-registered"></i> Register</a>
             </li>
         </ul>
     </div>
