@@ -22,7 +22,8 @@
         </p>
         <a class="btn btn-primary" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
         <a class="btn btn-primary" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
-        <p th:text="${#temporals.format(journal.getCreatedAt().toInstant(), 'dd-MM-yyyy HH:mm')}">Created at</p>
+<!--        <p th:text="${#temporals.format(journal.getCreatedAt().toInstant(), 'HH:mm MM-dd-yyyy')}">Created at</p>-->
+        <p><span th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
     </div>
 </section>
 <a th:href="@{/report/{id}(id=${journal.id})}">Report Abusive Content </a>
