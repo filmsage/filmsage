@@ -12,8 +12,9 @@ body{
 }
 
 #logo{
-    height: 20%;
-    width: 20%;
+    height: 50%;
+    max-width: 70px;
+    /*width: 20%;*/
     padding-right: .66rem;
 }
 
