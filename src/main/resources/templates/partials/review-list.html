@@ -8,8 +8,8 @@
                 review title
             </a>
         </h2>
-        <p th:text="${review.getUserContent().getUser().getUsername()}">
+        <a th:text="${review.getUserContent().getUser().getUsername()}" th:href="@{/profile/{userId}(userId=${review.getUserContent().id})}">
             Posted by user
-        </p>
+        </a>
     </div>
 </section>

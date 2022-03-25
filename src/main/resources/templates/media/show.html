@@ -32,13 +32,12 @@
         <div class="col-12 col-md-6">
             <h2>Reviews</h2>
             <br/>
-<!--        TODO: display recent reviews for this movie on the page instead of just this link to all -->
             <a class="btn btn-primary btn-block" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a Review!</a>
             <p><a th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show user reviews</a></p>
             <th:block th:replace="partials/review-list :: review-list(reviews=${reviews})"></th:block>
         </div>
         <div class="col-12 col-md-6">
-            <h2>On Watchlists</h2>
+            <h2>Watchlists</h2>
             <br/>
             <div class="dropdown">
                 <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="watchlist-dropdown-button"
@@ -46,13 +45,21 @@
                     Add to watch list...
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" th:each="watchlist: ${watchlists}"
+                    <a class="dropdown-item" th:each="watchlist: ${userWatchlists}"
                       th:href="@{/watchlist/{id}/add(id=${watchlist.id},imdb=${movie.imdbID})}"
                       th:text="${watchlist.title}">Watchlist title</a>
                     <a class="dropdown-item" th:href="@{/watchlist/create(imdb=${movie.imdbID})}">
                         A new watchlist
                     </a>
                 </div>
+            </div>
+            <div th:each= "watchlist : ${watchlists}">
+                <h3>
+                    <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
+                        Watchlist title
+                    </a>
+                </h3>
+                <p><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="${watchlist.getUserContent().getUser().getUsername()}"></a></p>
             </div>
         </div>
 </section>
