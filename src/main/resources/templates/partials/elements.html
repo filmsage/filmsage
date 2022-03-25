@@ -55,20 +55,19 @@
                 </form>
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item">
-                <form th:action="@{/logout}" th:method="post">
-                    <button class="btn-link btn">Logout</button>
-                </form>
+                <a class="nav-link" th:href="@{/logout}">
+                    Logout
+                </a>
             </li>
             <li  sec:authorize="!isAuthenticated()" class="nav-item">
                 <a class="nav-link" href="/login">
-<!--                    <i class="fa-solid fa-right-to-bracket"></i>-->
                     Login
                 </a>
             </li>
             <li sec:authorize="isAnonymous()" class="nav-item">
                 <a class="nav-link" href="/register">
-<!--                    <i class="fa-solid fa-registered"></i>-->
-                    Register</a>
+                    Register
+                </a>
             </li>
         </ul>
     </div>
