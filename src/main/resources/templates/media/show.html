@@ -6,10 +6,10 @@
 
 <section class="container" id="content-area">
     <div class="row">
-        <div class="col-12 col-md-3">
-            <img class="img-fluid d-block mx-auto mt-3" th:src="${movie.poster}" alt="Movie poster"/>
+        <div class="col-12 col-lg-3">
+            <img class="img-fluid d-block mx-auto my-3" th:src="${movie.poster}" alt="Movie poster"/>
         </div>
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-lg-9">
             <h2 class="" th:text="${movie.title}"></h2>
             <h3 class="" th:text="${movie.year}"></h3>
             <p class="" th:text="${movie.plot}"></p>
@@ -28,7 +28,7 @@
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-none d-md-flex">
         <div class="col-12 col-md-6">
             <h2>Reviews</h2>
             <br/>
@@ -62,6 +62,49 @@
                 <p><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="${watchlist.getUserContent().getUser().getUsername()}"></a></p>
             </div>
         </div>
+    </div>
+    <div class="row d-block d-md-none">
+        <br/>
+        <ul class="nav nav-pills nav-fill my-2" role="tablist" id="mobile-tabs-nav">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" href="#reviews" id="reviews-tab" data-toggle="tab" role="tab" aria-controls="reviews" aria-selected="true">Reviews</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#watchlists" id="watchlists-tab" data-toggle="tab" role="tab" aria-controls="reviews" aria-selected="false">Watchlists</a>
+            </li>
+        </ul>
+        <div class="tab-content my-2" id="mobile-tabs-content">
+            <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                <a class="btn btn-primary btn-block" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a Review!</a>
+                <p><a th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show user reviews</a></p>
+                <th:block th:replace="partials/review-list :: review-list(reviews=${reviews})"></th:block>
+            </div>
+            <div class="tab-pane fade" id="watchlists" role="tabpanel" aria-labelledby="watchlists-tab">
+                <div class="dropdown">
+                    <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="mobile-watchlist-dropdown-button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Add to watch list...
+                    </button>
+                    <div class="dropdown-menu w-100">
+                        <a class="dropdown-item" th:each="watchlist: ${userWatchlists}"
+                           th:href="@{/watchlist/{id}/add(id=${watchlist.id},imdb=${movie.imdbID})}"
+                           th:text="${watchlist.title}">Watchlist title</a>
+                        <a class="dropdown-item" th:href="@{/watchlist/create(imdb=${movie.imdbID})}">
+                            A new watchlist
+                        </a>
+                    </div>
+                </div>
+                <div th:each= "watchlist : ${watchlists}">
+                    <h3>
+                        <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
+                            Watchlist title
+                        </a>
+                    </h3>
+                    <p><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="${watchlist.getUserContent().getUser().getUsername()}"></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <th:block th:replace="partials/elements :: footer"></th:block>
