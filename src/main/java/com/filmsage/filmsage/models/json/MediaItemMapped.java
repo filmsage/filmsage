@@ -10,7 +10,7 @@ public class MediaItemMapped {
     @JsonProperty("Title")
     private String title;
     @JsonProperty("Year")
-    private int year;
+    private String year;
     @JsonProperty("Released")
     private String released;
     @JsonProperty("Runtime")
@@ -47,10 +47,6 @@ public class MediaItemMapped {
     private String DVD;
     @JsonProperty("BoxOffice")
     private String boxOffice;
-//    @JsonProperty("Production")
-//    private String production;
-//    @JsonProperty("Website")
-//    private String website;
 
     public String getTitle() {
         return title;
@@ -60,11 +56,11 @@ public class MediaItemMapped {
         this.title = title;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -212,19 +208,4 @@ public class MediaItemMapped {
         this.boxOffice = boxOffice;
     }
 
-//    public String getProduction() {
-//        return production;
-//    }
-//
-//    public void setProduction(String production) {
-//        this.production = production;
-//    }
-//
-//    public String getWebsite() {
-//        return website;
-//    }
-//
-//    public void setWebsite(String website) {
-//        this.website = website;
-//    }
 }

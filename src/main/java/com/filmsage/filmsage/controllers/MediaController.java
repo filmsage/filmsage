@@ -37,6 +37,9 @@ public class MediaController {
 
     @RequestMapping(value = "/search", params = "q")
     public String searchMovies(@RequestParam("q") String query, Model model) {
+        if (query.isBlank()) {
+            return "search/search";
+        }
         List<MediaSearchMapped> movies = omdbRequester.searchMovie(query);
         model.addAttribute("movies", movies);
         return "search/results";
@@ -46,15 +49,16 @@ public class MediaController {
     public String getMoviesById(@PathVariable String imdb, Model model, Principal principal) {
         MediaItemMapped movie = omdbRequester.getMovie(imdb);
         List<Review> reviews = reviewDao.findAllByMediaItemImdb(imdb);
+        List<Watchlist> watchlists =watchlistDao.findAllByMediaItems_Imdb(imdb);
         model.addAttribute("movie", movie);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("watchlists", watchlists);
         if (principal != null) {
-            List<Watchlist> watchlists = watchlistDao.findWatchlistsByUserContent(userContentService.getUserContent());
-            model.addAttribute("watchlists", watchlists);
+            List<Watchlist> userWatchlists = watchlistDao.findWatchlistsByUserContent(userContentService.getUserContent());
+            model.addAttribute("userWatchlists", userWatchlists);
         }
 
         return "media/show";
     }
-
 
 }

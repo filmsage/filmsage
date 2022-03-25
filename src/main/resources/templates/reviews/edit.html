@@ -6,9 +6,9 @@
 
 <section class="container" id="content-area">
     <h1>Editing Review</h1>
-    <form th:action="@{/reviews/edit(imdb=${movie.imdb})}" th:method="post" th:object="${review}">
+    <form th:action="@{/reviews/edit(imdb=${movie.imdb}, review-id=${review.id})}" th:method="post" th:object="${review}">
         <input th:field="${user.id}" type="hidden"/>
-        <input th:field="*{id}" type="hidden"/>
+        <input th:field="${review.id}" name="review-id" type="hidden"/>
         <div class="form-group">
             <label>Review Title</label>
             <input th:field="*{title}" class="field" required>
