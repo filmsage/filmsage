@@ -10,50 +10,64 @@
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
-
-    <a class="navbar-brand" href="/"><img th:src="@{~/img/filmsage-logo.png}" alt="film-sage logo" id="logo" class="img-Fluid"></a>
+    <a class="navbar-brand" href="/">
+        <img th:src="@{~/img/filmsage-logo.png}" alt="film-sage logo" id="logo">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<!--        <div class="container col-4 text-center">-->
-        <div sec:authorize="isAuthenticated()">
-            <a th:href="@{/profile}">
-                <i class="fa-solid fa-user"><small> Profile</small></i>
-            </a>
-        </div>
-        <div class="mx-2">
-            <a class="mx-2" th:href="@{/journals}" alt="journals"><i class="fa-solid fa-book"><small> Journals</small></i></a>
-
-            <a class="mx-2" th:href="@{/reviews/index}" alt="reviews"><i class="fa-solid fa-list-ul"><small> Reviews</small></i></a>
-
-            <a class="mx-2" th:href="@{/about-us}" alt="about-us"><i class="fa-solid fa-address-card"><small> About Us</small></i></a>
-        </div>
-    </div>
-
-    <div class="col col-4">
-        <a class="navbar-brand" href="/"><img th:src="@{/static/images/filmsage-logo.png}" alt="film-sage logo" class="img-Fluid"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div>
-        <ul class="navbar-nav mr-2 ml-auto" >
-            <form class="form-inline my-2 my-lg-0 mr-auto" th:action="@{/search}" th:method="GET">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <li sec:authorize="isAuthenticated()" >
-                <form th:action="@{/logout}" th:method="post">
-                    <button class="btn-link btn">Logout</button>
+        <ul class="navbar-nav w-100">
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:href="@{/profile}">
+                    <i class="fa-solid fa-user"></i>
+                    Profile
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/journals}" alt="journals">
+                    <i class="fa-solid fa-book"></i>
+                    Journals
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/reviews/index}" alt="reviews">
+                    <i class="fa-solid fa-newspaper"></i>
+                    Reviews
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/watchlist}" alt="watchlist">
+                    <i class="fa-solid fa-list-ul"></i>
+                    Watchlist
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/about-us}" alt="about-us">
+                    <i class="fa-solid fa-address-card"></i>
+                    About Us
+                </a>
+            </li>
+            <li class="nav-item ml-lg-auto mr-lg-0">
+                <form class="form-inline" th:action="@{/search}" th:method="GET">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="q">
+                    <button class="btn btn-outline-danger" type="submit">Search</button>
                 </form>
             </li>
-            <li  sec:authorize="!isAuthenticated()" class="nav-item active">
-                <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <li sec:authorize="isAuthenticated()" class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">
+                    Logout
+                </a>
             </li>
-            <li sec:authorize="isAnonymous()" class="nav-item active">
-                <a class="nav-link" href="/register"><i class="fa-solid fa-registered"></i> Register</a>
+            <li  sec:authorize="!isAuthenticated()" class="nav-item">
+                <a class="nav-link" href="/login">
+                    Login
+                </a>
+            </li>
+            <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" href="/register">
+                    Register
+                </a>
             </li>
         </ul>
     </div>
