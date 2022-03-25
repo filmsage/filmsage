@@ -37,10 +37,15 @@ public class WatchlistController {
     public String viewWatchlists(Model model, @RequestParam(required = false) String user, @RequestParam(required = false) String imdb) {
         if (user != null && imdb == null) {
             model.addAttribute("watchlists", watchlistDao.findWatchlistsByUserContent_Id(Long.parseLong(user)));
+            model.addAttribute("user", userContentDao.getById(Long.parseLong(user)));
+            model.addAttribute("for", "user");
         } else if (user == null && imdb != null) {
             model.addAttribute("watchlists", watchlistDao.findAllByMediaItems_Imdb(imdb));
+            model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
+            model.addAttribute("for", "movie");
         } else if (user == null && imdb == null) {
             model.addAttribute("watchlists", watchlistDao.findAll());
+            model.addAttribute("for", "all");
         }
         return "watchlist/index";
     }

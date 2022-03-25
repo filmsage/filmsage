@@ -5,7 +5,11 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <h1>Watchlists</h1>
+    <div th:switch="${for}">
+        <h1 th:case="'movie'">All watchlists featuring <a th:href="@{/movies/{imdb}(imdb=${movie.imdb})}" th:text="${movie.title}">Movie</a></h1>
+        <h1 th:case="'user'">All watchlists created by <a th:href="@{/profile/{id}(id=${user.getId()})}" th:text="${user.getUser().getUsername()}">User</a></h1>
+        <h1 th:case="'all'">All watchlists</h1>
+    </div>
     <div th:each= "watchlist : ${watchlists}">
         <h3>
             <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
