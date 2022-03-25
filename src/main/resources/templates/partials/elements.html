@@ -11,6 +11,11 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
 
+    <a class="navbar-brand" href="/"><img th:src="@{~/img/filmsage-logo.png}" alt="film-sage logo" id="logo" class="img-Fluid"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <!--        <div class="container col-4 text-center">-->
         <div sec:authorize="isAuthenticated()">
@@ -28,7 +33,7 @@
     </div>
 
     <div class="col col-4">
-        <a class="navbar-brand" href="/"><img th:src="@{~/img/filmSageLogo.png}" alt="film-sage logo" id="logo" class="img-Fluid">FilmSage</a>
+        <a class="navbar-brand" href="/"><img th:src="@{/static/images/filmsage-logo.png}" alt="film-sage logo" class="img-Fluid"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
