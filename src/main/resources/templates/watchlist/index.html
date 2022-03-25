@@ -12,7 +12,7 @@
                 Watchlist title
             </a>
         </h3>
-        <p th:text="${watchlist.getUserContent().getUser().getUsername()}"></p>
+        <p><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="${watchlist.getUserContent().getUser().getUsername()}"></a></p>
     </div>
 
 </section>
