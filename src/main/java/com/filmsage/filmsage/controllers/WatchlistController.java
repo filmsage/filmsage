@@ -34,10 +34,12 @@ public class WatchlistController {
     }
 
     @GetMapping("/watchlist")
-    public String viewWatchlists(Model model, @RequestParam(required = false) String user) {
-        if (user != null) {
+    public String viewWatchlists(Model model, @RequestParam(required = false) String user, @RequestParam(required = false) String imdb) {
+        if (user != null && imdb == null) {
             model.addAttribute("watchlists", watchlistDao.findWatchlistsByUserContent_Id(Long.parseLong(user)));
-        } else {
+        } else if (user == null && imdb != null) {
+            model.addAttribute("watchlists", watchlistDao.findAllByMediaItems_Imdb(imdb));
+        } else if (user == null && imdb == null) {
             model.addAttribute("watchlists", watchlistDao.findAll());
         }
         return "watchlist/index";
