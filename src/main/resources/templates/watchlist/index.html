@@ -5,7 +5,7 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <h1>Collections</h1>
+    <h1>Watchlists</h1>
     <div th:each= "watchlist : ${watchlists}">
         <h3>
             <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
