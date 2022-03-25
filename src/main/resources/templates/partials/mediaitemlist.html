@@ -4,7 +4,7 @@
 <div th:fragment="mediaitemslist(listofmovies)">
     <section class="container-fluid">
         <div class="row">
-            <div class="col-6 col-md-4 col-lg-3 my-2 px-1" th:each="movie : ${listofmovies}">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 px-1" th:each="movie : ${listofmovies}">
                 <div class="card h-100" style="background-color: whitesmoke !important;">
                     <a th:href="@{/movies/{imdb}(imdb=${movie.imdb})}">
                         <img class="card-img-top" th:src="${movie.poster}" th:alt="${'Poster for ' + movie.title}"/>
