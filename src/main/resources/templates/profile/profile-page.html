@@ -18,21 +18,46 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <section class="container">
+        <h2>Details</h2>
         <ul class="list-group">
-            <li class="list-group-item bg-transparent border-0">First Name: <span th:text="${usercontent.firstName}"></span></li>
-            <li class="list-group-item bg-transparent border-0">Last Name: <span th:text="${usercontent.lastName}"></span></li>
-            <li class="list-group-item bg-transparent border-0">UserName: <span th:text="${user.getUsername()}"></span></li>
+            <li class="list-group-item bg-transparent border-0">First Name: <span
+                    th:text="${usercontent.firstName}"></span></li>
+            <li class="list-group-item bg-transparent border-0">Last Name: <span
+                    th:text="${usercontent.lastName}"></span></li>
+            <li class="list-group-item bg-transparent border-0">UserName: <span th:text="${user.getUsername()}"></span>
+            </li>
             <li class="list-group-item bg-transparent border-0">Email: <span th:text="${user.getEmail()}"></span></li>
-            <li class="list-group-item bg-transparent border-0">Country: <span th:text="${usercontent.getCountry()}"></span></li>
-            <li class="list-group-item bg-transparent border-0"><div class="likes">
-                <p>
-                    <i class="fa fa-heart"></i>
-                    <span th:text="${likes}"></span>
-                </p>
-            </div></li>
+            <li class="list-group-item bg-transparent border-0">Country: <span
+                    th:text="${usercontent.getCountry()}"></span></li>
         </ul>
-    </div>
+    </section>
+    <section class="container">
+        <h2>Stats</h2>
+        <ul class="list-group">
+            <!--                total reviews created -->
+            <li class="list-group-item bg-transparent border-0">
+                <span th:text="${reviews.size()}"></span> reviews written
+            </li>
+            <!--                total watchlists created -->
+            <li class="list-group-item bg-transparent border-0">
+                <span th:text="${usercontent.getCollections().size()}"></span> watchlists created
+            </li>
+            <!--                total journals written -->
+            <li class="list-group-item bg-transparent border-0">
+                <span th:text="${usercontent.getJournals().size()}"></span> journals penned
+            </li>
+            <!--                all likes received -->
+            <li class="list-group-item bg-transparent border-0">
+                <div class="likes">
+                    <p>
+                        <i class="fa fa-heart"></i>
+                        <span th:text="${likes}"></span> likes received
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </section>
     <section class="container">
         <h3>Reviews</h3>
         <div th:each="review : ${reviews}">
@@ -44,14 +69,8 @@
             <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
         </div>
 
-        <div class="likes">
-            <p>
-                <i class="fa fa-heart"></i>
-                <span th:text="${likes}"></span>
-            </p>
-        </div>
     </section>
-    </section>
-    <th:block th:replace="partials/elements :: footer"></th:block>
+</section>
+<th:block th:replace="partials/elements :: footer"></th:block>
 </body>
 </html>
