@@ -76,6 +76,9 @@
             <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
         </div>
         <h3>Journals</h3>
+        <div th:each="journal : ${usercontent.getJournals()}">
+            <a th:text="${journal.getTitle()}" th:href="@{/journals(id=${journal.id})}">title</a>
+        </div>
     </section>
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
