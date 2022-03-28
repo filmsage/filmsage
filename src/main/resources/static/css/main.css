@@ -37,19 +37,26 @@ a {
     color: #8336A4
 }
 
-
-
-
-/*.navbar{*/
-/*    background-color: black;*/
-/*}*/
-
-/*a:hover{*/
-/*    background-color: red;*/
-/*}*/
+a:hover{
+    color: #666666;
+    text-decoration: none;
+}
 
 #error-page{
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
+.card-title{
+    color: #000000;
+    font-size: 30px;
+}
+
+#movie-card{
+    color: #3d4145;
+    border: 2px solid;
+}
+
+
+
