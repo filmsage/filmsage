@@ -4,7 +4,17 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
+
 <section class="container" id="content-area">
+
+    <div class="text-right">
+        <p class="ml-auto mr-0">
+            <a class="btn btn-danger"
+               th:href="@{/reviews/index(user=${review.getUserContent().getId()})}"
+               th:text="${'Back to ' + review.getUserContent().getUser().getUsername()}"></a>
+        </p>
+    </div>
+
     <h1 th:text="${review.title}"></h1>
     <h2><a th:href="@{/profile/{userId}(userId=${review.getUserContent().id})}" th:text="'Posted by: ' + ${review.getUserContent().getUser().username}"></a></h2>
     <h3><a th:href="@{/movies/{imdb}(imdb=${movie.getImdb()})}" th:text="'Reviewing ' + ${movie.getTitle()}">Movie</a></h3>
@@ -14,6 +24,7 @@
     <p>
         <a th:href="@{/reviews/index(imdb=${movie.getImdb()})}" th:text="${'Back to ' + movie.title + ' reviews'}"></a>
     </p>
+
 
     <div class="likes container p-0 m-0">
         <p><i class="fa fa-thumbs-up"
@@ -31,6 +42,8 @@
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
     </div>
+
+
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
 <script th:src="@{/js/like-button.js}"></script>
