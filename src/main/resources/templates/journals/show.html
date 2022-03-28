@@ -32,7 +32,7 @@
                 Creator username
             </a>
         </p>
-
+        <button class="btn btn-danger" id="report-abuse" data-type="journal" th:data-id="${journal.id}" >Report Abusive Content </button>
         <a class="btn btn-danger" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
         <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
         <p><span th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
@@ -43,5 +43,6 @@
     <!--             th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a></p>-->
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
+<script th:src="@{/js/report-abuse-button.js}"></script>
 </body>
 </html>

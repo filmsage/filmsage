@@ -7,6 +7,7 @@ import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
 import com.filmsage.filmsage.repositories.WatchlistRepository;
 
+import org.springframework.security.access.annotation.Secured;
 import com.filmsage.filmsage.services.UserContentService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -60,5 +61,13 @@ public class UserController {
         return "redirect:/profile/" + user.getId();
 
     }
+
+//    @Secured({"ROLE_ADMIN"})
+//    @PostMapping("/delete-user")
+//    public String deleteUser(){
+//
+//        System.out.println("**************************************");
+//        return "Deleted User";
+//    }
 
 }

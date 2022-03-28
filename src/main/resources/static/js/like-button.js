@@ -5,4 +5,5 @@ $(document).ready(() => {
     const result = await response.text();
     $('#like-count').text(result);
   });
+
 });

@@ -31,10 +31,14 @@
             </a>
         </div>
     </div>
+  
+    <button class="btn btn-danger" id="report-abuse" data-type="watchlist" th:data-id="${watchlist.id}" >Report Abusive Content </button>
     <div class="d-flex">
         <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
     </div>
+
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
+<script th:src="@{/js/report-abuse-button.js}"></script>
 </body>
 </html>

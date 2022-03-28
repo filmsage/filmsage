@@ -32,7 +32,8 @@
               th:attr="id=${#authorization.expression('isAuthenticated()') ? 'like-button' : ''}"
         ></i>
             <span id="like-count" th:text="${likes}"></span></p>
-        <a th:href="@{/report/{id}(id=${review.id})}">Report Abusive Content </a>
+
+        <button class="btn btn-danger" id="report-abuse" data-type="review" th:data-id="${review.id}" >Report Abusive Content </button>
     </div>
   
     <div class="author-controls container d-flex p-0 m-0">
@@ -47,5 +48,6 @@
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
 <script th:src="@{/js/like-button.js}"></script>
+<script th:src="@{/js/report-abuse-button.js}"></script>
 </body>
 </html>
