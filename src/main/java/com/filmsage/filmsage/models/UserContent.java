@@ -111,11 +111,11 @@ public class UserContent {
         this.reviews = reviews;
     }
 
-    public List<Watchlist> getCollections() {
+    public List<Watchlist> getWatchlists() {
         return watchlists;
     }
 
-    public void setCollections(List<Watchlist> watchlists) {
+    public void setWatchlists(List<Watchlist> watchlists) {
         this.watchlists = watchlists;
     }
 

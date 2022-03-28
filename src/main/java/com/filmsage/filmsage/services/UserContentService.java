@@ -2,12 +2,15 @@ package com.filmsage.filmsage.services;
 
 import com.filmsage.filmsage.models.User;
 import com.filmsage.filmsage.models.UserContent;
+import com.filmsage.filmsage.models.auth.Role;
 import com.filmsage.filmsage.models.auth.UserPrinciple;
 import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.UserRepository;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class UserContentService {
@@ -37,5 +40,9 @@ public class UserContentService {
 
     public UserContent save(UserContent user) {
         return userContentDao.save(user);
+    }
+
+    public boolean isAdmin() {
+        return getUser().getRoles().stream().map(Role::getName).collect(Collectors.toList()).contains("ROLE_ADMIN");
     }
 }

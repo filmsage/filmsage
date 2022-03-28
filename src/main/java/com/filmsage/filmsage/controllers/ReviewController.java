@@ -2,9 +2,6 @@ package com.filmsage.filmsage.controllers;
 
 import com.filmsage.filmsage.models.*;
 import com.filmsage.filmsage.models.auth.Role;
-import com.filmsage.filmsage.models.auth.UserPrinciple;
-import com.filmsage.filmsage.models.json.MediaItemMapped;
-import com.filmsage.filmsage.repositories.MediaItemRepository;
 import com.filmsage.filmsage.repositories.ReviewRepository;
 import com.filmsage.filmsage.repositories.UserContentRepository;
 import com.filmsage.filmsage.repositories.auth.RoleRepository;
@@ -13,12 +10,12 @@ import com.filmsage.filmsage.services.MediaItemService;
 import com.filmsage.filmsage.services.OMDBRequester;
 import com.filmsage.filmsage.services.UserContentService;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.stream.Collectors;
 
 @Controller
 public class ReviewController {
@@ -45,17 +42,6 @@ public class ReviewController {
         this.likesService = likesService;
         this.roleDao = roleDao;
     }
-
-//    @RequestMapping(value = "/movies/{imdb}/reviews/show",
-//            method = RequestMethod.GET,
-//            params = "r")
-//    public String showReview(Model model, @PathVariable String imdb, @RequestParam long r) {
-//        Review review = reviewDao.getById(r);
-//        model.addAttribute("review", review);
-//        model.addAttribute("movie", omdbRequester.getMovie(imdb));
-//        model.addAttribute("likes", review.getUserLikes().size());
-//        return "media/reviews/review";
-//    }
 
     @GetMapping("/reviews/show")
     public String showReview(Model model,
@@ -124,24 +110,32 @@ public class ReviewController {
     public String showEditForm(Model model, @RequestParam String imdb, @RequestParam long r) {
         // get the UserContent object which links to all that user's user-created content
         UserContent userContent = userContentService.getUserContent();
-        model.addAttribute("user", userContent);
-        model.addAttribute("review", reviewDao.getById(r));
-        model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
-        return "reviews/edit";
+        Review review = reviewDao.getById(r);
+        if (userContentService.getUserContent().getId() == review.getUserContent().getId() ||
+                userContentService.isAdmin()) {
+            model.addAttribute("user", userContent);
+            model.addAttribute("review", review);
+            model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
+            return "reviews/edit";
+        } else {
+            return "redirect:/reviews/index";
+        }
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/reviews/edit")
-    public String submitEdit(@ModelAttribute Review review, @RequestParam String imdb){
+    public String submitEdit(@ModelAttribute Review review, @RequestParam String imdb, @RequestParam(name = "review-id") long id){
         // check if record exists already and prepare it for review
         MediaItem mediaItem = mediaItemService.getTempMediaItemRecord(imdb);
+        Review existingReview = reviewDao.getById(id);
         // set the userContent field in the Review
-        review.setUserContent(userContentService.getUserContent());
-        review.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
-        review.setMediaItem(mediaItem); // associate MediaItem with review
+        existingReview.setCreatedAt(new Timestamp(System.currentTimeMillis())); // timestamp review
+        existingReview.setTitle(review.getTitle());
+        existingReview.setBody(review.getBody());
+        existingReview.setRating(review.getRating());
         // persist the review (ie store it in the database)
-        reviewDao.save(review);
-        return String.format("redirect:/reviews/show?imdb=%s&r=%d", imdb, review.getId());
+        reviewDao.save(existingReview);
+        return String.format("redirect:/reviews/show?imdb=%s&r=%d", imdb, existingReview.getId());
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -150,8 +144,7 @@ public class ReviewController {
         Review review = reviewDao.getById(id);
         // check if record exists already and prepare it for review
         if (userContentService.getUserContent().getId() == review.getUserContent().getId() ||
-                userContentService.getUser().getRoles().contains(roleDao.findByName("ROLE_ADMIN"))) {
-            System.out.println("User matches or role is admin");
+                userContentService.isAdmin()) {
             for(UserContent usersWhoLike : review.getUserLikes()) {
                 usersWhoLike.getLikedReviews().remove(review);
                 review.getUserLikes().remove(usersWhoLike);
@@ -160,12 +153,5 @@ public class ReviewController {
         }
         return String.format("redirect:/reviews/index?user=%s", review.getUserContent().getId());
     }
-
-//    @GetMapping("/reviews/index")
-//    public String  reviewsIndex(Model model){
-//        model.addAttribute("reviews", reviewDao.findAll());
-//        return "/media/reviews/review-list";
-//    }
-
 
 }
