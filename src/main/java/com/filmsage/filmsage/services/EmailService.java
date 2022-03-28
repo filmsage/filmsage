@@ -33,4 +33,20 @@ public class EmailService {
             System.err.println(ex.getMessage());
         }
     }
+
+    public void prepareAbuse(String url){
+        String recipientAddress = "team.filmsage@gmail.com";
+        String subject = "Flagged Content - Abuse";
+        String reportedContentUrl = url;
+        String from = "donotreply@filmsage.net";
+
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(recipientAddress);
+        email.setFrom(from);
+        email.setSubject(subject);
+        email.setText(reportedContentUrl);
+        emailSender.send(email);
+    }
+
+
 }
