@@ -10,7 +10,7 @@
             <div class="col">
                 <h1><span th:text="${user.getUsername()}"> </span> Profile</h1>
             </div>
-            <div class="col text-right">
+            <div th:if="${isOwner}" class="col text-right">
                 <a class="btn btn-danger" th:href="@{/profile/{userId}/edit (userId = ${usercontent.getId()})}">Edit
                     Profile</a>
                 <a class="btn btn-danger" th:href="@{/update-password/{id} (id = ${user.getId()})}">Change
