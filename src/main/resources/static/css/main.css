@@ -53,3 +53,17 @@ a {
     margin-left: auto;
     margin-right: auto;
 }
+
+.au-headshots {
+    max-height: 150px;
+    max-width: 150px;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.au-cards {
+    background-color: white;
+    padding: 2rem;
+}
