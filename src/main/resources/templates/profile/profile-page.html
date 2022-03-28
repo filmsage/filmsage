@@ -11,9 +11,9 @@
                 <h1><span th:text="${user.getUsername()}"> </span> Profile</h1>
             </div>
             <div th:if="${isOwner}" class="col text-right">
-                <a class="btn btn-danger" th:href="@{/profile/{userId}/edit (userId = ${usercontent.getId()})}">Edit
+                <a class="btn btn-danger" th:href="@{/profile/{userId}/edit(userId = ${usercontent.getId()})}">Edit
                     Profile</a>
-                <a class="btn btn-danger" th:href="@{/update-password/{id} (id = ${user.getId()})}">Change
+                <a class="btn btn-danger" th:href="@{/update-password/{id}(id = ${user.getId()})}">Change
                     Password</a>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     th:text="${usercontent.firstName}"></span></li>
             <li class="list-group-item bg-transparent border-0">Last Name: <span
                     th:text="${usercontent.lastName}"></span></li>
-            <li class="list-group-item bg-transparent border-0">UserName: <span th:text="${user.getUsername()}"></span>
+            <li class="list-group-item bg-transparent border-0">Username: <span th:text="${user.getUsername()}"></span>
             </li>
             <li class="list-group-item bg-transparent border-0">Email: <span th:text="${user.getEmail()}"></span></li>
             <li class="list-group-item bg-transparent border-0">Country: <span

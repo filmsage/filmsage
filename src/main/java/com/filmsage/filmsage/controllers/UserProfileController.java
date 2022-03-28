@@ -70,7 +70,6 @@ public class UserProfileController {
         } else {
             return "redirect:/profile/" + userId;
         }
-//       model.addAttribute("user", getUserContent());
     }
 
     @PostMapping("/profile/{id}/edit")
