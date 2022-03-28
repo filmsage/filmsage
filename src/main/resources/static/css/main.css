@@ -44,9 +44,10 @@ a {
 /*    background-color: black;*/
 /*}*/
 
-/*a:hover{*/
-/*    background-color: red;*/
-/*}*/
+a:hover{
+    color: red;
+    text-decoration: none;
+}
 
 #error-page{
     display: block;
@@ -56,12 +57,16 @@ a {
 
 .card-title{
     color: #000000;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 #movie-card{
     color: #3d4145;
     border: 2px solid;
 }
+
+/*.card-text {*/
+/*    text-shadow: 1px 1px 2px grey;*/
+/*}*/
 
 
