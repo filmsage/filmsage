@@ -53,8 +53,6 @@ public class UserProfileController {
     @GetMapping("/profile/{userId}/edit")
     public String getUpdateProfileForm(Model model, @PathVariable String userId) {
         long id = Long.parseLong(userId);
-//       model.addAttribute("firstName", getUserContent().getFirstName());
-//       model.addAttribute("lastName",getUserContent());
        model.addAttribute("user", getUserContent());
        return "profile/update-profile";
     }
@@ -69,19 +67,6 @@ public class UserProfileController {
         userContentDao.save(existingUser);
         return "redirect:/profile/" + id;
     }
-//
-//    @PostMapping("/profile")
-//    public String submitUpdateProfileForm(@ModelAttribute ("update-Profile"), Model model) {
-//        if()
-//
-//    }
-//@PostMapping("/profile/{id}/edit")
-//public String submitUpdateProfile(@ModelAttribute Profile profile, @PathVariable long id) {
-//    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//    Profile.setUserContent(user.getUserContent());
-//    userContentDao.save(profile);
-//    return "redirect:/profile/";
-//}
 
     private UserContent getUserContent() {
         UserPrinciple principle = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

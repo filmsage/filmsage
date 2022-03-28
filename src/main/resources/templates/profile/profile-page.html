@@ -71,7 +71,7 @@
             </p>
             <p class="mt-1 mb-2">Rating: <span th:text="${review.rating}"></span> / 5</p>
         </div>
-        <h3>Watchlist</h3>
+        <h3>Watchlists</h3>
         <div th:each="collection : ${usercontent.getCollections()}">
             <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
         </div>

@@ -37,19 +37,14 @@ public class UserController {
     }
 
     @PostMapping("/update-password")
-//    @PreAuthorize("hasRole('READ_PRIVILEGE')")
     public String updatePassword(@ModelAttribute("userPassword") UpdatePasswordDTO updatePasswordDTO ){
         User user = userDao.getById(updatePasswordDTO.getId());
         String hash = user.getPassword();
-        System.out.println("hash password");
         if( passwordEncoder.matches(updatePasswordDTO.getOldpassword(), user.getPassword())){
-            System.out.println("old password + form password");
             if (updatePasswordDTO.getPassword().equals(updatePasswordDTO.getConfirmpassword())) {
-                System.out.println("password and confirmed password are equal");
                 String newHash = passwordEncoder.encode(updatePasswordDTO.getPassword());
                 user.setPassword(newHash);
                 userDao.save(user);
-                System.out.println("updated user");
             }
         }
         return "redirect:/profile/" + updatePasswordDTO.getId();
