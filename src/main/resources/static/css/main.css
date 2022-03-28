@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,500;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+body{
+    /*background-color: #8b0000;*/
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(140,17,8,1) 52%, rgba(252,176,69,1) 100%) !important;
+}
+
+#content-area{
+    background-color: rgba(240, 250, 250, .75);
+    padding: 2rem;
+}
+
+#logo{
+    height: 50%;
+    max-width: 130px;
+    padding-right: .66rem;
+}
+
+h1,h2,h3,h4,h5{
+    font-family: "Ubuntu", "Courier New", monospace !important;
+}
+
+h1 {
+    font-weight: 700 !important;
+    color: goldenrod;
+    font-size: 60px !important;
+}
+
+h2 {
+    font-weight: bold !important;
+   // color: #fff;
+    font-size: 24px !important;
+}
+
+a {
+    color: #8336A4
+}
+
+a:hover{
+    color: #666666;
+    text-decoration: none;
+}
+
+#error-page{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.au-headshots {
+    max-height: 150px;
+    max-width: 150px;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.au-cards {
+    background-color: white;
+    padding: 2rem;
+}
+
+.card-title{
+    color: #000000;
+    font-size: 30px;
+}
+
+#movie-card{
+    color: #3d4145;
+    border: 2px solid;
+}

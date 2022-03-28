@@ -3,7 +3,7 @@
 <head th:replace="partials/elements :: head(title='Editing Journal')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
-<section class="container">
+<section class="container" id="content-area">
     <form th:action="@{'/journals/' + ${journal.id} + '/edit'}" th:method="POST" th:object="${journal}">
         <div class="form-group">
             <label for="title">Title</label>
@@ -14,7 +14,7 @@
             <label for="body">Body</label>
             <textarea class="form-control" id="body" rows="3" name="body" th:field="*{body}"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-danger">Submit</button>
     </form>
 </section>
 <th:block th:replace="partials/bootstrap :: scripts"></th:block>

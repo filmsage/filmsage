@@ -1,5 +1,6 @@
 package com.filmsage.filmsage.models;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,8 +17,8 @@ public class MediaItem {
     @Column(nullable = false, length = 255, name = "title")
     private String title;
 
-    @Column(name = "year")
-    private int year;
+    @Column(length = 63, name = "year")
+    private String year;
 
     @Column(length = 100, name = "genre")
     private String genre;
@@ -26,15 +27,14 @@ public class MediaItem {
     private String poster;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mediaItem")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "mediaItems")
-    private List<Watchlist> watchlists;
-
+    private List<Watchlist> watchlists = new ArrayList<>();
 
     public MediaItem() {}
 
-    public MediaItem(String imdb, String title, int year, String genre, String poster) {
+    public MediaItem(String imdb, String title, String year, String genre, String poster) {
         this.imdb = imdb;
         this.title = title;
         this.year = year;
@@ -42,7 +42,7 @@ public class MediaItem {
         this.poster = poster;
     }
 
-    public MediaItem(Long id, String imdb, String title, int year, String genre, String poster) {
+    public MediaItem(Long id, String imdb, String title, String year, String genre, String poster) {
         this.id = id;
         this.imdb = imdb;
         this.title = title;
@@ -79,11 +79,11 @@ public class MediaItem {
         this.title = title;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

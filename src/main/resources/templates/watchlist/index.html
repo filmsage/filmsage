@@ -4,21 +4,19 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
-    <h1>Collections</h1>
-    <div class="card-body" th:each= "watchlist : ${watchlists}">
+<section class="container" id="content-area">
+    <div th:switch="${for}">
+        <h1 th:case="'movie'">All watchlists featuring <a th:href="@{/movies/{imdb}(imdb=${movie.imdb})}" th:text="${movie.title}">Movie</a></h1>
+        <h1 th:case="'user'">All watchlists created by <a th:href="@{/profile/{id}(id=${user.getId()})}" th:text="${user.getUser().getUsername()}">User</a></h1>
+        <h1 th:case="'all'">All watchlists</h1>
+    </div>
+    <div th:each= "watchlist : ${watchlists}">
         <h3>
             <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
                 Watchlist title
             </a>
         </h3>
-        <p th:text="${watchlist.getUserContent().getUser().getUsername()}"></p>
-
-        <form th:action="@{/watchlist/delete}" th:method="POST">
-            <input name="id" type="hidden" th:value="${watchlist.id}">
-            <p th:text="${watchlist.id}"></p>
-            <button type="submit">Delete</button>
-        </form>
+        <p><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="${watchlist.getUserContent().getUser().getUsername()}"></a></p>
     </div>
 
 </section>

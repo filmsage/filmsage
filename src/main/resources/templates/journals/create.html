@@ -5,7 +5,7 @@
 </head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
-<section class="container">
+<section class="container" id="content-area">
     <form th:action="@{/journals/create}" th:method="POST" th:object="${journal}">
         <div class="form-group">
             <label for="title">Title</label>
@@ -15,7 +15,7 @@
             <label for="title">Body</label>
             <textarea class="form-control" id="body" name="body" th:field="*{body}"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-danger">Submit</button>
     </form>
     <th:block th:replace="partials/elements :: footer"></th:block>
 </section>

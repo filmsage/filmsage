@@ -4,10 +4,10 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <h1>Journal Page</h1>
     <div class="container">
-       <th:block th:replace="partials/content/journals-nav" :: nav/>
+        <th:block th:replace="partials/content/journals-nav" :: nav/>
     </div>
     <div class="container" id="journals-container">
         <div th:each="journal : ${journals}">

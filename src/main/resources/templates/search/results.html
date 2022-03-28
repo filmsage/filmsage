@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<section class="container">
+<section class="container" id="content-area">
     <h1>FilmSage Home</h1>
     <section class="container" id="results">
         <div th:each="movie : ${movies}">

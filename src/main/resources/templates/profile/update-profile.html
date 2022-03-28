@@ -6,22 +6,21 @@
 <section class="container">
     <h1>Profile Update</h1>
 </section>
-<div class="container">
-    <form th:action="@{/profile/{userId}/edit(userId= ${user.id})}" th:method="POST" th:object="${user}">
+<div class="container" id="content-area">
+    <form th:action="@{/profile/{userId}/edit(userId=${user.id})}" th:method="POST" th:object="${user}">
         <div class="form-group">
             <input name="id" type="hidden" th:value="*{id}">
             <label for="first-Name">First Name: </label>
-            <input type="text" class="field" id="first-Name" th:field="*{firstName}" >
+            <input type="text" class="field" id="first-Name" th:field="*{firstName}">
             <br>
             <label for="last-Name">Last Name: </label>
-            <input type="text" class="field" id="last-Name" th:field="*{lastName}" >
+            <input type="text" class="field" id="last-Name" th:field="*{lastName}">
             <br>
             <label for="country">Country: </label>
             <input type="text" id="country" class="field" th:field="*{country}">
-
-            <a th:href="@{/profile/edit}">Edit My Profile </a>
+            <!--            <a th:href="@{/profile/edit}">Edit My Profile </a>-->
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-danger">Submit</button>
     </form>
 </div>
 

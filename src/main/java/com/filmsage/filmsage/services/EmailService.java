@@ -12,8 +12,8 @@ public class EmailService {
 
     public JavaMailSender emailSender;
 
-    @Value("${SPRING_MAIL_FROM}")
-    private String from;
+//    @Value("${SPRING_MAIL_FROM}")
+//    private String from;
 
     public EmailService(JavaMailSender emailSender) {
         this.emailSender = emailSender;
@@ -21,7 +21,7 @@ public class EmailService {
 
     public void prepareAndSend(User user, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom(from);
+        msg.setFrom("registration@filmsage.net");
         msg.setTo(user.getEmail());
         msg.setSubject(subject);
         msg.setText(body);
@@ -33,4 +33,20 @@ public class EmailService {
             System.err.println(ex.getMessage());
         }
     }
+
+    public void prepareAbuse(String url){
+        String recipientAddress = "team.filmsage@gmail.com";
+        String subject = "Flagged Content - Abuse";
+        String reportedContentUrl = url;
+        String from = "donotreply@filmsage.net";
+
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(recipientAddress);
+        email.setFrom(from);
+        email.setSubject(subject);
+        email.setText(reportedContentUrl);
+        emailSender.send(email);
+    }
+
+
 }
