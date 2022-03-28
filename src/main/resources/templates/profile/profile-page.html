@@ -41,7 +41,7 @@
             </li>
             <!--                total watchlists created -->
             <li class="list-group-item bg-transparent border-0">
-                <span th:text="${usercontent.getCollections().size()}"></span> watchlists created
+                <span th:text="${usercontent.getWatchlists().size()}"></span> watchlists created
             </li>
             <!--                total journals written -->
             <li class="list-group-item bg-transparent border-0">
@@ -72,7 +72,7 @@
             <p class="mt-1 mb-2">Rating: <span th:text="${review.rating}"></span> / 5</p>
         </div>
         <h3>Watchlists</h3>
-        <div th:each="collection : ${usercontent.getCollections()}">
+        <div th:each="collection : ${usercontent.getWatchlists()}">
             <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
         </div>
         <h3>Journals</h3>
