@@ -37,15 +37,8 @@ a {
     color: #8336A4
 }
 
-
-
-
-/*.navbar{*/
-/*    background-color: black;*/
-/*}*/
-
 a:hover{
-    color: red;
+    color: #666666;
     text-decoration: none;
 }
 
@@ -65,8 +58,5 @@ a:hover{
     border: 2px solid;
 }
 
-/*.card-text {*/
-/*    text-shadow: 1px 1px 2px grey;*/
-/*}*/
 
 
