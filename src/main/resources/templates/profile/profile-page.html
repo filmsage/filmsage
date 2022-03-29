@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials/elements :: head(title='User Profile')"></head>
+<head th:replace="partials/elements :: head(title=${user.getUsername()} + ' Profile')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 

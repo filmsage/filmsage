@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<head th:replace="partials/elements :: head(title='Search')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
-<h1>Search Page</h1>
 
 <section class="container" id="content-area">
+    <h1>Search Media Database</h1>
     <form th:action="@{/search}" th:method="GET">
         <div class="form-group">
             <label for="search">search</label>
