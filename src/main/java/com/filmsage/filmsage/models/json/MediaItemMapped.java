@@ -32,11 +32,11 @@ public class MediaItemMapped {
     @JsonProperty("Awards")
     private String awards;
     @JsonProperty("Poster")
-    private URL poster;
+    private String poster;
     @JsonProperty("Metascore")
     private String metascore;
     @JsonProperty("imdbRating")
-    private float imdbRating;
+    private String imdbRating;
     @JsonProperty("imdbVotes")
     private String imdbVotes;
     @JsonProperty("imdbID")
@@ -144,11 +144,11 @@ public class MediaItemMapped {
         this.awards = awards;
     }
 
-    public URL getPoster() {
+    public String getPoster() {
         return poster;
     }
 
-    public void setPoster(URL poster) {
+    public void setPoster(String poster) {
         this.poster = poster;
     }
 
@@ -160,11 +160,11 @@ public class MediaItemMapped {
         this.metascore = metascore;
     }
 
-    public float getImdbRating() {
+    public String getImdbRating() {
         return imdbRating;
     }
 
-    public void setImdbRating(float imdbRating) {
+    public void setImdbRating(String imdbRating) {
         this.imdbRating = imdbRating;
     }
 

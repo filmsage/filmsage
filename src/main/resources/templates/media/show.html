@@ -7,7 +7,7 @@
 <section class="container" id="content-area">
     <div class="row">
         <div class="col-12 col-lg-4">
-            <img class="img-fluid d-block mx-auto my-3" th:src="${movie.poster}" alt="Movie poster"/>
+            <img class="img-fluid d-block mx-auto my-3" th:src="${movie.poster != 'N/A' ? movie.poster : 'https://via.placeholder.com/280x410.png?text=No+Poster'}" alt="Movie poster"/>
         </div>
         <div class="col-12 col-lg-8">
             <h2 class="" th:text="${movie.title}"></h2>
