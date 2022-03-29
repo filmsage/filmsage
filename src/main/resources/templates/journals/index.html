@@ -5,14 +5,18 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <h1>Journal Page</h1>
-    <div class="container">
-        <th:block th:replace="partials/content/journals-nav" :: nav/>
+    <div class="d-flex">
+        <h1>Journal Page</h1>
+        <div class="ml-md-auto mr-md-0 ml-0">
+            <a th:href="@{/journals/create}" class="btn btn-danger" sec:authorize="isAuthenticated()">
+                Create Journal Post
+            </a>
+        </div>
     </div>
     <div class="container" id="journals-container">
         <div th:each="journal : ${journals}">
             <a th:href="@{/journals(id=${journal.id})}">
-                <h2 th:text="${journal.title}">Journal title</h2>
+                <h3 th:text="${journal.title}">Journal title</h3>
             </a>
             <a th:href="@{/journals(id=${journal.id})}">
                 <a
