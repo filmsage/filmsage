@@ -40,6 +40,7 @@ public class MediaController {
         if (query.isBlank()) {
             return "search/search";
         }
+        query = query.strip();
         List<MediaSearchMapped> movies = omdbRequester.searchMovie(query);
         model.addAttribute("movies", movies);
         return "search/results";

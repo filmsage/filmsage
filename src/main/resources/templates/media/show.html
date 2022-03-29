@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='FilmSage Index')"></head>
+<head th:replace="partials/elements :: head(title=${movie.title})"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
     <div class="row">
         <div class="col-12 col-lg-4">
-            <img class="img-fluid d-block mx-auto my-3" th:src="${movie.poster}" alt="Movie poster"/>
+            <img class="img-fluid d-block mx-auto my-3" th:src="${movie.poster != 'N/A' ? movie.poster : 'https://via.placeholder.com/280x410.png?text=No+Poster'}" alt="Movie poster"/>
         </div>
         <div class="col-12 col-lg-8">
             <h2 class="" th:text="${movie.title}"></h2>
@@ -32,9 +32,9 @@
         <div class="col-12 col-md-6 mt-3">
             <h2>Reviews</h2>
             <div class="d-flex">
-                <a class="btn btn-primary btn-block mr-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a
+                <a class="btn btn-danger btn-block mr-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a
                     Review!</a>
-                <a class="btn btn-primary btn-block mt-0 ml-1" th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show
+                <a class="btn btn-danger btn-block mt-0 ml-1" th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show
                     Reviews</a>
             </div>
             <th:block th:replace="partials/review-list :: review-list(reviews=${reviews})"></th:block>
@@ -43,7 +43,7 @@
             <h2>Watchlists</h2>
             <div class="d-flex">
                 <div class="dropdown mr-1">
-                    <button class="btn btn-primary btn-block dropdown-toggle" type="button"
+                    <button class="btn btn-danger btn-block dropdown-toggle" type="button"
                             id="watchlist-dropdown-button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Add to watch list...
@@ -57,7 +57,7 @@
                         </a>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block mt-0 ml-1" th:href="@{/watchlist(imdb = ${movie.imdbID})}">
+                <a class="btn btn-danger btn-block mt-0 ml-1" th:href="@{/watchlist(imdb = ${movie.imdbID})}">
                     Watchlists
                 </a>
             </div>
@@ -74,27 +74,27 @@
     </div>
     <div class="row d-block d-md-none">
         <br/>
-        <ul class="nav nav-pills nav-fill my-2" role="tablist" id="mobile-tabs-nav">
+        <ul class="nav nav-tabs nav-fill my-2" role="tablist" id="mobile-tabs-nav">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" href="#reviews" id="reviews-tab" data-toggle="tab" role="tab"
-                   aria-controls="reviews" aria-selected="true">Reviews</a>
+                   aria-controls="reviews" aria-selected="true" style="border: none">Reviews</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="#watchlists" id="watchlists-tab" data-toggle="tab" role="tab"
-                   aria-controls="reviews" aria-selected="false">Watchlists</a>
+                   aria-controls="reviews" aria-selected="false" style="border: none">Watchlists</a>
             </li>
         </ul>
         <div class="tab-content my-2" id="mobile-tabs-content">
             <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                <a class="btn btn-primary btn-block mb-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a
+                <a class="btn btn-danger btn-block mb-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a
                     Review!</a>
-                <a class="btn btn-primary btn-block mt-1" th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show
+                <a class="btn btn-danger btn-block mt-1" th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show
                     Reviews</a>
                 <th:block th:replace="partials/review-list :: review-list(reviews=${reviews})"></th:block>
             </div>
             <div class="tab-pane fade mb-1" id="watchlists" role="tabpanel" aria-labelledby="watchlists-tab">
                 <div class="dropdown">
-                    <button class="btn btn-primary btn-block dropdown-toggle" type="button"
+                    <button class="btn btn-danger btn-block dropdown-toggle" type="button"
                             id="mobile-watchlist-dropdown-button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Add to watch list...
@@ -108,7 +108,7 @@
                         </a>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block mt-1" th:href="@{/watchlist(imdb = ${movie.imdbID})}">
+                <a class="btn btn-danger btn-block mt-1" th:href="@{/watchlist(imdb = ${movie.imdbID})}">
                     Watchlists
                 </a>
                 <div th:each="watchlist : ${watchlists}">

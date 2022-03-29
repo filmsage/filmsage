@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='Journal')"></head>
+<head th:replace="partials/elements :: head(title=${journal.title} + ' - Journal')"></head>
 
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
@@ -23,24 +23,22 @@
     </div>
     <div class="container">
         <h2 th:text="${journal.title}">Journal title</h2>
+        <p><span th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
         <p th:text="${journal.body}">Journal body</p>
         <p>
             <a
                     th:href="@{/journals(user=${journal.getUserContent().getId()})}"
-                    th:text="${journal.getUserContent().getUser().getUsername()}"
+                    th:text="'Posted by ' + ${journal.getUserContent().getUser().getUsername()}"
             >
                 Creator username
             </a>
         </p>
         <button class="btn btn-danger" id="report-abuse" data-type="journal" th:data-id="${journal.id}" >Report Abusive Content </button>
-        <a class="btn btn-danger" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
-        <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
-        <p><span th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
+        <div th:if="${canModify}">
+            <a class="btn btn-danger" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
+            <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
+        </div>
     </div>
-    <a class="btn btn-danger" th:href="@{/report/{id}(id=${journal.id})}">Report Abusive Content </a>
-
-    <!--    <p><a class="btn btn-danger"    th:href="@{/journals(user=${journal.getUserContent().getId()})}"-->
-    <!--             th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a></p>-->
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
 <script th:src="@{/js/report-abuse-button.js}"></script>

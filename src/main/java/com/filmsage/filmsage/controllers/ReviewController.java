@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.stream.Collectors;
 
@@ -45,12 +46,20 @@ public class ReviewController {
 
     @GetMapping("/reviews/show")
     public String showReview(Model model,
+                             Principal principal,
                              @RequestParam long r,
                              @RequestParam String imdb) {
         Review review = reviewDao.getById(r);
         model.addAttribute("review", review);
         model.addAttribute("movie", mediaItemService.getTempMediaItemRecord(imdb));
         model.addAttribute("likes", review.getUserLikes().size());
+
+        if (principal != null) {
+            if (review.getUserContent().getId() == userContentService.getUserContent().getId() ||
+                    userContentService.isAdmin()) {
+                model.addAttribute("canModify", true);
+            }
+        }
 
         return "reviews/review";
     }
