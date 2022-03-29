@@ -13,6 +13,16 @@ public class MediaSearchMapped {
     private String imdbID;
     @JsonProperty("Type")
     private String type;
+    @JsonProperty("Poster")
+    private String poster;
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
 
     public String getTitle() {
         return title;
