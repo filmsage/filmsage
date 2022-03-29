@@ -91,16 +91,14 @@ public class JournalController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/journals/{id}/edit")
     public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
-        Journal oldJournal = journalDao.getById(id);
-        if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
+        Journal existingJournal = journalDao.getById(id);
+        if (existingJournal.getUserContent().getId() == userContentService.getUserContent().getId() ||
                 userContentService.isAdmin()) {
-//            journal.setUserContent(userContentService.getUserContent());
-//            journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-            oldJournal.setTitle(journal.getTitle());
-            oldJournal.setBody(journal.getBody());
-            journalDao.save(oldJournal);
+            existingJournal.setTitle(journal.getTitle());
+            existingJournal.setBody(journal.getBody());
+            journalDao.save(existingJournal);
         }
-        return "redirect:/journals?id=" + journal.getId();
+        return "redirect:/journals?id=" + existingJournal.getId();
     }
 
     // this function defines that when a user attempts to delete a journal,
