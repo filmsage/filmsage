@@ -35,8 +35,10 @@ public class OMDBRequester {
     public List<MediaSearchMapped> searchMovie(String query) {
         SearchMapped search = restTemplate.getForObject("https://www.omdbapi.com/?apikey={apikey}&s={query}", SearchMapped.class, this.omdbProperties.getKey(), query);
         List<MediaSearchMapped> results = new LinkedList<>();
-        if (search.getSearchResults().length > 0) {
-            results = Arrays.stream(search.getSearchResults()).collect(Collectors.toList());
+        if (search.getSearchResults() != null) {
+            if (search.getSearchResults().length > 0) {
+                results = Arrays.stream(search.getSearchResults()).collect(Collectors.toList());
+            }
         }
         return results;
     }
