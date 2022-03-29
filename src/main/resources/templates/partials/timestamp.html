@@ -6,13 +6,14 @@
 </span>
 
 <span th:fragment="time(timestamp)">
-    <span th:text="${#temporals.hour(timestamp)} + ':'
-    + ${#temporals.minute(timestamp)} + ':'
-     + ${#temporals.second(timestamp)}"></span>
+    <span th:text="${#temporals.hour(timestamp) < 10 ? '0' + #temporals.hour(timestamp) : #temporals.hour(timestamp) } + ':'
+    + ${#temporals.minute(timestamp) < 10 ? '0' + #temporals.minute(timestamp) : #temporals.minute(timestamp)} + ':'
+     + ${#temporals.second(timestamp) < 10 ? '0' + #temporals.second(timestamp) : #temporals.second(timestamp)}"></span>
 </span>
 
 <span th:fragment="date(timestamp)">
-    <span th:text="${#temporals.day(timestamp)} + ' '
-    + ${#temporals.monthName(timestamp)} + ', '
+
+    <span th:text="${#temporals.monthName(timestamp)} + ' '
+    + ${#temporals.day(timestamp)} + ', '
     + ${#temporals.year(timestamp)}"></span>
 </span>
