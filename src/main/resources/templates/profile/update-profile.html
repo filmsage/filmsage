@@ -11,14 +11,13 @@
         <div class="form-group">
             <input name="id" type="hidden" th:value="*{id}">
             <label for="first-Name">First Name: </label>
-            <input type="text" class="field" id="first-Name" th:field="*{firstName}">
+            <input type="text" class="field form-control" id="first-Name" th:field="*{firstName}">
             <br>
             <label for="last-Name">Last Name: </label>
-            <input type="text" class="field" id="last-Name" th:field="*{lastName}">
+            <input type="text" class="field form-control" id="last-Name" th:field="*{lastName}">
             <br>
             <label for="country">Country: </label>
-            <input type="text" id="country" class="field" th:field="*{country}">
-            <!--            <a th:href="@{/profile/edit}">Edit My Profile </a>-->
+            <input type="text" id="country" class="field form-control" th:field="*{country}">
         </div>
         <button type="submit" class="btn btn-danger">Submit</button>
     </form>
