@@ -91,11 +91,14 @@ public class JournalController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/journals/{id}/edit")
     public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
+        Journal oldJournal = journalDao.getById(id);
         if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
                 userContentService.isAdmin()) {
-            journal.setUserContent(userContentService.getUserContent());
-            journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-            journalDao.save(journal);
+//            journal.setUserContent(userContentService.getUserContent());
+//            journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            oldJournal.setTitle(journal.getTitle());
+            oldJournal.setBody(journal.getBody());
+            journalDao.save(oldJournal);
         }
         return "redirect:/journals?id=" + journal.getId();
     }
