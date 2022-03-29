@@ -18,9 +18,9 @@
 
     </div>
 
-    <div class="container">
-        <th:block th:replace="partials/content/journals-nav" :: nav/>
-    </div>
+<!--    <div class="container">-->
+<!--        <th:block th:replace="partials/content/journals-nav" :: nav/>-->
+<!--    </div>-->
     <div class="container">
         <h2 th:text="${journal.title}">Journal title</h2>
         <p><span th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
