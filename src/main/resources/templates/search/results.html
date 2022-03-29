@@ -7,8 +7,14 @@
 <section class="container" id="content-area">
     <h1>Search Results</h1>
     <section class="container" id="results">
-        <div th:if="${!movies.isEmpty()}" th:each="movie : ${movies}">
-            <a th:href="@{/movies/{imdb}(imdb = ${movie.imdbID})}"><p th:text="${movie.title + ' (' + movie.year + ')'}"></p></a>
+        <div th:if="${!movies.isEmpty()}" th:each="movie : ${movies}" class="container-fluid  my-2 p-1"
+             style="background-color: white">
+            <a th:href="@{/movies/{imdb}(imdb = ${movie.imdbID})}" class="d-flex">
+                <img th:src="${movie.poster != 'N/A' ? movie.poster : 'https://via.placeholder.com/100x150.png?text=No+Poster'}"
+                     style="width: 100px; height: 150px; object-fit: cover"
+                     th:alt="${'Movie poster for ' + movie.title}">
+                <p class="ml-3 mt-3" th:text="${movie.title + ' (' + movie.year + ')'}"></p>
+            </a>
         </div>
         <div th:if="${movies.isEmpty()}">
             <p>No results :(</p>
