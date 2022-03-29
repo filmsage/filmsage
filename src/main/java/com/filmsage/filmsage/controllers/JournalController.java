@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 
 
@@ -33,11 +34,19 @@ public class JournalController {
 
     @GetMapping("/journals")
     public String showJournals(Model model,
+                               Principal principal,
                                @RequestParam(required = false) String id,
                                @RequestParam(required = false) String user,
                                @RequestParam(required = false) String username) {
         if (StringUtils.hasText(id)) {
-            model.addAttribute("journal", journalDao.getById(Long.parseLong(id)));
+            Journal journal = journalDao.getById(Long.parseLong(id));
+            model.addAttribute("journal", journal);
+            if (principal != null) {
+                if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
+                        userContentService.isAdmin()) {
+                    model.addAttribute("canModify", true);
+                }
+            }
             return "journals/show";
         } else if (StringUtils.hasText(user)) {
             model.addAttribute("journals", journalDao.findAllByUserContent_Id(Long.parseLong(user)));

@@ -34,8 +34,10 @@
             </a>
         </p>
         <button class="btn btn-danger" id="report-abuse" data-type="journal" th:data-id="${journal.id}" >Report Abusive Content </button>
-        <a class="btn btn-danger" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
-        <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
+        <div th:if="${canModify}">
+            <a class="btn btn-danger" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
+            <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
+        </div>
     </div>
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>

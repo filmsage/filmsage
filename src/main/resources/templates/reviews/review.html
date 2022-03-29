@@ -36,7 +36,7 @@
         <button class="btn btn-danger" id="report-abuse" data-type="review" th:data-id="${review.id}" >Report Abusive Content </button>
     </div>
   
-    <div class="author-controls container d-flex p-0 m-0">
+    <div th:if="${canModify}" class="author-controls container d-flex p-0 m-0">
         <a class="btn btn-danger" th:href="@{/reviews/edit(imdb=${movie.getImdb()}, r=${review.id})}">Edit</a>
         <form class="ml-auto mr-0" method="post" th:action="@{/reviews/delete(imdb=${movie.getImdb()})}">
             <input type="hidden" name="review-id" th:value="${review.getUserContent().id}">
