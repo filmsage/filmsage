@@ -11,7 +11,7 @@
     </div>
     <h2><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="'Created by: ' + ${watchlist.getUserContent().getUser().getUsername()}"></a></h2>
     <p>
-        Created at: <span th:replace="partials/timestamp :: timeanddate(instant=${watchlist.getCreatedAt().toInstant().atZone('GMT-0500')})"></span>
+        Created on: <span th:replace="partials/timestamp :: timeanddate(instant=${watchlist.getCreatedAt().toInstant().atZone('GMT-0500')})"></span>
     </p>
     <div class="container row" th:each="item : ${mediaItems}">
         <div class="col my-2 p-1 shadow-sm">

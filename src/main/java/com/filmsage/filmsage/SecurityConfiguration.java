@@ -96,5 +96,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 )
                 .authenticated()
         ;
+
     }
+
+
 }
