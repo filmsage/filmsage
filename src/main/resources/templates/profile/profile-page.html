@@ -12,12 +12,7 @@
 <!--                <small><span th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}"></span> <span-->
 <!--                        th:text="${usercontent.country != null ? 'from ' + usercontent.country : ''}"></span></small>-->
             </div>
-            <div th:if="${isOwner}" class="col text-right">
-                <a class="btn btn-danger" th:href="@{/profile/{userId}/edit(userId = ${usercontent.getId()})}">Edit
-                    Profile</a>
-                <a class="btn btn-danger" th:href="@{/update-password/{id}(id = ${user.getId()})}">Change
-                    Password</a>
-            </div>
+
         </div>
     </div>
     <section class="container">
@@ -128,6 +123,12 @@
             </div>
         </div>
 
+        <div class="my-2 text-right" th:if="${isOwner}">
+            <a class="btn btn-danger" th:href="@{/profile/{userId}/edit(userId = ${usercontent.getId()})}">Edit
+                Profile</a>
+            <a class="btn btn-danger" th:href="@{/update-password/{id}(id = ${user.getId()})}">Change
+                Password</a>
+        </div>
 
     </section>
 </section>
