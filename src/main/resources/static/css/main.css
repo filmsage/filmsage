@@ -14,8 +14,8 @@ body{
 #logo{
     /*height: 50%;*/
     /*max-width: 130px;*/
-    width: 130px;
-    height: 40px;
+    width: 80px;
+    height: 25px;
     padding-right: .66rem;
 }
 
@@ -84,4 +84,14 @@ a:hover{
 #movie-card{
     color: #3d4145;
     border: 2px solid;
+}
+
+.btn-danger {
+    /*background-color: #290661;*/
+    color: #3d0a91 !important;
+}
+
+#report-abuse {
+    color: white !important;
+    background-color: #dc3444;
 }
