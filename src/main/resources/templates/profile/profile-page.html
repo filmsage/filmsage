@@ -8,29 +8,17 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Welcome, <span th:text="${user.getUsername()}"> </span></h1>
+                <h1><span th:text="${user.getUsername()}"></span>'s Profile </h1>
+<!--                <small><span th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}"></span> <span-->
+<!--                        th:text="${usercontent.country != null ? 'from ' + usercontent.country : ''}"></span></small>-->
             </div>
-            <div th:if="${isOwner}" class="col text-right">
-                <a class="btn btn-danger" th:href="@{/profile/{userId}/edit(userId = ${usercontent.getId()})}">Edit
-                    Profile</a>
-                <a class="btn btn-danger" th:href="@{/update-password/{id}(id = ${user.getId()})}">Change
-                    Password</a>
-            </div>
+
         </div>
     </div>
     <section class="container">
-        <h2>Details</h2>
-        <ul class="list-group">
-            <li class="list-group-item bg-transparent border-0">First Name: <span
-                    th:text="${usercontent.firstName}"></span></li>
-            <li class="list-group-item bg-transparent border-0">Last Name: <span
-                    th:text="${usercontent.lastName}"></span></li>
-            <li class="list-group-item bg-transparent border-0">Username: <span th:text="${user.getUsername()}"></span>
-            </li>
-            <li class="list-group-item bg-transparent border-0">Email: <span th:text="${user.getEmail()}"></span></li>
-            <li class="list-group-item bg-transparent border-0">Country: <span
-                    th:text="${usercontent.getCountry()}"></span></li>
-        </ul>
+        <p th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}" class="mb-2"></p>
+        <p th:text="${usercontent.country}" class="my-2"></p>
+        <p class="my-2">Joined on <span th:replace="partials/timestamp :: date(timestamp=${user.getCreatedAt().toInstant().atZone('GMT-0500')})"></span> </p>
     </section>
     <section class="container">
         <h2>Stats</h2>
@@ -64,13 +52,15 @@
             <div class="card">
                 <div class="card-header" id="heading-reviews">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-reviews" aria-expanded="true" aria-controls="collapse-reviews">
+                        <button class="btn btn-link btn-block text-left collapsed content-accordion" type="button" data-toggle="collapse"
+                                data-target="#collapse-reviews" aria-expanded="false" aria-controls="collapse-reviews">
                             Reviews
                         </button>
                     </h2>
                 </div>
 
-                <div id="collapse-reviews" class="collapse show" aria-labelledby="heading-reviews" data-parent="#usercontent-accordion">
+                <div id="collapse-reviews" class="collapse" aria-labelledby="heading-reviews"
+                     data-parent="#usercontent-accordion">
                     <div class="card-body">
 
                         <div th:each="review : ${reviews}">
@@ -91,16 +81,20 @@
             <div class="card">
                 <div class="card-header" id="heading-watchlists">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse-watchlists" aria-expanded="false" aria-controls="collapse-watchlist">
+                        <button class="btn btn-link btn-block text-left collapsed content-accordion" type="button" data-toggle="collapse"
+                                data-target="#collapse-watchlists" aria-expanded="false"
+                                aria-controls="collapse-watchlist">
                             Watchlists
                         </button>
                     </h2>
                 </div>
-                <div id="collapse-watchlists" class="collapse" aria-labelledby="heading-watchlists" data-parent="#usercontent-accordion">
+                <div id="collapse-watchlists" class="collapse" aria-labelledby="heading-watchlists"
+                     data-parent="#usercontent-accordion">
                     <div class="card-body">
 
                         <div th:each="collection : ${usercontent.getWatchlists()}">
-                            <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
+                            <a th:text="${collection.getTitle()}"
+                               th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
                         </div>
 
                     </div>
@@ -109,12 +103,15 @@
             <div class="card">
                 <div class="card-header" id="heading-journals">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse-journals" aria-expanded="false" aria-controls="collapse-journals">
+                        <button class="btn btn-link btn-block text-left collapsed content-accordion" type="button" data-toggle="collapse"
+                                data-target="#collapse-journals" aria-expanded="false"
+                                aria-controls="collapse-journals">
                             Journals
                         </button>
                     </h2>
                 </div>
-                <div id="collapse-journals" class="collapse" aria-labelledby="heading-journals" data-parent="#usercontent-accordion">
+                <div id="collapse-journals" class="collapse" aria-labelledby="heading-journals"
+                     data-parent="#usercontent-accordion">
                     <div class="card-body">
 
                         <div th:each="journal : ${usercontent.getJournals()}">
@@ -126,6 +123,12 @@
             </div>
         </div>
 
+        <div class="my-2 text-right" th:if="${isOwner}">
+            <a class="btn btn-danger" th:href="@{/profile/{userId}/edit(userId = ${usercontent.getId()})}">Edit
+                Profile</a>
+            <a class="btn btn-danger" th:href="@{/update-password/{id}(id = ${user.getId()})}">Change
+                Password</a>
+        </div>
 
     </section>
 </section>
