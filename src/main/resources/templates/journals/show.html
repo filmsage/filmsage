@@ -6,44 +6,42 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <h1>Viewing Journal</h1>
+    <div class="d-flex justify-content-end w-100">
 
-    <div class="p-0 m-0 d-flex">
-        <div class="">
-        <div/>
-
-
-
-
-    </div>
-
-<!--    <div class="container">-->
-<!--        <th:block th:replace="partials/content/journals-nav" :: nav/>-->
-<!--    </div>-->
-    <div class="container">
-        <h2 th:text="${journal.title}">Journal title</h2>
-        <p><span th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
-        <p th:text="${journal.body}">Journal body</p>
-        <p>Created by:
-            <a
-                    th:href="@{/journals(user=${journal.getUserContent().getId()})}"
-                    th:text=" ${journal.getUserContent().getUser().getUsername()}"
-            >
-                Creator username
-            </a>
-        </p>
-
-        <div th:if="${canModify}" class="d-flex my-3">
-            <a class="btn btn-danger mr-2" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
-            <a class="btn btn-danger ml-2" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
-        </div>
-
-        <a class="btn btn-danger my-3"
+        <a class="btn btn-danger ml-auto mr-0"
            th:href="@{/journals(user=${journal.getUserContent().getId()})}"
            th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a>
-        <button class="btn btn-danger my-3" id="report-abuse" data-type="journal" th:data-id="${journal.id}" >Report Abusive Content </button>
-
     </div>
+    <h1>Viewing Journal</h1>
+
+
+    <h2 th:text="${journal.title}">Journal title</h2>
+
+
+    <p><span
+            th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span>
+    </p>
+    <p th:text="${journal.body}">Journal body</p>
+    <p>Created by:
+        <a
+                th:href="@{/journals(user=${journal.getUserContent().getId()})}"
+                th:text=" ${journal.getUserContent().getUser().getUsername()}"
+        >
+            Creator username
+        </a>
+    </p>
+
+    <button class="btn btn-danger my-2" id="report-abuse" data-type="journal" th:data-id="${journal.id}">Report Abusive
+        Content
+    </button>
+
+
+    <div th:if="${canModify}" class="d-flex my-2 justify-content-between">
+        <a class="btn btn-danger mr-2" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
+        <a class="btn btn-danger ml-2" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
+    </div>
+
+
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
 <script th:src="@{/js/report-abuse-button.js}"></script>

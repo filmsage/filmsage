@@ -33,7 +33,7 @@
         ></i>
             <span id="like-count" th:text="${likes}"></span></p>
 
-        <button class="btn btn-danger" id="report-abuse" data-type="review" th:data-id="${review.id}" >Report Abusive Content </button>
+        <button class="btn btn-danger mb-3" id="report-abuse" data-type="review" th:data-id="${review.id}" >Report Abusive Content </button>
     </div>
   
     <div th:if="${canModify}" class="author-controls container d-flex p-0 m-0">
