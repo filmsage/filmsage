@@ -116,3 +116,20 @@ a:hover{
 .content-accordion {
     color: #8336A4;
 }
+
+.search-submit-button {
+    border-color: #290661;
+    color: #290661;
+}
+
+.search-submit-button:hover {
+    border-color: white;
+    background-color: #3d0a91;
+    color: white;
+}
+
+.search-submit-button:active {
+    border-color: white;
+    background-color: #3d0a91;
+    color: white;
+}
