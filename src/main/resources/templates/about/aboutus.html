@@ -3,133 +3,171 @@
 <head th:replace="partials/elements :: head(title='About Us')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
-<section class="container" id="content-area">
+<section class="container-fluid" id="content-area">
     <div class="about-us-section">
         <h1>About the team</h1>
-        <p>FilmSage was designed and built by a team in less than a month.</p>
+        <p>FilmSage was designed and built by the team in less than a month.</p>
         <p>We are a team of four developers who joined together to build a full stack web application. Our focus was to
-        deliver a full-featured modern experience leveraging the Spring Boot framework.</p>
+            deliver a full-featured modern experience leveraging the Spring Boot framework.</p>
         <p>You can contact the team at <a href="mailto:team.filmsage@gmail.com">team.filmsage@gmail.com</a></p>
     </div>
     <h2 style="text-align: center">Our Team</h2>
-    <div class="row justify-content-center">
-        <div class="col-sm col-md-6 my-2">
-            <div class="au-cards h-100">
-                <img class="mx-auto d-block mt-3 au-headshots" th:src="@{~/img/James.jpeg}" alt="James">
-                <div class="container">
-                    <h2 class="text-center">James Wienecke</h2>
-                    <p class="title text-center">Junior Software Engineer</p>
-                    <p>James is an eager developer and team player. He knows Java, Spring Boot, MySQL, JavaScript/TypeScript, React.</p>
-                    <p>A fast learner with a community-focused mindset, he planned, organized, and built much of the back end. He also fulfilled the role of DevOps on this project.</p>
 
-                    <div class="wrapper d-flex">
-                        <div class="mr-4">
-                            <a href="https://github.com/james-wienecke" class="icon github">
-                                <div class="tooltip">Github</div>
-                                <span><i class="fab fa-github"></i></span>
-                            </a>
-                        </div>
 
-                        <div>
-                            <a href="https://www.linkedin.com/in/james-a-wienecke/" class="icon linkedin mr-2">
-                                <div class="tooltip">LinkedIn</div>
-                                <span><i class="fab fa-linkedin"></i></span>
-                            </a>
-                        </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="au-cards h-100 d-flex flex-column justify-content-between">
+                <div class="container-fluid">
+                    <img class="mx-auto d-block mt-3 au-headshots" th:src="@{~/img/James.jpeg}" alt="James">
+
+                    <div class="w-100">
+                        <h2 class="text-center">James Wienecke</h2>
+                        <p class="title text-center">Software Developer</p>
+                        <p>James is an eager software developer and team player. He knows Java, Spring Boot, MySQL,
+                            JavaScript/TypeScript, and React. He has experience with using npm, git, and test driven
+                            development
+                            for web applications using JUnit, Jest, and Jasmine.
+                        </p>
+                        <p>A fast learner with a community-focused mindset, he planned, organized, and built much of the
+                            back end. He also fulfilled the role of DevOps on this project.</p>
+                    </div>
+                </div>
+                <div class="wrapper d-flex">
+                    <div class="mr-4">
+                        <a href="https://github.com/james-wienecke" class="icon github">
+                            <div class="tooltip">Github</div>
+                            <span><i class="fab fa-github"></i></span>
+                        </a>
+                    </div>
+
+                    <div class="mr-4">
+                        <a href="https://www.linkedin.com/in/james-a-wienecke/" class="icon linkedin mr-2">
+                            <div class="tooltip">LinkedIn</div>
+                            <span><i class="fab fa-linkedin"></i></span>
+                        </a>
+                    </div>
+
+                    <div class="mr-4">
+                        <a href="https://alumni.codeup.com/students/1346">Alumni</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm col-md-6 my-2">
-            <div class="au-cards h-100">
-                <img class="mx-auto d-block mt-3 au-headshots" th:src="@{~/img/Eva Brechum.jpg}" alt="Eva">
-                <div class="container">
+        <div class="col-sm">
+            <div class="au-cards h-100 d-flex flex-column justify-content-between">
+                <div class="container-fluid">
+                    <img class="mx-auto d-block mt-3 au-headshots" th:src="@{~/img/Eva Brechum.jpg}" alt="Eva">
                     <h2 class="text-center">Eva Brechum</h2>
-                    <p class="title text-center">Junior Software Engineer</p>
-                    <p>Eva is a Software Developer passionate about building and designing things that solve people’s
+                    <p class="title text-center">Software Developer</p>
+                    <p class="mb-auto">Eva is a Software Developer passionate about building and designing things that
+                        solve people’s
                         problems and improves their daily lives. She is experienced in community engagement and
                         establishing client partnerships. She used her organizational and time management skills to
                         manage the team project and worked on the front end design and customization. Her technical
                         skills include Java, HTML, CSS, MySQL, Bootstrap and SpringBoot.</p>
+                </div>
+                <div class="wrapper d-flex mb-0 mt-2">
+                    <div class="mr-4">
+                        <a href="https://github.com/eva-brechum" class="icon github">
+                            <div class="tooltip">Github</div>
+                            <span><i class="fab fa-github"></i></span>
+                        </a>
+                    </div>
 
-                    <div class="wrapper d-flex">
-                        <div class="mr-4">
-                            <a href="https://github.com/eva-brechum" class="icon github">
-                                <div class="tooltip">Github</div>
-                                <span><i class="fab fa-github"></i></span>
-                            </a>
-                        </div>
+                    <div class="mr-4">
+                        <a href="https://www.linkedin.com/in/eva-brechum/" class="icon linkedin mr-2">
+                            <div class="tooltip">LinkedIn</div>
+                            <span><i class="fab fa-linkedin"></i></span>
+                        </a>
+                    </div>
 
-                        <div>
-                            <a href="https://www.linkedin.com/in/eva-brechum/" class="icon linkedin mr-2">
-                                <div class="tooltip">LinkedIn</div>
-                                <span><i class="fab fa-linkedin"></i></span>
-                            </a>
-                        </div>
+                    <div class="mr-4">
+                        <a href="https://alumni.codeup.com/students/1354">Alumni</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm col-md-6 my-2">
-            <div class="au-cards h-100">
-                <img class="mx-auto d-block mt-3 au-headshots" th:src="@{~/img/Alfonso.jpg}" alt="Alfonso">
-                <div class="container">
+        <div class="col-sm">
+            <div class="au-cards h-100 d-flex flex-column justify-content-between">
+                <div class="container-fluid">
+                    <img class="mx-auto d-block mt-3 au-headshots" th:src="@{~/img/Alfonso.jpg}" alt="Alfonso">
                     <h2 class="text-center">Alfonso Carrillo</h2>
-                    <p class="title text-center">Junior Software Engineer</p>
-                    <p>Experienced and motivated Junior Software Developer with a Bachelor of Science in Business Administration, strong interpersonal skills, and the ability to work well in a team or as an individual. The ability to adapt to an ever changing work environment by acquiring new knowledge, while maintaining a high level of quality has inspired a pivot and move into a career in technology. Looking to leverage my extensive experience and technical skills to join a collaborative environment and grow into a leadership role.
-                        Technical skills: HTML - CSS - Bootstrap - JavaScript - jQuery - Java SE - Java EE (Servlets, JSP) - Spring - MySQL - Thymeleaf - Object-Oriented Programming - Test-Driven Development - Version Control with Git - Paired Programming. </p>
+                    <p class="title text-center">Software Developer</p>
+                    <p class="mb-auto">Experienced and motivated Software Developer with a Bachelor of Science in
+                        Business
+                        Administration, strong interpersonal skills, and the ability to work well in a team or as an
+                        individual. The ability to adapt to an ever changing work environment by acquiring new
+                        knowledge, while maintaining a high level of quality has inspired a pivot and move into a career
+                        in technology. Looking to leverage my extensive experience and technical skills to join a
+                        collaborative environment and grow into a leadership role.
+                        Technical skills: HTML, CSS, Bootstrap, JavaScript, jQuery, Java SE, Java EE (Servlets,
+                        JSP), Spring, MySQL, Thymeleaf, Object-Oriented Programming, Test-Driven Development -
+                        Version Control with Git, Paired Programming. </p>
 
-                    <div class="wrapper d-flex">
-                        <div class="mr-4">
-                            <a href="https://github.com/alfonso-ivan-carrillo" class="icon github">
-                                <div class="tooltip">Github</div>
-                                <span><i class="fab fa-github"></i></span>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="https://www.linkedin.com/in/alfonso-ivan-carrillo/" class="icon linkedin mr-2">
-                                <div class="tooltip">LinkedIn</div>
-                                <span><i class="fab fa-linkedin"></i></span>
-                            </a>
-                        </div>
+                </div>
+                <div class="wrapper d-flex mb-0 mt-2">
+                    <div class="mr-4">
+                        <a href="https://github.com/alfonso-ivan-carrillo" class="icon github">
+                            <div class="tooltip">Github</div>
+                            <span><i class="fab fa-github"></i></span>
+                        </a>
+                    </div>
+                    <div class="mr-4">
+                        <a href="https://www.linkedin.com/in/alfonso-ivan-carrillo/" class="icon linkedin mr-2">
+                            <div class="tooltip">LinkedIn</div>
+                            <span><i class="fab fa-linkedin"></i></span>
+                        </a>
+                    </div>
+
+                    <div class="mr-4">
+                        <a href="https://alumni.codeup.com/students/1355">Alumni</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm col-md-6 my-2">
-            <div class="au-cards h-100">
-                <img class="mx-auto d-block mt-3 au-headshots"  th:src="@{~/img/Sabastain-PP.jpg}" alt="Sabastain">
-                <div class="container">
-                    <h2 class="text-center">Sabastain Wakoyi</h2>
-                    <p class="title text-center">Junior Software Engineer</p>
-                    <p>Sabastain Wakoyi is a dedicated Software Engineer with a bachelor in Economics and a postgraduate certificate in information technology.
-                        Possesses a comprehensive background in designing highly available, scalable, fault tolerant, cost effective and secure solutions.
-                        Adept at working independently and collaborating with teams to review, analyze, and resolve security incidents.
-                        Experience in working with technologies such as AWS Cloud, Finance,Java,
-                        JavaScript, Dokku,TDD, Git, jQuery, Bootstrap, Spring, Thymeleaf, MySQL </p>
-                    <p>I am also AWS Certified</p>
+        <div class="col-sm">
+            <div class="au-cards h-100 d-flex flex-column justify-content-between">
+                <div class="container-fluid">
+                    <img class="mx-auto d-block mt-3 au-headshots" th:src="@{~/img/Sabastain-PP.jpg}" alt="Sabastain">
 
-                    <div class="wrapper d-flex">
-                        <div class="mr-4">
-                            <a href="https://github.com/Sabastain-Wakoyi" class="icon github">
-                                <div class="tooltip">Github</div>
-                                <span><i class="fab fa-github"></i></span>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="https://www.linkedin.com/in/sabastain-wakoyi/" class="icon linkedin ">
-                                <div class="tooltip">LinkedIn</div>
-                                <span><i class="fab fa-linkedin"></i></span>
-                            </a>
-                        </div>
+                    <h2 class="text-center">Sabastain Wakoyi</h2>
+                    <p class="title text-center">Software Developer</p>
+                    <p>Sabastain Wakoyi is a dedicated Software Developer with a bachelor in Economics and a
+                        postgraduate
+                        certificate in information technology.
+                        Possesses a comprehensive background in designing highly available, scalable, fault tolerant,
+                        cost effective and secure solutions.
+                        Adept at working independently and collaborating with teams to review, analyze, and resolve
+                        security incidents.
+                        Experience in working with technologies such as AWS Cloud, Finance, Java,
+                        JavaScript, Dokku, TDD, Git, jQuery, Bootstrap, Spring, Thymeleaf, MySQL </p>
+                    <p>I am also AWS Certified</p>
+                </div>
+
+                <div class="wrapper d-flex mb-0 mt-2">
+                    <div class="mr-4">
+                        <a href="https://github.com/Sabastain-Wakoyi" class="icon github">
+                            <div class="tooltip">Github</div>
+                            <span><i class="fab fa-github"></i></span>
+                        </a>
+                    </div>
+                    <div class="mr-4">
+                        <a href="https://www.linkedin.com/in/sabastain-wakoyi/" class="icon linkedin ">
+                            <div class="tooltip">LinkedIn</div>
+                            <span><i class="fab fa-linkedin"></i></span>
+                        </a>
+                    </div>
+                    <div class="mr-4">
+                        <a href="https://alumni.codeup.com/students/1361">Alumni</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 </body>
 </html>

@@ -32,7 +32,7 @@
         <div class="col-12 col-md-6 mt-3">
             <h2>Reviews</h2>
             <div class="d-flex">
-                <a class="btn btn-danger btn-block mr-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a
+                <a class="btn btn-danger btn-block mr-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create
                     Review!</a>
                 <a class="btn btn-danger btn-block mt-0 ml-1" th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show
                     Reviews</a>
@@ -42,22 +42,23 @@
         <div class="col-12 col-md-6 mt-3">
             <h2>Watchlists</h2>
             <div class="d-flex">
-                <div class="dropdown mr-1">
+                <div class="dropdown mr-1 w-50">
                     <button class="btn btn-danger btn-block dropdown-toggle" type="button"
                             id="watchlist-dropdown-button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Add to watch list...
+                        Add to watchlist
                     </button>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu w-100">
                         <a class="dropdown-item" th:each="watchlist: ${userWatchlists}"
                            th:href="@{/watchlist/{id}/add(id=${watchlist.id},imdb=${movie.imdbID})}"
                            th:text="${watchlist.title}">Watchlist title</a>
+                        <div class="dropdown-divider" th:if="${userWatchlists != null}"></div>
                         <a class="dropdown-item" th:href="@{/watchlist/create(imdb=${movie.imdbID})}">
                             A new watchlist
                         </a>
                     </div>
                 </div>
-                <a class="btn btn-danger btn-block mt-0 ml-1" th:href="@{/watchlist(imdb = ${movie.imdbID})}">
+                <a class="btn btn-danger btn-block mt-0 ml-1 w-50" th:href="@{/watchlist(imdb = ${movie.imdbID})}">
                     Watchlists
                 </a>
             </div>
@@ -67,7 +68,7 @@
                         Watchlist title
                     </a>
                 </h3>
-                <p><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}"
+                <p>Created by: <a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}"
                       th:text="${watchlist.getUserContent().getUser().getUsername()}"></a></p>
             </div>
         </div>
@@ -97,7 +98,7 @@
                     <button class="btn btn-danger btn-block dropdown-toggle" type="button"
                             id="mobile-watchlist-dropdown-button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Add to watch list...
+                        Add to watch list
                     </button>
                     <div class="dropdown-menu w-100">
                         <a class="dropdown-item" th:each="watchlist: ${userWatchlists}"
