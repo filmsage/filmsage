@@ -117,6 +117,11 @@ a:hover{
     color: #8336A4;
 }
 
+.content-accordion:hover{
+    color: #666666;
+    text-decoration: none;
+}
+
 .search-submit-button {
     border-color: #290661;
     color: #290661;
@@ -141,10 +146,11 @@ a:hover{
     left: 50%;
     padding: 8px;
     position: absolute;
-    transform: translateY(-160%);
-    transition: transform 0.3s;
+    transform: translateY(-5000px);
+    transition: transform 0.1s;
 }
 
 .skip-to-content-link:focus {
     transform: translateY(0%);
 }
+

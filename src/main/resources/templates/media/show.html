@@ -29,11 +29,11 @@
         </div>
     </div>
     <div class="row d-none d-md-flex">
-        <div class="col-12 col-md-6 mt-3">
+        <div class="col-12 col-md-6 mt-3 ">
             <h2>Reviews</h2>
-            <div class="d-flex">
+            <div class="d-flex mb-2">
                 <a class="btn btn-danger btn-block mr-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create
-                    Review!</a>
+                    Review</a>
                 <a class="btn btn-danger btn-block mt-0 ml-1" th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show
                     Reviews</a>
             </div>
@@ -62,7 +62,7 @@
                     Watchlists
                 </a>
             </div>
-            <div th:each="watchlist : ${watchlists}">
+            <div th:each="watchlist : ${watchlists}" class="mt-2">
                 <h3>
                     <a th:text="${watchlist.title}" th:href="@{/watchlist/{id}/show(id=${watchlist.id})}">
                         Watchlist title

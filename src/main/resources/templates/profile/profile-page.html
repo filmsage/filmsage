@@ -16,8 +16,8 @@
         </div>
     </div>
     <section class="container">
-        <p th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}" class="mb-2"></p>
-        <p th:text="${usercontent.country}" class="my-2"></p>
+        <p th:if="${usercontent.firstName != null && usercontent.lastName != null}" th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}" class="mb-2"></p>
+        <p th:if="${usercontent.country != null}" th:text="${usercontent.country}" class="my-2"></p>
         <p class="my-2">Joined on <span th:replace="partials/timestamp :: date(timestamp=${user.getCreatedAt().toInstant().atZone('GMT-0500')})"></span> </p>
     </section>
     <section class="container">
@@ -63,7 +63,7 @@
                      data-parent="#usercontent-accordion">
                     <div class="card-body">
 
-                        <div th:each="review : ${reviews}">
+                        <div class="my-3" th:each="review : ${reviews}">
                             <p class="my-1">Reviewing:
                                 <a th:text="${review.getMediaItem().getTitle()}"
                                    th:href="@{/movies/{imdb}(imdb=${review.getMediaItem().getImdb()})}"></a>
@@ -92,7 +92,7 @@
                      data-parent="#usercontent-accordion">
                     <div class="card-body">
 
-                        <div th:each="collection : ${usercontent.getWatchlists()}">
+                        <div class="my-3" th:each="collection : ${usercontent.getWatchlists()}">
                             <a th:text="${collection.getTitle()}"
                                th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
                         </div>
@@ -114,7 +114,7 @@
                      data-parent="#usercontent-accordion">
                     <div class="card-body">
 
-                        <div th:each="journal : ${usercontent.getJournals()}">
+                        <div class="my-3" th:each="journal : ${usercontent.getJournals()}">
                             <a th:text="${journal.getTitle()}" th:href="@{/journals(id=${journal.id})}">title</a>
                         </div>
 

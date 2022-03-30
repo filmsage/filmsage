@@ -6,14 +6,13 @@
 <nav th:replace="partials/elements :: navbar"></nav>
 
 <section class="container" id="content-area">
-    <div class="p-0 m-0 d-flex">
-        <h1>Viewing Journal</h1>
+    <h1>Viewing Journal</h1>
 
-        <p class="ml-auto mr-0">
-            <a class="btn btn-danger"
-               th:href="@{/journals(user=${journal.getUserContent().getId()})}"
-               th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a>
-        </p>
+    <div class="p-0 m-0 d-flex">
+        <div class="">
+        <div/>
+
+
 
 
     </div>
@@ -33,11 +32,17 @@
                 Creator username
             </a>
         </p>
-        <button class="btn btn-danger" id="report-abuse" data-type="journal" th:data-id="${journal.id}" >Report Abusive Content </button>
-        <div th:if="${canModify}">
-            <a class="btn btn-danger" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
-            <a class="btn btn-danger" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
+
+        <div th:if="${canModify}" class="d-flex my-3">
+            <a class="btn btn-danger mr-2" th:href="@{/journals/{id}/edit(id = ${journal.id})}">Edit</a>
+            <a class="btn btn-danger ml-2" th:href="@{/journals/{id}/delete(id = ${journal.id})}">Delete</a>
         </div>
+
+        <a class="btn btn-danger my-3"
+           th:href="@{/journals(user=${journal.getUserContent().getId()})}"
+           th:text="${'Back to ' + journal.getUserContent().getUser().getUsername()}"></a>
+        <button class="btn btn-danger my-3" id="report-abuse" data-type="journal" th:data-id="${journal.id}" >Report Abusive Content </button>
+
     </div>
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
