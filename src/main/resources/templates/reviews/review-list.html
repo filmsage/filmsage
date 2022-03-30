@@ -25,9 +25,13 @@
                     link to movie review is for
                 </a>
             </h3>
-            <p th:text="${review.getUserContent().getUser().getUsername()}">
-                Posted by user
-            </p>
+            <p>Created by:
+                <a th:text="${review.getUserContent().getUser().getUsername()}" th:href="@{/profile/{userId}(userId=${review.getUserContent().id})}"></a></p>
+<!--            <p th:text="'Created by: ' + ${review.getUserContent().getUser().getUsername()}">-->
+<!--                Posted by user-->
+<!--            </p>-->
+
+
         </div>
     </section>
 </section>

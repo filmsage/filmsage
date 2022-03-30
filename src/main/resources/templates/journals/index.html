@@ -18,14 +18,16 @@
             <a th:href="@{/journals(id=${journal.id})}">
                 <h3 th:text="${journal.title}">Journal title</h3>
             </a>
-            <a th:href="@{/journals(id=${journal.id})}">
-                <a
+
+            <a th:href="@{/journals(id=${journal.id})}"></a>
+            <p>Created by:
+                 <a
                         th:text="${journal.getUserContent().getUser().getUsername()}"
-                        th:href="@{/journals(user=${journal.getUserContent().getId()})}"
+                        th:href="@{/profile/{userId}(userId=${journal.getUserContent().id})}"
                 >
                     Journal title
-                </a>
-            </a>
+                </a></p>
+<!--            </a>-->
             <p th:text="${journal.body}">Journal body...</p>
         </div>
     </div>
