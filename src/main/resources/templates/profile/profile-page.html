@@ -16,8 +16,8 @@
         </div>
     </div>
     <section class="container">
-        <p th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}" class="mb-2"></p>
-        <p th:text="${usercontent.country}" class="my-2"></p>
+        <p th:if="${usercontent.firstName != null && usercontent.lastName != null}" th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}" class="mb-2"></p>
+        <p th:if="${usercontent.country != null}" th:text="${usercontent.country}" class="my-2"></p>
         <p class="my-2">Joined on <span th:replace="partials/timestamp :: date(timestamp=${user.getCreatedAt().toInstant().atZone('GMT-0500')})"></span> </p>
     </section>
     <section class="container">

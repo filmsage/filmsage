@@ -7,11 +7,13 @@
 <section class="container" id="content-area">
     <div class="d-flex">
         <h1 th:text="${watchlist.title}">Collection title</h1>
-        <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
+        <!--        <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>-->
     </div>
-    <h2><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="'Created by: ' + ${watchlist.getUserContent().getUser().getUsername()}"></a></h2>
+    <h2><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}"
+           th:text="'Created by: ' + ${watchlist.getUserContent().getUser().getUsername()}"></a></h2>
     <p>
-        Created on: <span th:replace="partials/timestamp :: timeanddate(instant=${watchlist.getCreatedAt().toInstant().atZone('GMT-0500')})"></span>
+        Created on: <span
+            th:replace="partials/timestamp :: timeanddate(instant=${watchlist.getCreatedAt().toInstant().atZone('GMT-0500')})"></span>
     </p>
     <div class="container row" th:each="item : ${mediaItems}">
         <div class="col my-2 p-1 shadow-sm">
@@ -31,11 +33,12 @@
             </a>
         </div>
     </div>
-  
-    <button class="btn btn-danger" id="report-abuse" data-type="watchlist" th:data-id="${watchlist.id}" >Report Abusive Content </button>
-    <div class="d-flex">
-        <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
-    </div>
+
+    <button class="btn btn-danger" id="report-abuse" data-type="watchlist" th:data-id="${watchlist.id}">Report Abusive
+        Content
+    </button>
+    <br/>
+    <a class="btn btn-danger my-3" th:href="@{/watchlist}" th:text="${'Back to index'}"></a>
 
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>

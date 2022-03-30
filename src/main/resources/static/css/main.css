@@ -146,8 +146,8 @@ a:hover{
     left: 50%;
     padding: 8px;
     position: absolute;
-    transform: translateY(-160%);
-    transition: transform 0.3s;
+    transform: translateY(-5000px);
+    transition: transform 0.1s;
 }
 
 .skip-to-content-link:focus {
