@@ -7,7 +7,7 @@
 <section class="container" id="content-area">
     <div class="d-flex">
         <h1 th:text="${watchlist.title}">Collection title</h1>
-        <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>
+<!--        <p class="ml-auto mr-0"><a class="btn btn-danger" th:href="@{/watchlist}" th:text="${'Back to index'}"></a></p>-->
     </div>
     <h2><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}" th:text="'Created by: ' + ${watchlist.getUserContent().getUser().getUsername()}"></a></h2>
     <p>
