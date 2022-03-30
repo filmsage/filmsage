@@ -87,9 +87,24 @@ a:hover{
 }
 
 .btn-danger {
-    /*background-color: #290661;*/
-    color: #3d0a91 !important;
+    background-color: #290661;
+    color: white;
+    border: none;
 }
+
+.btn-danger:hover{
+    color:white;
+    background-color: #3d0a91;
+}
+
+.btn-danger:active{
+    color: white;
+    background-color: #3d0a91;
+}
+
+/*.btn-danger:focus{*/
+/*    background-color: greenyellow;*/
+/*}*/
 
 #report-abuse {
     color: white !important;
