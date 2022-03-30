@@ -133,3 +133,18 @@ a:hover{
     background-color: #3d0a91;
     color: white;
 }
+
+.skip-to-content-link {
+    background: #3d0a91;
+    color: white;
+    height: 30px;
+    left: 50%;
+    padding: 8px;
+    position: absolute;
+    transform: translateY(-160%);
+    transition: transform 0.3s;
+}
+
+.skip-to-content-link:focus {
+    transform: translateY(0%);
+}
