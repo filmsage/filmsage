@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 
 
@@ -33,11 +34,19 @@ public class JournalController {
 
     @GetMapping("/journals")
     public String showJournals(Model model,
+                               Principal principal,
                                @RequestParam(required = false) String id,
                                @RequestParam(required = false) String user,
                                @RequestParam(required = false) String username) {
         if (StringUtils.hasText(id)) {
-            model.addAttribute("journal", journalDao.getById(Long.parseLong(id)));
+            Journal journal = journalDao.getById(Long.parseLong(id));
+            model.addAttribute("journal", journal);
+            if (principal != null) {
+                if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
+                        userContentService.isAdmin()) {
+                    model.addAttribute("canModify", true);
+                }
+            }
             return "journals/show";
         } else if (StringUtils.hasText(user)) {
             model.addAttribute("journals", journalDao.findAllByUserContent_Id(Long.parseLong(user)));
@@ -82,13 +91,14 @@ public class JournalController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/journals/{id}/edit")
     public String submitEdit(@ModelAttribute Journal journal, @PathVariable long id) {
-        if (journal.getUserContent().getId() == userContentService.getUserContent().getId() ||
+        Journal existingJournal = journalDao.getById(id);
+        if (existingJournal.getUserContent().getId() == userContentService.getUserContent().getId() ||
                 userContentService.isAdmin()) {
-            journal.setUserContent(userContentService.getUserContent());
-            journal.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-            journalDao.save(journal);
+            existingJournal.setTitle(journal.getTitle());
+            existingJournal.setBody(journal.getBody());
+            journalDao.save(existingJournal);
         }
-        return "redirect:/journals?id=" + journal.getId();
+        return "redirect:/journals?id=" + existingJournal.getId();
     }
 
     // this function defines that when a user attempts to delete a journal,

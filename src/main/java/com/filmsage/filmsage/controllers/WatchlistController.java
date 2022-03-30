@@ -84,7 +84,7 @@ public class WatchlistController {
             watchlist.getMediaItems().add(mediaItem);
         }
         watchlistDao.save(watchlist);
-        return "redirect:/watchlist";
+        return "redirect:/watchlist?user=" + watchlist.getUserContent().getId();
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})

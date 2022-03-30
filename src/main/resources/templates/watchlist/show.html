@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/elements :: head(title='Individual Movies Collection')"></head>
+<head th:replace="partials/elements :: head(title=${watchlist.title} + ' - Watchlist')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 

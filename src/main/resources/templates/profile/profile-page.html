@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials/elements :: head(title='User Profile')"></head>
+<head th:replace="partials/elements :: head(title=${user.getUsername()} + ' Profile')"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
 
@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1><span th:text="${user.getUsername()}"> </span> Profile</h1>
+                <h1>Welcome, <span th:text="${user.getUsername()}"> </span></h1>
             </div>
             <div th:if="${isOwner}" class="col text-right">
                 <a class="btn btn-danger" th:href="@{/profile/{userId}/edit(userId = ${usercontent.getId()})}">Edit
@@ -59,26 +59,74 @@
         </ul>
     </section>
     <section class="container">
-        <h3>Reviews</h3>
-        <div th:each="review : ${reviews}">
-            <p class="my-1">Reviewing:
-                <a th:text="${review.getMediaItem().getTitle()}"
-                   th:href="@{/movies/{imdb}(imdb=${review.getMediaItem().getImdb()})}"></a>
-            </p>
-            <p class="my-1">Title:
-                <a th:text="${review.title}"
-                   th:href="@{/reviews/show(imdb=${review.getMediaItem().getImdb()}, id=${review.getId()})}"></a>
-            </p>
-            <p class="mt-1 mb-2">Rating: <span th:text="${review.rating}"></span> / 5</p>
+
+        <div class="accordion" id="usercontent-accordion">
+            <div class="card">
+                <div class="card-header" id="heading-reviews">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-reviews" aria-expanded="true" aria-controls="collapse-reviews">
+                            Reviews
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapse-reviews" class="collapse show" aria-labelledby="heading-reviews" data-parent="#usercontent-accordion">
+                    <div class="card-body">
+
+                        <div th:each="review : ${reviews}">
+                            <p class="my-1">Reviewing:
+                                <a th:text="${review.getMediaItem().getTitle()}"
+                                   th:href="@{/movies/{imdb}(imdb=${review.getMediaItem().getImdb()})}"></a>
+                            </p>
+                            <p class="my-1">Title:
+                                <a th:text="${review.title}"
+                                   th:href="@{/reviews/show(r=${review.getId()}, imdb=${review.getMediaItem().getImdb()})}"></a>
+                            </p>
+                            <p class="mt-1 mb-2">Rating: <span th:text="${review.rating}"></span> / 5</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="heading-watchlists">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse-watchlists" aria-expanded="false" aria-controls="collapse-watchlist">
+                            Watchlists
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapse-watchlists" class="collapse" aria-labelledby="heading-watchlists" data-parent="#usercontent-accordion">
+                    <div class="card-body">
+
+                        <div th:each="collection : ${usercontent.getWatchlists()}">
+                            <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="heading-journals">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse-journals" aria-expanded="false" aria-controls="collapse-journals">
+                            Journals
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapse-journals" class="collapse" aria-labelledby="heading-journals" data-parent="#usercontent-accordion">
+                    <div class="card-body">
+
+                        <div th:each="journal : ${usercontent.getJournals()}">
+                            <a th:text="${journal.getTitle()}" th:href="@{/journals(id=${journal.id})}">title</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3>Watchlists</h3>
-        <div th:each="collection : ${usercontent.getWatchlists()}">
-            <a th:text="${collection.getTitle()}" th:href="@{/watchlist/{id}/show(id=${collection.id})}">title</a>
-        </div>
-        <h3>Journals</h3>
-        <div th:each="journal : ${usercontent.getJournals()}">
-            <a th:text="${journal.getTitle()}" th:href="@{/journals(id=${journal.id})}">title</a>
-        </div>
+
+
     </section>
 </section>
 <th:block th:replace="partials/elements :: footer"></th:block>
