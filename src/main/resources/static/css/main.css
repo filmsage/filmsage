@@ -16,8 +16,8 @@ body{
 #logo{
     /*height: 50%;*/
     /*max-width: 130px;*/
-    width: 130px;
-    height: 40px;
+    width: 80px;
+    height: 25px;
     padding-right: .66rem;
 }
 
@@ -88,6 +88,29 @@ a:hover{
     border: 2px solid;
 }
 
+.btn-danger {
+    background-color: #290661;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover{
+    color:white;
+    background-color: #3d0a91;
+}
+
+.btn-danger:active{
+    color: white;
+    background-color: #3d0a91;
+}
+
+/*.btn-danger:focus{*/
+/*    background-color: greenyellow;*/
+/*}*/
+
+#report-abuse {
+    color: white !important;
+    background-color: #dc3444;
+
 .content-accordion {
     color: #8336A4;
-}
