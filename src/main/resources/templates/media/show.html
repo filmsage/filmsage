@@ -32,7 +32,7 @@
         <div class="col-12 col-md-6 mt-3">
             <h2>Reviews</h2>
             <div class="d-flex">
-                <a class="btn btn-danger btn-block mr-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create a
+                <a class="btn btn-danger btn-block mr-1" th:href="@{/reviews/create(imdb = ${movie.imdbID})}">Create
                     Review!</a>
                 <a class="btn btn-danger btn-block mt-0 ml-1" th:href="@{/reviews/index(imdb = ${movie.imdbID})}">Show
                     Reviews</a>
@@ -67,7 +67,7 @@
                         Watchlist title
                     </a>
                 </h3>
-                <p><a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}"
+                <p>Created by: <a th:href="@{/profile/{userId}(userId=${watchlist.getUserContent().id})}"
                       th:text="${watchlist.getUserContent().getUser().getUsername()}"></a></p>
             </div>
         </div>

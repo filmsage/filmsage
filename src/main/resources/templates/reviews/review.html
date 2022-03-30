@@ -16,7 +16,7 @@
     </div>
 
     <h1 th:text="${review.title}"></h1>
-    <h2><a th:href="@{/profile/{userId}(userId=${review.getUserContent().id})}" th:text="'Posted by: ' + ${review.getUserContent().getUser().username}"></a></h2>
+    <h2><a th:href="@{/profile/{userId}(userId=${review.getUserContent().id})}" th:text="'Created by: ' + ${review.getUserContent().getUser().username}"></a></h2>
     <h3><a th:href="@{/movies/{imdb}(imdb=${movie.getImdb()})}" th:text="'Reviewing ' + ${movie.getTitle()}">Movie</a></h3>
     <p>Created at: <span th:replace="partials/timestamp :: timeanddate(instant=${review.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
     <p th:text="${review.body}"></p>

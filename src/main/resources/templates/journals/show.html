@@ -25,10 +25,10 @@
         <h2 th:text="${journal.title}">Journal title</h2>
         <p><span th:replace="partials/timestamp :: timeanddate(instant=${journal.getCreatedAt().toInstant().atZone('GMT-0500')})"></span></p>
         <p th:text="${journal.body}">Journal body</p>
-        <p>
+        <p>Created by:
             <a
                     th:href="@{/journals(user=${journal.getUserContent().getId()})}"
-                    th:text="'Posted by ' + ${journal.getUserContent().getUser().getUsername()}"
+                    th:text=" ${journal.getUserContent().getUser().getUsername()}"
             >
                 Creator username
             </a>

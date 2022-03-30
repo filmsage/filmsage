@@ -3,10 +3,11 @@
 <head th:replace="partials/elements :: head(title='Update Profile: ' + ${user.user.username})"></head>
 <body>
 <nav th:replace="partials/elements :: navbar"></nav>
-<section class="container">
-    <h1>Profile Update</h1>
-</section>
+<!--<section class="container">-->
+
+<!--</section>-->
 <div class="container" id="content-area">
+    <h1>Profile Update</h1>
     <form th:action="@{/profile/{userId}/edit(userId=${user.id})}" th:method="POST" th:object="${user}">
         <div class="form-group">
             <input name="id" type="hidden" th:value="*{id}">
