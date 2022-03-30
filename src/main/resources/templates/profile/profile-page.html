@@ -22,7 +22,8 @@
     </div>
     <section class="container">
         <p th:text="${usercontent.firstName} + ' ' + ${usercontent.lastName}" class="mb-2"></p>
-        <p th:text="${usercontent.country}" class="mt-2"></p>
+        <p th:text="${usercontent.country}" class="my-2"></p>
+        <p class="my-2">Joined on <span th:replace="partials/timestamp :: date(timestamp=${user.getCreatedAt().toInstant().atZone('GMT-0500')})"></span> </p>
     </section>
     <section class="container">
         <h2>Stats</h2>
@@ -56,14 +57,14 @@
             <div class="card">
                 <div class="card-header" id="heading-reviews">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#collapse-reviews" aria-expanded="true" aria-controls="collapse-reviews">
+                        <button class="btn btn-link btn-block text-left collapsed content-accordion" type="button" data-toggle="collapse"
+                                data-target="#collapse-reviews" aria-expanded="false" aria-controls="collapse-reviews">
                             Reviews
                         </button>
                     </h2>
                 </div>
 
-                <div id="collapse-reviews" class="collapse show" aria-labelledby="heading-reviews"
+                <div id="collapse-reviews" class="collapse" aria-labelledby="heading-reviews"
                      data-parent="#usercontent-accordion">
                     <div class="card-body">
 
@@ -85,7 +86,7 @@
             <div class="card">
                 <div class="card-header" id="heading-watchlists">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                        <button class="btn btn-link btn-block text-left collapsed content-accordion" type="button" data-toggle="collapse"
                                 data-target="#collapse-watchlists" aria-expanded="false"
                                 aria-controls="collapse-watchlist">
                             Watchlists
@@ -107,7 +108,7 @@
             <div class="card">
                 <div class="card-header" id="heading-journals">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                        <button class="btn btn-link btn-block text-left collapsed content-accordion" type="button" data-toggle="collapse"
                                 data-target="#collapse-journals" aria-expanded="false"
                                 aria-controls="collapse-journals">
                             Journals
